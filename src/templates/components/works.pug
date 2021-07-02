@@ -16,14 +16,13 @@ script(type="text/x-template")#slider-display
     .works-slider__pics-content
       transition-group(name="fade" tag="div").works-slider__fullpic-container
         img(:src="`http://localhost:8000/${currentWork.photo}`" :key="currentWork.id").works-slider__fullpic
-      btns(
-        @slide="direction => $emit('slide', direction)"
-      )
-
       thumbs(
         :works="reversedWorks",
         :currentWork="currentWork"
         @slideDirectly="$emit('slideDirectly', $event)"
+      )
+      btns(
+        @slide="direction => $emit('slide', direction)"
       )
             
 script(type="text/x-template")#slider-thumbs

@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "title": "1 this guy was trained by Vue",
+    "skills": "1 Html, Css, JavaScript",
+    "photo": "slider-1.jpg",
+    "link": "google.com",
+    "desc": "this guy was trained by Vue"
+  },
+  {
+    "id": 2,
+    "title": "2 this guy was trained by Vue",
+    "skills": "1 Html, Css, JavaScript",
+    "photo": "slider-1.jpg",
+    "link": "google.com",
+    "desc": "this guy was trained by Vue"
+  },
+  {
+    "id": 3,
+    "title": "3 this guy was trained by Vue",
+    "skills": "1 Html, Css, JavaScript",
+    "photo": "slider-1.jpg",
+    "link": "google.com",
+    "desc": "this guy was trained by Vue"
+  },
+  {
+    "id": 4,
+    "title": "4 this guy was trained by Vue",
+    "skills": "1 Html, Css, JavaScript",
+    "photo": "slider-1.jpg",
+    "link": "google.com",
+    "desc": "this guy was trained by Vue"
+  }
+]

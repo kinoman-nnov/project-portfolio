@@ -1,40 +1,31 @@
 script(type="text/x-template")#slider-container
-  .works-slider(v-if="works.length")
+  .works-slider
     display(
-      :works="works",
       :currentWork="currentWork",
-      :currentIndex="currentIndex"
-      @slide="handleSlide"
-      @slideDirectly="slideDirectly"
+      :works="works",
     )
     info(
       :currentWork="currentWork"
     )
 
 script(type="text/x-template")#slider-display
-  .works-slider__pics(:data-slide="currentIndex + 1")
+  .works-slider__pics(:data-slide="1")
     .works-slider__pics-content
-      transition-group(name="fade" tag="div").works-slider__fullpic-container
-        img(:src="`http://localhost:8000/${currentWork.photo}`" :key="currentWork.id").works-slider__fullpic
+      img(:src="currentWork.photo" :key="currentWork.id").works-slider__fullpic
       thumbs(
-        :works="reversedWorks",
+        :works="works"
         :currentWork="currentWork"
-        @slideDirectly="$emit('slideDirectly', $event)"
       )
-      btns(
-        @slide="direction => $emit('slide', direction)"
-      )
-            
+      btns
+
 script(type="text/x-template")#slider-thumbs
   ul.works-slider__thumbs
     li.works-slider__thumb-item(
-      v-for="(work, index) in works"
-      :class="{active: currentWork.id === work.id}"
+      v-for="slide in works" :key="slide.id"
+      :class="{active: currentWork.id === slide.id}"
     )
-      a.works-slider__thumb-link(
-        @click="$emit('slideDirectly', work)"
-      )
-        img(:src="`http://localhost:8000/${work.photo}`", alt="").works-slider__thumb
+      button.works-slider__thumb-link
+        img(:src="slide.photo").works-slider__thumb
 
 script(type="text/x-template")#slider-btns
   .works-slider__buttons
@@ -42,15 +33,14 @@ script(type="text/x-template")#slider-btns
     a(href="#" @click.prevent="$emit('slide', 'prev')").works-slider__btn.works-slider__btn_prev
 
 script(type="text/x-template")#slider-info
-  .works-slider__data
-    tags(
-      :tags="tagsArray"
-    )
+  .works-slider__info
+    ul.works-slider__tags
+      tags
     .works-slider__title {{currentWork.title}}
     .works-slider__desc
-      p {{currentWork.description}}
+      p {{currentWork.desc}}
     .works-slider__link 
-      a(href="").iconed-link Посмотреть сайт
+      a(href="currentWork.link").iconed-link View the website
 
 script(type="text/x-template")#slider-tags
   ul.works-slider__tags(v-if="tags.length")

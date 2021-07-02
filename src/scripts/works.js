@@ -1,6 +1,7 @@
 import Vue from "vue";
 
 const thumbs = {
+  props: ["works", "currentWork"],
   template: "#slider-thumbs"
 };
 
@@ -9,7 +10,7 @@ const btns = {
 };
 
 const display = {
-  props: ["currentWork"],
+  props: ["currentWork", "works"],
   template: "#slider-display",
   components: {
     thumbs,
@@ -22,6 +23,7 @@ const tags = {
 };
 
 const info = {
+  props: ["currentWork"],
   template: "#slider-info",
   components: {
     tags
@@ -44,7 +46,7 @@ new Vue({
   methods: {
     requireImagesToArray(data) {
       return data.map(item => {
-        const requireImages = require(`../images/content/${item.photo}`);
+        const requireImages = require(`../images/content/${item.photo}`).default;
         item.photo = requireImages;
         return item;
       });

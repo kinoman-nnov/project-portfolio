@@ -4,7 +4,7 @@
     "title": "1 this guy was trained by Vue",
     "skills": "1 Html, Css, JavaScript",
     "photo": "slider-1.jpg",
-    "link": "google.com",
+    "link": "//google.com",
     "desc": "this guy was trained by Vue"
   },
   {
@@ -12,7 +12,7 @@
     "title": "2 this guy was trained by Vue",
     "skills": "1 Html, Css, JavaScript",
     "photo": "slider-2.jpg",
-    "link": "google.com",
+    "link": "//yandex.ru",
     "desc": "this guy was trained by Vue"
   },
   {
@@ -20,7 +20,7 @@
     "title": "3 this guy was trained by Vue",
     "skills": "1 Html, Css, JavaScript",
     "photo": "slider-3.jpg",
-    "link": "google.com",
+    "link": "//rambler.ru",
     "desc": "this guy was trained by Vue"
   }
 ]

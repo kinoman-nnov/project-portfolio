@@ -10,7 +10,7 @@
   {
     "id": 2,
     "title": "2 this guy was trained by Vue",
-    "skills": "1 Html, Css, JavaScript",
+    "skills": "2 Html, Css, JavaScript",
     "photo": "slider-2.jpg",
     "link": "//yandex.ru",
     "desc": "this guy was trained by Vue"
@@ -18,8 +18,16 @@
   {
     "id": 3,
     "title": "3 this guy was trained by Vue",
-    "skills": "1 Html, Css, JavaScript",
+    "skills": "3 Html, Css, JavaScript",
     "photo": "slider-3.jpg",
+    "link": "//rambler.ru",
+    "desc": "this guy was trained by Vue"
+  },
+  {
+    "id": 4,
+    "title": "4 this guy was trained by Vue",
+    "skills": "4 Html, Css, JavaScript",
+    "photo": "user.jpg",
     "link": "//rambler.ru",
     "desc": "this guy was trained by Vue"
   }

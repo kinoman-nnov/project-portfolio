@@ -3,20 +3,24 @@ script(type="text/x-template")#slider-container
     display(
       :currentWork="currentWork",
       :works="works",
+      :currentIndex="currentIndex",
+      @slide="slide"
     )
     info(
       :currentWork="currentWork"
     )
 
 script(type="text/x-template")#slider-display
-  .works-slider__pics(:data-slide="1")
+  .works-slider__pics(:data-slide="currentIndex + 1")
     .works-slider__pics-content
       img(:src="currentWork.photo" :key="currentWork.id").works-slider__fullpic
       thumbs(
-        :works="works"
+        :works="reversedWorks"
         :currentWork="currentWork"
       )
-      btns
+      btns(
+        @slide="$emit('slide', $event)"
+      )
 
 script(type="text/x-template")#slider-thumbs
   ul.works-slider__thumbs
@@ -29,13 +33,21 @@ script(type="text/x-template")#slider-thumbs
 
 script(type="text/x-template")#slider-btns
   .works-slider__buttons
-    a(href="#" @click.prevent="$emit('slide', 'next')").works-slider__btn.works-slider__btn_next
-    a(href="#" @click.prevent="$emit('slide', 'prev')").works-slider__btn.works-slider__btn_prev
+    button(
+      type="button"
+      @click="$emit('slide', 'next')"
+      ).works-slider__btn.works-slider__btn_next
+    button(
+      type="button"
+      @click="$emit('slide', 'prev')"
+      ).works-slider__btn.works-slider__btn_prev
 
 script(type="text/x-template")#slider-info
   .works-slider__info
     ul.works-slider__tags
-      tags
+      tags(
+        :tags="tagsArray"
+      )
     .works-slider__title {{currentWork.title}}
     .works-slider__desc
       p {{currentWork.desc}}

@@ -2,25 +2,26 @@ extends ./main.layout.pug
 
 block content
   .welcome-section
-    section.fullscreen-section.hero
+    section.hero
       .container.hero__container
         header.header
           .header__logo
             a.logo(href="") AY
-          .header__menu 
-            nav.menu
-              ul.menu__list
-                - var menuLinks = ["About me", "Skills", "Works", "Reviews"];
-                each item in menuLinks 
-                  li.menu__item
-                    a(href="#").menu__link #{item}
-          .header__buttons
-            ul.socials
-              - var socials = ['insta', 'vk', 'github', 'envelope'];
-              each item in socials
-                li.socials__item
-                  a(href=`${item === 'envelope' ? 'mailto:myMale@yandex.ru' : '#'}`, target="_blank").socials__link
-                    +icon(item, 'socials__icon')
+          .header-container.popup-menu
+            .header__menu 
+              nav.menu
+                ul.menu__list
+                  - var menuLinks = ["About me", "Skills", "Works", "Reviews"];
+                  each item in menuLinks 
+                    li.menu__item
+                      a(href="#").menu__link #{item}
+            .header__buttons
+              ul.socials
+                - var socials = ['insta', 'vk', 'github', 'envelope'];
+                each item in socials
+                  li.socials__item
+                    a(href=`${item === 'envelope' ? 'mailto:myMale@yandex.ru' : '#'}`, target="_blank").socials__link
+                      +icon(item, 'socials__icon')
 
         .hero__content
           .userinfo

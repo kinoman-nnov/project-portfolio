@@ -15,6 +15,13 @@
   width: 100%;
 }
 
+.hamburger {
+  display: none;
+  @include tablets {
+    display: block;
+  }
+}
+
 .header__menu {
   width: 55%;
 
@@ -24,7 +31,7 @@
 }
 
 .header__buttons {
-  @include phones {
+  /* @include phones {
     display: none;
-  }
+  } */
 }

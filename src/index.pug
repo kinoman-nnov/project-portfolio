@@ -22,11 +22,14 @@ block content
                   li.socials__item
                     a(href=`${item === 'envelope' ? 'mailto:myMale@yandex.ru' : '#'}`, target="_blank").socials__link
                       +icon(item, 'socials__icon')
+            button.hamburger.hamburger--vortex
+              span.hamburger-box
+                span.hamburger-inner
 
         .hero__content
           .userinfo
             .userinfo__title Personal website #[span.userinfo__occ web developer]
-            .userinfo__name Alexey Ya
+            .userinfo__name Mount
         .hero__downbutton
           .scroll-down
             a(href="").scroll-down__btn Scroll

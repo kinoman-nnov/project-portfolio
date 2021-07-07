@@ -22,9 +22,10 @@ block content
                   li.socials__item
                     a(href=`${item === 'envelope' ? 'mailto:myMale@yandex.ru' : '#'}`, target="_blank").socials__link
                       +icon(item, 'socials__icon')
-            button.hamburger.hamburger--vortex
-              span.hamburger-box
-                span.hamburger-inner
+            #hamburger-component
+            //- button.hamburger.hamburger--vortex
+            //-   span.hamburger-box
+            //-     span.hamburger-inner
 
         .hero__content
           .userinfo

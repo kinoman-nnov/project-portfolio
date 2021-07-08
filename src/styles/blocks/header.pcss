@@ -2,6 +2,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @include tablets {
+    align-items: flex-start;
+  }
 }
 
 .header__logo {
@@ -17,6 +21,7 @@
 
 .hamburger {
   display: none;
+
   @include tablets {
     display: block;
   }

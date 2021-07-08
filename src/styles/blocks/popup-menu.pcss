@@ -1,5 +1,5 @@
-.popup-menuuu {
-
+.popup-menu {
+ 
   @include tablets {
     display: flex;
     flex-direction: column;
@@ -8,16 +8,16 @@
     height: 100vh;
     text-align: center;
     padding: rem(15px);
-    /* background: #313131; */
-    position: fixed;
+    background: #fff;
+    /* position: fixed; */
     top: 0;
     /* left: -100%; */
     z-index: 100;
     /* opacity: 0; */
-    transition: 0.3s; 
+    transition: 0.3s;
   }
 }
-.popup-menu--active {
+.popup-menu--open {
   opacity: 1;
   left: 0;
 }

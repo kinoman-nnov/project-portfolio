@@ -2,33 +2,33 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  @include tablets {
-    align-items: flex-start;
-  }
 }
 
 .header__logo {
-  margin-right: 350px;
+  padding-left: 3%;
 }
 
 .header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-}
-
-.hamburger {
-  display: none;
+  width: 75%;
 
   @include tablets {
-    display: block;
+    width: 0%;
   }
 }
 
 .header__menu {
   width: 55%;
+
+  &-modal {
+    padding-left: 40px;
+
+    @include phones {
+      padding-left: 72px;
+    }
+  }
 
   @include tablets {
     display: none;
@@ -36,7 +36,50 @@
 }
 
 .header__buttons {
-  /* @include phones {
+
+  &-modal {
     display: none;
-  } */
+    justify-content: center;
+  }
+
+  @include tablets{
+    &--close {
+      display: none;
+    }
+  }
+
+  @include phones {
+    display: none;
+  }
+}
+
+.header__modal {
+  display: none;
+
+  @include tablets {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.hamburger {
+  display: none;
+
+  @include tablets {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  @include phones {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.header__menu-modal.header__menu-modal--open {
+  display: flex;
+}
+
+.header__buttons-modal.header__buttons-modal--open {
+  display: flex;
 }

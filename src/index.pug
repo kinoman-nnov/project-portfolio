@@ -7,7 +7,7 @@ block content
         header.header
           .header__logo
             a.logo(href="") AY
-          .header-container.popup-menu
+          .header-container
             .header__menu 
               nav.menu
                 ul.menu__list
@@ -22,9 +22,24 @@ block content
                   li.socials__item
                     a(href=`${item === 'envelope' ? 'mailto:myMale@yandex.ru' : '#'}`, target="_blank").socials__link
                       +icon(item, 'socials__icon')
+          .header__modal
             button.hamburger.hamburger--vortex
               span.hamburger-box
                 span.hamburger-inner
+            .header__menu.header__menu-modal
+              nav.menu
+                ul.menu__list.menu__list--modal
+                  - var menuLinks = ["Main", "About me", "Skills", "Works", "Reviews"];
+                  each item in menuLinks 
+                    li.menu__item.menu__item--modal
+                      a(href="#").menu__link #{item}
+            .header__buttons.header__buttons-modal
+              ul.socials
+                - var socials = ['insta', 'vk', 'github', 'envelope'];
+                each item in socials
+                  li.socials__item
+                    a(href=`${item === 'envelope' ? 'mailto:myMale@yandex.ru' : '#'}`, target="_blank").socials__link
+                      +icon(item, 'socials__icon')
 
         .hero__content
           .userinfo

@@ -14,20 +14,26 @@
 //   }
 // });
 
-import popupTemplate from '../templates/hamburger-menu.pug';
-
 const body = document.querySelector("body");
 const button = document.querySelector(".hamburger");
-const menu = document.querySelector(".header-container");
-const bg = document.querySelector(".welcome-section")
+const menu = document.querySelector(".header__modal");
+const modalMenu = document.querySelector(".header__menu-modal");
+const modalButtons = document.querySelector(".header__buttons-modal");
+const content = document.querySelector(".hero__content");
+const headerButtons = document.querySelector(".header__buttons");
+const bg = document.querySelector(".welcome-section");
 
 function toggleMenu() {
   body.classList.toggle('open-modal');
   button.classList.toggle('is-active');
   menu.classList.toggle('popup-menu--open');
-  bg.classList.toggle('welcome-section--modal');
-  menu.innerHTML = popupTemplate;
+  modalMenu.classList.toggle('header__menu-modal--open');
+  modalButtons.classList.toggle('header__buttons-modal--open');
+  content.classList.toggle('hero__content--close');
+  headerButtons.classList.toggle('header__buttons--close');
+  bg.classList.toggle('welcome-section--bg-change');
 }
+
 button.addEventListener("click", toggleMenu);
 
 menu.addEventListener("click", (e) => {
@@ -36,7 +42,7 @@ menu.addEventListener("click", (e) => {
   
   if (e.target.classList.contains("hamburger--vortex")) {
     toggleMenu()
-  } else if (target.classList.contains("overlay-menu__link")) {
+  } else if (target.classList.contains("popup-menu__link")) {
     scrollToSection(dataValue);
     toggleMenu()
   }

@@ -36,13 +36,12 @@ function toggleMenu() {
 
 button.addEventListener("click", toggleMenu);
 
-menu.addEventListener("click", (e) => {
+body.addEventListener("click", (e) => {
   const target = e.target;
   const dataValue = target.dataset.scrollTo;
-  
   if (e.target.classList.contains("hamburger--vortex")) {
     toggleMenu()
-  } else if (target.classList.contains("popup-menu__link")) {
+  } else if (target.classList.contains("menu__link")) {
     scrollToSection(dataValue);
     toggleMenu()
   }
@@ -54,5 +53,5 @@ const scrollToSection = (attr) => {
     left: 0,
     top: elem.offsetTop,
     behavior: "smooth"
-  })
+  });
 };

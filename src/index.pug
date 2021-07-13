@@ -29,8 +29,8 @@ block content
             .header__menu.header__menu-modal
               nav.menu
                 ul.menu__list.menu__list--modal
-                  - var menuLinks = [{name:"Main", data:"main"}, {name:"About me", data:"about"}, {name:"Skills", data:"skills"}, {name:"Works", data:"works"}, {name:"Reviews", data:"reviews"}];
-                  each item in menuLinks
+                  - var menuModalLinks = [{name:"Main", data:"main"}, {name:"About me", data:"about"}, {name:"Skills", data:"skills"}, {name:"Works", data:"works"}, {name:"Reviews", data:"reviews"}];
+                  each item in menuModalLinks
                     li.menu__item.menu__item--modal
                       a(href="#").menu__link.menu__link--modal&attributes({'data-scroll-to':`${item.data}`}) #{item.name}
             .header__buttons.header__buttons-modal
@@ -188,7 +188,7 @@ block content
           ul.menu__list
             each item in menuLinks 
               li.menu__item
-                a(href="#").menu__link #{item}
+                a(href="#").menu__link&attributes({'data-scroll-to':`${item.data}`}) #{item.name}
         .footer__data-content
           .footer__data-col
             .footer__data-text

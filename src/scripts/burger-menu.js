@@ -16,7 +16,9 @@
 
 const body = document.querySelector("body");
 const button = document.querySelector(".hamburger");
+const headerMenu = document.querySelector(".header__menu");
 const menu = document.querySelector(".header__modal");
+const footerMenu = document.querySelector(".footer__data-menu");
 const modalMenu = document.querySelector(".header__menu-modal");
 const modalButtons = document.querySelector(".header__buttons-modal");
 const content = document.querySelector(".hero__content");
@@ -36,12 +38,12 @@ function toggleMenu() {
 
 button.addEventListener("click", toggleMenu);
 
-body.addEventListener("click", (e) => {
-  e.preventDefault();
+function pageNavigation(e) {
+  
   const target = e.target;
   const dataValue = target.dataset.scrollTo;
 
-  if (e.target.classList.contains("hamburger--vortex")) {
+  if (target.classList.contains("hamburger--vortex")) {
     toggleMenu();
   } else if ((target.classList.contains("menu__link")) && (document.querySelector('.popup-menu--open'))) {
     scrollToSection(dataValue);
@@ -49,6 +51,21 @@ body.addEventListener("click", (e) => {
   } else if (target.classList.contains("menu__link")) {
     scrollToSection(dataValue);
   }
+}
+
+headerMenu.addEventListener("click", (e) => {
+  e.preventDefault();
+  pageNavigation(e);
+});
+
+menu.addEventListener("click", (e) => {
+  e.preventDefault();
+  pageNavigation(e);
+});
+
+footerMenu.addEventListener("click", (e) => {
+  e.preventDefault();
+  pageNavigation(e);
 });
 
 const scrollToSection = (attr) => {

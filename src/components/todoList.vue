@@ -1,5 +1,8 @@
 <template lang="pug">
   .todo-list
+    todo-list-button(
+      @filterTodos="filterTodos"
+    )
     .content
       ul.list
         li.item(
@@ -17,17 +20,23 @@
           todo-list-filter(
             @filterTodos="filterTodos"
           )
+        .clear-button
+          button(
+            type="button"
+          ) Clear completed
 </template>
 
 <script>
-import todoListFilter from './todoListFilter.vue'
+import todoListButton from './todoListButton.vue'
 import todoListItem from './todoListItem.vue'
+import todoListFilter from './todoListFilter.vue'
 
 export default {
   props: {
     todos: Array
   },
   components: {
+    todoListButton,
     todoListFilter,
     todoListItem
   },
@@ -42,6 +51,10 @@ export default {
 
     filterTodos(filter) {
       this.$emit('filterTodos', filter);
+    },
+
+    selectedALLTodos() {
+      this.$emit('selectedAll', todo)
     }
   }
 }
@@ -49,6 +62,18 @@ export default {
 
 
 <style lang="scss" scoped>
+
+  button {
+    border: none;
+    cursor: pointer;    
+    outline: none;
+    background: transparent;
+    color: inherit;
+  }
+
+  .todo-list {
+    position: relative;
+  }
 
   .list {
     font-size: 24px;

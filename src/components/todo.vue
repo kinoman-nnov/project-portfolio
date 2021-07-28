@@ -70,6 +70,12 @@ export default {
 
     filterTodos(filter) {
       this.filter = filter;
+    },
+
+    selectedALLTodos() {
+      this.todos = this.todos.map(item => {
+        return item.checked === true;
+      });
     }
   }
 }

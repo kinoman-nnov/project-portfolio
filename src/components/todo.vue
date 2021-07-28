@@ -6,11 +6,12 @@
       )
       todo-list(
         v-if="todos.length > 0"
-        :todos="todos"
+        :todos="filteredTodos"
         @removeTodo="removeTodo"
         @checkTodo="checkTodo"
+        @filterTodos="filterTodos"
       )
-    pre {{todos}}
+    pre {{todos}} {{filter}}
 </template>
 
 <script>
@@ -20,12 +21,33 @@ import todoList from './todoList.vue'
 export default {
   data() {
     return {
-      todos: []
+      todos: [],
+      filter: "all"
     }
   },
   components: {
     todoInput,
     todoList
+  },
+  computed: {
+    filteredTodos() {
+      switch(this.filter) {
+        case "all" :
+          return this.todos;
+        case "active" :
+          return this.todos.filter(item => {
+            if (!item.checked) {
+              return item
+            }
+          });
+        case "completed" :
+          return this.todos.filter(item => {
+            if (item.checked) {
+              return item
+            }
+          });
+      }
+    }
   },
   methods: {
     addTodo(todo) {
@@ -44,6 +66,10 @@ export default {
           return todo;
         } else {return item;}
       });
+    },
+
+    filterTodos(filter) {
+      this.filter = filter;
     }
   }
 }

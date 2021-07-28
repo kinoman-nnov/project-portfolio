@@ -52,6 +52,7 @@ export default {
   }
 
   .checked {
+    color: rgb(219, 219, 219);
     text-decoration: line-through;
   }
 

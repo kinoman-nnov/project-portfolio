@@ -7,9 +7,11 @@
       todo-list(
         v-if="todos.length > 0"
         :todos="filteredTodos"
+        :currentState="currentStateTodos"
         @removeTodo="removeTodo"
         @checkTodo="checkTodo"
         @filterTodos="filterTodos"
+        @selectedALLTodos="selectedALLTodos"
       )
     pre {{todos}} {{filter}}
 </template>
@@ -22,7 +24,10 @@ export default {
   data() {
     return {
       todos: [],
-      filter: "all"
+      filter: "all",
+      currentState: {
+        checked: false
+      }
     }
   },
   components: {
@@ -30,7 +35,7 @@ export default {
     todoList
   },
   computed: {
-    filteredTodos() {
+    filteredTodos() { 
       switch(this.filter) {
         case "all" :
           return this.todos;
@@ -47,6 +52,16 @@ export default {
             }
           });
       }
+    },
+    currentStateTodos() {
+      for (const todo of this.todos) {
+        if (todo.checked === true) {
+          continue; 
+        }
+        else {
+          return this.currentState = false;
+        }
+      } return this.currentState = true;
     }
   },
   methods: {
@@ -72,9 +87,19 @@ export default {
       this.filter = filter;
     },
 
-    selectedALLTodos() {
-      this.todos = this.todos.map(item => {
-        return item.checked === true;
+    selectedALLTodos(currentState) { 
+      this.currentState = currentState;
+      this.todos.map(item => {
+        if (currentState) { 
+          if (item.checked === false) { 
+            return (item.checked = currentState); 
+          }
+        }
+        else {
+           if (item.checked) { 
+            return (item.checked = currentState); 
+          }
+        }
       });
     }
   }

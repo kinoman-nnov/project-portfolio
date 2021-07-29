@@ -1,7 +1,8 @@
 <template lang="pug">
   .todo-list
     todo-list-button(
-      @filterTodos="filterTodos"
+      @selectedALLTodos="selectedALLTodos"
+      :currentState="currentState"
     )
     .content
       ul.list
@@ -15,7 +16,7 @@
           )             
     .footer
       .footer-content
-        .counter {{todos.length}} items left
+        .counter {{todosChecked.length}} items left
         .filter
           todo-list-filter(
             @filterTodos="filterTodos"
@@ -30,15 +31,30 @@
 import todoListButton from './todoListButton.vue'
 import todoListItem from './todoListItem.vue'
 import todoListFilter from './todoListFilter.vue'
-
+ 
 export default {
+  data() {
+    return {
+      todosChecked: []
+    }
+  },
   props: {
-    todos: Array
+    todos: Array,
+    currentState: Boolean
   },
   components: {
     todoListButton,
     todoListFilter,
     todoListItem
+  },
+  computed: {
+    todosItemChecked() {
+      return this.todosChecked = this.todos.filter(item => {
+        if (!item.checked) {
+          return item;
+        }
+      });
+    } 
   },
   methods: {
     removeTodo(todoId) {
@@ -53,8 +69,8 @@ export default {
       this.$emit('filterTodos', filter);
     },
 
-    selectedALLTodos() {
-      this.$emit('selectedAll', todo)
+    selectedALLTodos(currentState) {
+      this.$emit('selectedALLTodos', currentState)
     }
   }
 }

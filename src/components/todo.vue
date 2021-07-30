@@ -13,7 +13,7 @@
         @filterTodos="filterTodos"
         @selectedALLTodos="selectedALLTodos"
       )
-    pre {{todos}} {{filter}}
+    pre {{todos}} {{currentStateTodos}}
 </template>
 
 <script>
@@ -26,7 +26,8 @@ export default {
       todos: [],
       filter: "all",
       currentState: {
-        checked: false
+        checkedAll: false,
+        todosChecked: []
       }
     }
   },
@@ -54,14 +55,23 @@ export default {
       }
     },
     currentStateTodos() {
+      this.currentState.todosChecked = this.todos.filter(item => {
+        if (item.checked === false) { 
+          return item;
+        }
+      });
+      
       for (const todo of this.todos) {
         if (todo.checked === true) {
           continue; 
         }
         else {
-          return this.currentState = false;
+          this.currentState.checkedAll = false;
+          return this.currentState;
         }
-      } return this.currentState = true;
+      } 
+      this.currentState.checkedAll = true; 
+      return this.currentState;
     }
   },
   methods: {
@@ -87,17 +97,17 @@ export default {
       this.filter = filter;
     },
 
-    selectedALLTodos(currentState) { 
-      this.currentState = currentState;
+    selectedALLTodos(currentStateBool) {
+      this.currentState.checkedAll = currentStateBool;
       this.todos.map(item => {
-        if (currentState) { 
-          if (item.checked === false) { 
-            return (item.checked = currentState); 
+        if (currentStateBool) { 
+          if (!item.checked) { 
+            return (item.checked = currentStateBool); 
           }
         }
         else {
            if (item.checked) { 
-            return (item.checked = currentState); 
+            return (item.checked = currentStateBool); 
           }
         }
       });

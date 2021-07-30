@@ -3,19 +3,19 @@
     button(
       type="button"
       @click="selectedALLTodos"
-      :class="{active: currentState}"
+      :class="{active: currentState.checkedAll}"
     ) v
 </template>
 
 <script>
 export default {
   props: {
-    currentState: Boolean
+    currentState: Object
   },
   methods: {
-    selectedALLTodos() {
-      let currentState = this.currentState;
-      this.$emit('selectedALLTodos', !currentState);
+    selectedALLTodos() { // пользовательское событие Boolean
+      let currentStateBool = this.currentState.checkedAll;
+      this.$emit('selectedALLTodos', !currentStateBool);
     }
   }
 }

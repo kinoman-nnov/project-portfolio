@@ -16,7 +16,7 @@
           )             
     .footer
       .footer-content
-        .counter {{todosChecked.length}} items left
+        .counter {{currentState.todosChecked.length}} items left
         .filter
           todo-list-filter(
             @filterTodos="filterTodos"
@@ -33,14 +33,9 @@ import todoListItem from './todoListItem.vue'
 import todoListFilter from './todoListFilter.vue'
  
 export default {
-  data() {
-    return {
-      todosChecked: []
-    }
-  },
   props: {
     todos: Array,
-    currentState: Boolean
+    currentState: Object
   },
   components: {
     todoListButton,
@@ -69,8 +64,8 @@ export default {
       this.$emit('filterTodos', filter);
     },
 
-    selectedALLTodos(currentState) {
-      this.$emit('selectedALLTodos', currentState)
+    selectedALLTodos(current) {
+      this.$emit('selectedALLTodos', current)
     }
   }
 }

@@ -12,8 +12,9 @@
         @checkTodo="checkTodo"
         @filterTodos="filterTodos"
         @selectedALLTodos="selectedALLTodos"
+        @removeCompletedTodo="removeCompletedTodo"
       )
-    pre {{todos}} {{currentStateTodos}}
+    pre {{currentState}}
 </template>
 
 <script>
@@ -27,7 +28,8 @@ export default {
       filter: "all",
       currentState: {
         checkedAll: false,
-        todosChecked: []
+        clearButtonActive: false,
+        todosItemsLeft: []
       }
     }
   },
@@ -55,11 +57,20 @@ export default {
       }
     },
     currentStateTodos() {
-      this.currentState.todosChecked = this.todos.filter(item => {
+      this.currentState.todosItemsLeft = this.todos.filter(item => {
         if (item.checked === false) { 
           return item;
         }
       });
+
+      this.currentState.clearButtonActive = !!this.todos.find(item => {
+        if (item.checked === true) { console.log(item)
+          return item;
+        }
+      });
+      // if (this.todos.find(item => {item.checked === true})) {
+      //   this.currentState.clearButtonActive = true;
+      // }
       
       for (const todo of this.todos) {
         if (todo.checked === true) {
@@ -109,6 +120,14 @@ export default {
            if (item.checked) { 
             return (item.checked = currentStateBool); 
           }
+        }
+      });
+    },
+
+    removeCompletedTodo(completedTodo) {
+      this.todos = completedTodo.filter(item => {
+        if (item.checked === false) { 
+          return item;
         }
       });
     }

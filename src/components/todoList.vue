@@ -16,14 +16,16 @@
           )             
     .footer
       .footer-content
-        .counter {{currentState.todosChecked.length}} items left
+        .counter {{currentState.todosItemsLeft.length}} items left
         .filter
           todo-list-filter(
             @filterTodos="filterTodos"
           )
-        .clear-button
+        .clear-completed-button
           button(
             type="button"
+            :class="{active: currentState.clearButtonActive}"
+            @click="removeCompletedTodo"
           ) Clear completed
 </template>
 
@@ -42,15 +44,6 @@ export default {
     todoListFilter,
     todoListItem
   },
-  computed: {
-    todosItemChecked() {
-      return this.todosChecked = this.todos.filter(item => {
-        if (!item.checked) {
-          return item;
-        }
-      });
-    } 
-  },
   methods: {
     removeTodo(todoId) {
       this.$emit('removeTodo', todoId);
@@ -66,6 +59,10 @@ export default {
 
     selectedALLTodos(current) {
       this.$emit('selectedALLTodos', current)
+    },
+
+    removeCompletedTodo() {
+      this.$emit('removeCompletedTodo', this.todos);
     }
   }
 }
@@ -73,14 +70,6 @@ export default {
 
 
 <style lang="scss" scoped>
-
-  button {
-    border: none;
-    cursor: pointer;    
-    outline: none;
-    background: transparent;
-    color: inherit;
-  }
 
   .todo-list {
     position: relative;
@@ -125,5 +114,19 @@ export default {
 
   .filter {
     flex: 1;
+  }
+
+  button {
+    border: none;
+    cursor: pointer;    
+    outline: none;
+    background: transparent;
+    color: inherit;
+
+    display: none;
+
+    &.active {
+      display: flex;
+    }
   }
 </style>

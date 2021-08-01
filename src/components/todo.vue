@@ -1,20 +1,18 @@
 <template lang="pug">
-  div
-    div.todo
-      todo-input(
-        @addTodo="addTodo"
-      )
-      todo-list(
-        v-if="todos.length > 0"
-        :todos="filteredTodos"
-        :currentState="currentStateTodos"
-        @removeTodo="removeTodo"
-        @checkTodo="checkTodo"
-        @filterTodos="filterTodos"
-        @selectedALLTodos="selectedALLTodos"
-        @removeCompletedTodo="removeCompletedTodo"
-      )
-    pre {{currentState}}
+  div.todo
+    todo-input(
+      @addTodo="addTodo"
+    )
+    todo-list(
+      v-if="todos.length > 0"
+      :todos="filteredTodos"
+      :currentState="currentStateTodos"
+      @removeTodo="removeTodo"
+      @checkTodo="checkTodo"
+      @filterTodos="filterTodos"
+      @selectedALLTodos="selectedALLTodos"
+      @removeCompletedTodo="removeCompletedTodo"
+    )
 </template>
 
 <script>
@@ -63,15 +61,12 @@ export default {
         }
       });
 
-      this.currentState.clearButtonActive = !!this.todos.find(item => {
-        if (item.checked === true) { console.log(item)
-          return item;
+      this.currentState.clearButtonActive = this.todos.some(item => {
+        if (item.checked === true) {
+          return item.checked;
         }
       });
-      // if (this.todos.find(item => {item.checked === true})) {
-      //   this.currentState.clearButtonActive = true;
-      // }
-      
+
       for (const todo of this.todos) {
         if (todo.checked === true) {
           continue; 
@@ -81,7 +76,7 @@ export default {
           return this.currentState;
         }
       } 
-      this.currentState.checkedAll = true; 
+      this.currentState.checkedAll = true;
       return this.currentState;
     }
   },

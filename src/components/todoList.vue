@@ -113,7 +113,7 @@ export default {
   }
 
   .filter {
-    flex: 1;
+    width: 393px;
   }
 
   button {

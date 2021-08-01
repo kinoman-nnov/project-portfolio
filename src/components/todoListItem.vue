@@ -11,6 +11,11 @@
     .button
       button(
         type="button"
+        @click=""
+      ).view ~>
+    .button
+      button(
+        type="button"
         @click="removeTodo"
       ).remove x
 </template>
@@ -48,6 +53,10 @@ export default {
       .remove {
         visibility: visible;
       }
+
+      .view {
+        visibility: visible;
+      }
     }
   }
 
@@ -77,6 +86,11 @@ export default {
 
   .button {
     width: 40px;
+  }
+
+  .view {
+    visibility: hidden;
+    cursor: pointer;
   }
 
   .remove {

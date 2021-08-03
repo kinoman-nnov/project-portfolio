@@ -2,27 +2,29 @@
   .todo-list-button
     button(
       type="button"
-      @click="selectedALLTodos"
+      @click="selectedAllExistedTodos"
       :class="{active: currentState.checkedAll}"
     ) v
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
+
 export default {
   props: {
     currentState: Object
   },
   methods: {
-    selectedALLTodos() { // пользовательское событие Boolean
+    ...mapMutations(['selectedALLTodos']),
+    selectedAllExistedTodos() { // пользовательское событие Boolean
       let currentStateBool = this.currentState.checkedAll;
-      this.$emit('selectedALLTodos', !currentStateBool);
-    }
+      this.selectedALLTodos(!currentStateBool);
+    },
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
   button {
     border: none;
     cursor: pointer;    

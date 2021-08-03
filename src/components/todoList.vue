@@ -1,7 +1,6 @@
 <template lang="pug">
   .todo-list
     todo-list-button(
-      @selectedALLTodos="selectedALLTodos"
       :currentState="currentState"
     )
     .content
@@ -11,25 +10,23 @@
         )
           todo-list-item(
             :todo="todo"
-            @removeTodo="removeTodo"
-            @checkTodo="checkTodo"
           )             
     .footer
       .footer-content
         .counter {{currentState.todosItemsLeft.length}} items left
         .filter
-          todo-list-filter(
-            @filterTodos="filterTodos"
-          )
+          todo-list-filter
         .clear-completed-button
           button(
             type="button"
             :class="{active: currentState.clearButtonActive}"
-            @click="removeCompletedTodo"
+            @click="removeCompletedAllTodo"
           ) Clear completed
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
+
 import todoListButton from './todoListButton.vue'
 import todoListItem from './todoListItem.vue'
 import todoListFilter from './todoListFilter.vue'
@@ -45,32 +42,15 @@ export default {
     todoListItem
   },
   methods: {
-    removeTodo(todoId) {
-      this.$emit('removeTodo', todoId);
-    },
-
-    checkTodo(todo) {
-      this.$emit('checkTodo', todo);
-    },
-
-    filterTodos(filter) {
-      this.$emit('filterTodos', filter);
-    },
-
-    selectedALLTodos(current) {
-      this.$emit('selectedALLTodos', current)
-    },
-
-    removeCompletedTodo() {
-      this.$emit('removeCompletedTodo', this.todos);
+    ...mapMutations(['removeCompletedTodo']),
+    removeCompletedAllTodo() {
+      this.removeCompletedTodo(this.todos);
     }
   }
 }
 </script>
 
-
 <style lang="scss" scoped>
-
   .todo-list {
     position: relative;
   }

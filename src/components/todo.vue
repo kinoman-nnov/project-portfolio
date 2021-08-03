@@ -1,41 +1,38 @@
 <template lang="pug">
   div.todo
-    todo-input(
-      @addTodo="addTodo"
-    )
+    todo-input()
     todo-list(
       v-if="todos.length > 0"
       :todos="filteredTodos"
       :currentState="currentStateTodos"
-      @removeTodo="removeTodo"
-      @checkTodo="checkTodo"
-      @filterTodos="filterTodos"
-      @selectedALLTodos="selectedALLTodos"
-      @removeCompletedTodo="removeCompletedTodo"
     )
 </template>
 
 <script>
 import todoInput from './todoInput.vue'
 import todoList from './todoList.vue'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
-  data() {
-    return {
-      todos: [],
-      filter: "all",
-      currentState: {
-        checkedAll: false,
-        clearButtonActive: false,
-        todosItemsLeft: []
-      }
-    }
-  },
   components: {
     todoInput,
     todoList
   },
+  mounted() {
+    // setTimeout(() => {
+    //   console.log(this.todoById(2)); // возвращает задание с id: 2 по setTimeout
+    // }, 3000);
+
+    this.fetchItems();
+  },
   computed: {
+    ...mapState({
+      todos: state => state.todos.todos,
+      filter: state => state.todos.filter,
+      currentState: state => state.todos.currentState
+    }),
+    ...mapGetters(['todoById']),
+
     filteredTodos() { 
       switch(this.filter) {
         case "all" :
@@ -54,6 +51,7 @@ export default {
           });
       }
     },
+
     currentStateTodos() {
       this.currentState.todosItemsLeft = this.todos.filter(item => {
         if (item.checked === false) { 
@@ -81,51 +79,7 @@ export default {
     }
   },
   methods: {
-    addTodo(todo) {
-      this.todos.push(todo)
-    },
-
-    removeTodo(todoId) {
-      this.todos = this.todos.filter(item => {
-        return item.id !== todoId;
-      });
-    },
-
-    checkTodo(todo) {
-      this.todos = this.todos.map(item => {
-        if (item.id === todo.id) {
-          return todo;
-        } else {return item;}
-      });
-    },
-
-    filterTodos(filter) {
-      this.filter = filter;
-    },
-
-    selectedALLTodos(currentStateBool) {
-      this.currentState.checkedAll = currentStateBool;
-      this.todos.map(item => {
-        if (currentStateBool) { 
-          if (!item.checked) { 
-            return (item.checked = currentStateBool); 
-          }
-        }
-        else {
-           if (item.checked) { 
-            return (item.checked = currentStateBool); 
-          }
-        }
-      });
-    },
-
-    removeCompletedTodo(completedTodo) {
-      this.todos = completedTodo.filter(item => {
-        if (item.checked === false) { 
-          return item;
-        }
-      });
-    }
+    ...mapActions(['fetchItems'])
   }
 }
 </script>

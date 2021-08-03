@@ -12,7 +12,7 @@ const routes = [
     component: todo
   },
   {
-    path: '/view',
+    path: '/view/:todo',
     component: todoView 
   }
 ];

@@ -47,12 +47,12 @@ export default {
   data() {
     return {
       editmode: this.editModeByDefault,
-      title: this.value,
+      title: this.value, 
     };
   },
   methods: {
     onApprove() {
-      if (this.title.trim() === "") return false;
+      if (this.value.trim() === "") return false;
       if (this.title.trim() === this.value.trim()) {
         this.editmode = false;
       } else {

@@ -9,16 +9,16 @@ const methods = {
 
 export default {
   title: "category",
-  components: {category}
+  components: { category }
 }
 
 const skills = [
-  {id: 0, title: "CSS", percent: 80},
-  {id: 0, title: "HTML", percent: 50},
+  { id: 0, title: "CSS", percent: 80 },
+  { id: 1, title: "HTML", percent: 50 },
 ]
 
 export const defaultView = () => ({
-  components: {category},
+  components: { category },
   data() {
     return {
       title: "Frontend",

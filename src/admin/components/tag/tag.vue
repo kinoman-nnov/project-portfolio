@@ -1,12 +1,12 @@
 <template>
-  <div 
-    :class="['tag', {interactive: interactive}]"
-  >
-    <span>{{title}}</span>
-    <button 
+  <div :class="['tag', { interactive: interactive }]">
+    <span>{{ title }}</span>
+    <button
       v-on="$listeners"
-      v-if="interactive" 
-      class="remove" type="button"></button>
+      v-if="interactive"
+      class="remove"
+      type="button"
+    ></button>
   </div>
 </template>
 
@@ -16,14 +16,14 @@ export default {
   props: {
     title: {
       type: String,
-      default: ""
+      default: "",
     },
-    interactive: Boolean
+    interactive: Boolean,
   },
   components: {
-    icon
-  }
-}
+    icon,
+  },
+};
 </script>
 
 <style lang="postcss" scoped src="./tag.pcss"></style>

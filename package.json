@@ -65,6 +65,7 @@
   "dependencies": {
     "@babel/runtime": "^7.16.0",
     "axios": "^0.23.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "normalize.css": "^8.0.1",
     "promptly": "^3.0.3",
     "pug": "^3.0.0",

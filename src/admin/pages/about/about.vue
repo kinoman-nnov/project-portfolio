@@ -11,7 +11,7 @@
             title="Добавить группу"
           />
         </div>
-        <pre>{{categories}}</pre>
+        <pre>{{ categories }}</pre>
         <ul class="skills">
           <li class="item" v-if="emptyCatIsShown">
             <category
@@ -54,7 +54,7 @@ export default {
   },
   data() {
     return {
-      categories: [], // шаблонные категории из json
+      // categories: [], // шаблонные категории из json
       emptyCatIsShown: false,
     };
   },
@@ -98,7 +98,7 @@ export default {
   },
   created() {
     this.fetchCategoriesAction();
-    this.categories = require("../../data/categories.json"); // шаблон
+    // this.categories = require("../../data/categories.json"); // шаблон
   },
 };
 </script>

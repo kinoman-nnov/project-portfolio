@@ -48,10 +48,8 @@ export default {
     },
     async fetch({ commit }) {
       try {
-        // исправить /{user_id} 
-        const { data } = await this.$axios.get('/categories/user_id');
+        const { data } = await this.$axios.get('/categories/1'); // "1" - id пользователя, получено с get на /user
         commit("SET_CATEGORIES", data);
-        console.log(response);
       } catch (error) {
         console.log(error);
       }

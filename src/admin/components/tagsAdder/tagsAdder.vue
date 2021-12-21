@@ -8,8 +8,7 @@
     <ul class="tags">
       <li class="tag"
         v-for="(tag, index) in tagsArray"
-        :key="`${tag}${index}`"
-        v-if="tag.trim()"
+        :key="`${tag}${index}`"  
       >
         <tag
           interactive 
@@ -47,7 +46,10 @@ export default {
   },
   computed: {
     tagsArray() {
-      return this.currentTags.trim().split(',');
+      let arrayTags = this.currentTags.trim().split(',');
+      let filterTags = arrayTags.filter(item => item);
+
+      return filterTags;
     }
   },
   methods: {

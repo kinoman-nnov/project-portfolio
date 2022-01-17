@@ -6,6 +6,17 @@ export default {
   mutations: {
     SET_CATEGORIES: (state, categories) => (state.data = categories),
     ADD_CATEGORY: (state, category) => (state.data.unshift(category)),
+    EDIT_CATEGORY: (state, categoryToEdit) => {
+      state.data = state.data.map(category => {
+        if (category.id === categoryToEdit.id) {
+          category.category = categoryToEdit.category;
+        }
+        return category;
+      });
+    },
+    REMOVE_CATEGORY: (state, categoryIdToRemove) => {
+      state.data = state.data.filter(category => category.id !== categoryIdToRemove);
+    },
     ADD_SKILL: (state, newSkill) => {
       state.data = state.data.map(category => {
         if (category.id === newSkill.category) {
@@ -38,23 +49,41 @@ export default {
     }
   },
   actions: {
-    async create(store, title) {
+    async create({ commit }, title) {
       try {
-        const { data } = await this.$axios.post('/categories', { title });
-        commit("ADD_CATEGORY", data)
+        const { data } = await this.$axios.post('/categories', { title }); // с сервера в data возвращается объект category
+        commit("ADD_CATEGORY", data);
       } catch (error) {
+        console.log(error);
         throw new Error("ошибка")
       }
     },
     async fetch({ commit }) {
       try {
-        // исправить /{user_id} 
-        const { data } = await this.$axios.get('/categories/user_id');
+        const { data } = await this.$axios.get('/categories/1'); // с сервера в data возвращается массив объектов с категориями
         commit("SET_CATEGORIES", data);
-        console.log(response);
       } catch (error) {
         console.log(error);
+        throw new Error("ошибка")
       }
-    }
+    },
+    async edit({ commit }, categoryToEdit) {
+      try {
+        const { data } = await this.$axios.post(`/categories/${categoryToEdit.id}`, { title: categoryToEdit.title }); // с сервера в data возвращается объект с категорией(новый title)
+        commit("EDIT_CATEGORY", data.category);
+      } catch (error) {
+        console.log(error);
+        throw new Error("ошибка")
+      }
+    },
+    async remove({ commit }, categoryIdToRemove) {
+      try {
+        const { data } = await this.$axios.delete(`/categories/${categoryIdToRemove}`);  // с сервера в data возвращается объект с message "запись удалена"
+        commit("REMOVE_CATEGORY", categoryIdToRemove);
+      } catch (error) {
+        console.log(error);
+        throw new Error("Ошибка");
+      }
+    },
   }
 }

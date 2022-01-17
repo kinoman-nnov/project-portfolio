@@ -7,7 +7,6 @@
       <icon symbol="trash" class="btn" @click="$emit('remove', currentSkill)" grayscale />
     </div>
   </div>
-
   <div class="skill-component" v-else>
     <div class="title">
       <app-input noSidePaddings v-model="currentSkill.title" />

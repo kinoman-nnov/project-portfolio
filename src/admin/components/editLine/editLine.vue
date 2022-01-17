@@ -1,7 +1,7 @@
 <template>
   <div class="edit-line-component" :class="{'blocked' : blocked}">
     <div class="title" v-if="editmode === false">
-      <div class="text">{{value}}</div>
+      <div class="text">{{ value }}</div>
       <div class="icon">
         <icon symbol="pencil" grayscale @click="editmode = true"></icon>
       </div>

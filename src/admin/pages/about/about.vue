@@ -2,6 +2,7 @@
   <div class="about-page-components">
     <div class="page-content">
       <div class="container" v-if="categories.length">
+        <pre>{{ categories }}</pre>
         <div class="header">
           <div class="title">Блок "Обо мне"</div>
           <iconed-button
@@ -11,7 +12,6 @@
             title="Добавить группу"
           />
         </div>
-        <pre>{{categories}}</pre>
         <ul class="skills">
           <li class="item" v-if="emptyCatIsShown">
             <category
@@ -27,6 +27,8 @@
               @create-skill="createSkill($event, category.id)"
               @edit-skill="editSkill"
               @remove-skill="removeSkill"
+              @approve="editCategory($event, category.id)"
+              @remove="removeCategory(category.id)"
             />
           </li>
         </ul>
@@ -54,7 +56,7 @@ export default {
   },
   data() {
     return {
-      categories: [], // шаблонные категории из json
+      // categories: [], // шаблонные категории из json
       emptyCatIsShown: false,
     };
   },
@@ -67,15 +69,17 @@ export default {
     ...mapActions({
       createCategoryAction: "categories/create",
       fetchCategoriesAction: "categories/fetch",
+      editCategoryAction: "categories/edit",
+      removeCategoryAction: "categories/remove",
       addSkillAction: "skills/add",
       removeSkillAction: "skills/remove",
       editSkillAction: "skills/edit",
     }),
     async createSkill(skill, categoryId) {
-      const newSkill = {
+      const newSkill = { 
         ...skill,
-        category: categoryId
-      }
+        category: categoryId,
+      };
       await this.addSkillAction(newSkill);
       skill.title = "";
       skill.percent = "";
@@ -95,10 +99,21 @@ export default {
         console.log(error.message);
       }
     },
+    async editCategory(title, categoryId) {
+      const newCategory = {
+        title,
+        id: categoryId,
+      };
+      await this.editCategoryAction(newCategory);
+      
+    },
+    removeCategory(categoryId) {
+      this.removeCategoryAction(categoryId);
+    },
   },
   created() {
     this.fetchCategoriesAction();
-    this.categories = require("../../data/categories.json"); // шаблон
+    // this.categories = require("../../data/categories.json"); // шаблон
   },
 };
 </script>

@@ -2,7 +2,6 @@
   <div class="about-page-components">
     <div class="page-content">
       <div class="container" v-if="categories.length">
-        <pre>{{ categories }}</pre>
         <div class="header">
           <div class="title">Блок "Обо мне"</div>
           <iconed-button
@@ -45,6 +44,7 @@ import navigation from "../../components/navigation";
 import button from "../../components/button";
 import category from "../../components/category";
 import { mapActions, mapState } from "vuex";
+import categoryVue from '../../components/category/category.vue';
 
 export default {
   components: {
@@ -91,7 +91,8 @@ export default {
       await this.editSkillAction(skill);
       skill.editmode = false;
     },
-    async createCategory(categoryTitle) {
+    async createCategory(currentCategory) {
+      const categoryTitle = currentCategory.categoryTitle;
       try {
         await this.createCategoryAction(categoryTitle);
         this.emptyCatIsShown = false;
@@ -99,13 +100,13 @@ export default {
         console.log(error.message);
       }
     },
-    async editCategory(title, categoryId) {
+    async editCategory(categoryToEdit, categoryId) {
       const newCategory = {
-        title,
+        title: categoryToEdit.categoryTitle,
         id: categoryId,
       };
       await this.editCategoryAction(newCategory);
-      
+      categoryToEdit.editmode = false;
     },
     removeCategory(categoryId) {
       this.removeCategoryAction(categoryId);

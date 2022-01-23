@@ -15,7 +15,9 @@ export const defaultView = () => ({
   template: `
     <div>
       <pre>{{tags}}</pre>
-      <tags-adder  v-model="tags" />
+      <tags-adder
+      v-model="tags"
+      />
     </div>
   `
 });

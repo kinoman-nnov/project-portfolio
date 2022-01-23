@@ -1,9 +1,9 @@
 <template>
   <div class="edit-line-component" :class="{'blocked' : blocked}">
-    <div class="title" v-if="editmode === false">
+    <div class="title" v-if="currentCategory.editmode === false">
       <div class="text">{{ value }}</div>
       <div class="icon">
-        <icon symbol="pencil" grayscale @click="editmode = true"></icon>
+        <icon symbol="pencil" grayscale @click="currentCategory.editmode = true"></icon>
       </div>
     </div>
     <div v-else class="title">
@@ -11,6 +11,7 @@
         <app-input
           placeholder="Название новой группы"
           :value="value"
+          v-model="currentCategory.categoryTitle"
           :errorText="errorText"
           @input="$emit('input', $event)"
           @keydown.native.enter="onApprove"
@@ -46,17 +47,21 @@ export default {
   },
   data() {
     return {
-      editmode: this.editModeByDefault,
       title: this.value, 
+      currentCategory: {
+        editmode: this.editModeByDefault,
+        categoryTitle: this.value
+      }
     };
   },
   methods: {
     onApprove() {
       if (this.value.trim() === "") return false;
       if (this.title.trim() === this.value.trim()) {
-        this.editmode = false;
+        this.currentCategory.editmode = false;
       } else {
-        this.$emit("approve", this.value);
+        this.$emit("approve", this.currentCategory);
+        // this.editmode = false;
       }
     },
   },

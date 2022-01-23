@@ -52,7 +52,11 @@ export default {
     async create({ commit }, title) {
       try {
         const { data } = await this.$axios.post('/categories', { title }); // с сервера в data возвращается объект category
-        commit("ADD_CATEGORY", data);
+        const newCategory = {
+          ...data,
+          skills: []
+        };
+        commit("ADD_CATEGORY", newCategory);
       } catch (error) {
         console.log(error);
         throw new Error("ошибка")

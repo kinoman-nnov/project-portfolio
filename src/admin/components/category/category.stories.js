@@ -13,8 +13,8 @@ export default {
 }
 
 const skills = [
-  { id: 0, title: "CSS", percent: 80 },
-  { id: 1, title: "HTML", percent: 50 },
+  {id: 0, title: "CSS", percent: 80},
+  {id: 1, title: "HTML", percent: 50},
 ]
 
 export const defaultView = () => ({

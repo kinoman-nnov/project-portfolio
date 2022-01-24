@@ -11,7 +11,6 @@
             title="Добавить группу"
           />
         </div>
-        <pre>{{ categories }}</pre>
         <ul class="skills">
           <li class="item" v-if="emptyCatIsShown">
             <category
@@ -27,6 +26,8 @@
               @create-skill="createSkill($event, category.id)"
               @edit-skill="editSkill"
               @remove-skill="removeSkill"
+              @approve="editCategory($event, category.id)"
+              @remove="removeCategory(category.id)"
             />
           </li>
         </ul>
@@ -43,6 +44,7 @@ import navigation from "../../components/navigation";
 import button from "../../components/button";
 import category from "../../components/category";
 import { mapActions, mapState } from "vuex";
+import categoryVue from '../../components/category/category.vue';
 
 export default {
   components: {
@@ -67,15 +69,17 @@ export default {
     ...mapActions({
       createCategoryAction: "categories/create",
       fetchCategoriesAction: "categories/fetch",
+      editCategoryAction: "categories/edit",
+      removeCategoryAction: "categories/remove",
       addSkillAction: "skills/add",
       removeSkillAction: "skills/remove",
       editSkillAction: "skills/edit",
     }),
     async createSkill(skill, categoryId) {
-      const newSkill = {
+      const newSkill = { 
         ...skill,
-        category: categoryId
-      }
+        category: categoryId,
+      };
       await this.addSkillAction(newSkill);
       skill.title = "";
       skill.percent = "";
@@ -87,13 +91,25 @@ export default {
       await this.editSkillAction(skill);
       skill.editmode = false;
     },
-    async createCategory(categoryTitle) {
+    async createCategory(currentCategory) {
+      const categoryTitle = currentCategory.categoryTitle;
       try {
         await this.createCategoryAction(categoryTitle);
         this.emptyCatIsShown = false;
       } catch (error) {
         console.log(error.message);
       }
+    },
+    async editCategory(categoryToEdit, categoryId) {
+      const newCategory = {
+        title: categoryToEdit.categoryTitle,
+        id: categoryId,
+      };
+      await this.editCategoryAction(newCategory);
+      categoryToEdit.editmode = false;
+    },
+    removeCategory(categoryId) {
+      this.removeCategoryAction(categoryId);
     },
   },
   created() {

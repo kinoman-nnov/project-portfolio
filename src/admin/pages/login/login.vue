@@ -50,7 +50,7 @@ export default {
       name: "",
       password: "",
     },
-    isSubmitDisabled: false,
+    isSubmitDisabled: false, // блокировка кнопки submit для предотвращения повторного нажания отправки формы
   }),
   components: { appInput, appButton },
   methods: {

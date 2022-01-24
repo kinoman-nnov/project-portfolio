@@ -8,7 +8,7 @@
     <ul class="tags">
       <li class="tag"
         v-for="(tag, index) in tagsArray"
-        :key="`${tag}${index}`"  
+        :key="`${tag}${index}`"
       >
         <tag
           interactive 
@@ -46,10 +46,10 @@ export default {
   },
   computed: {
     tagsArray() {
-      let arrayTags = this.currentTags.trim().split(',');
-      let filterTags = arrayTags.filter(item => item);
-
-      return filterTags;
+      let tagsArr =  this.currentTags.trim().split(','); 
+      tagsArr = tagsArr.map(tag => tag.trim());
+      tagsArr = tagsArr.filter(tag => tag !== '');
+      return tagsArr; // возвращает массив тегов без пробелов
     }
   },
   methods: {

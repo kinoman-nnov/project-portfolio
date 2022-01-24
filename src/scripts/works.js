@@ -73,7 +73,7 @@ new Vue({
     },
     requireImagesToArray(data) {
       return data.map(item => {
-        const requireImages = require(`../images/content/${item.photo}`).default;
+        const requireImages = require(`../images/content/${item.photo}`).default;  // вебпэк генерирует ключ default
         item.photo = requireImages;
         return item;
       });

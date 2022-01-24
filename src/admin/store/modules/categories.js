@@ -58,8 +58,7 @@ export default {
         };
         commit("ADD_CATEGORY", newCategory);
       } catch (error) {
-        console.log(error);
-        throw new Error("ошибка")
+        throw new Error("Произошла ошибка")
       }
     },
     async fetch({ commit }) {
@@ -67,8 +66,8 @@ export default {
         const { data } = await this.$axios.get('/categories/1'); // с сервера в data возвращается массив объектов с категориями
         commit("SET_CATEGORIES", data);
       } catch (error) {
-        console.log(error);
-        throw new Error("ошибка")
+        console.log(error.message);
+        throw new Error("Произошла ошибка")
       }
     },
     async edit({ commit }, categoryToEdit) {
@@ -77,7 +76,7 @@ export default {
         commit("EDIT_CATEGORY", data.category);
       } catch (error) {
         console.log(error);
-        throw new Error("ошибка")
+        throw new Error("Произошла ошибка")
       }
     },
     async remove({ commit }, categoryIdToRemove) {
@@ -86,7 +85,7 @@ export default {
         commit("REMOVE_CATEGORY", categoryIdToRemove);
       } catch (error) {
         console.log(error);
-        throw new Error("Ошибка");
+        throw new Error("Произошла ошибка");
       }
     },
   }

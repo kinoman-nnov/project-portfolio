@@ -1,11 +1,12 @@
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
-import SimpleVueValidation from 'simple-vue-validator';
+import SimpleVueValidator from 'simple-vue-validator';
 import store from "./store";
 import $axios from "./requests";
 
-Vue.use(SimpleVueValidation, { mode: 'manual' });
+Vue.use(SimpleVueValidator);
+SimpleVueValidator.setMode('manual');
 
 store.$axios = $axios;
 

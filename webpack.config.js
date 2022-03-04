@@ -30,13 +30,13 @@ module.exports = (env, argv) => {
     test: /\.js$/,
     loader: "babel-loader",
     exclude: /node_modules/,
-    options: {
-      presets: ["@babel/preset-env"],
-      plugins: [
-        "@babel/plugin-transform-runtime",
-        "@babel/plugin-syntax-dynamic-import"
-      ],
-    },
+    // options: { // перенесены в .babelrc.json
+    //   presets: ["@babel/preset-env"],
+    //   plugins: [
+    //     "@babel/plugin-transform-runtime",
+    //     "@babel/plugin-syntax-dynamic-import"
+    //   ],
+    // },
   };
 
   const files = {

@@ -1,8 +1,8 @@
 <template>
   <div class="app-container">
-    <router-view name="header"/>
+    <router-view name="header" />
     <router-view />
-    <div :class="['notify-container', {active: isTooltipShown}]">
+    <div :class="['notify-container', { active: isTooltipShown }]">
       <div class="notification">
         <notification
           :text="tooltipText"
@@ -15,24 +15,24 @@
 </template>
 
 <script>
-import notification from './components/notification';
+import notification from "./components/notification";
 import { mapState, mapActions } from "vuex";
 
 export default {
   components: { notification },
-    methods: {
+  methods: {
     ...mapActions({
-      hideTooltip: "tooltips/hide"
-    })
+      hideTooltip: "tooltips/hide",
+    }),
   },
   computed: {
     ...mapState("tooltips", {
-      isTooltipShown: state => state.isShown,
-      tooltipText: state => state.text,
-      tooltipType: state => state.type,
-    })
-  }
-}
+      isTooltipShown: (state) => state.isShown,
+      tooltipText: (state) => state.text,
+      tooltipType: (state) => state.type,
+    }),
+  },
+};
 </script>
 
 
@@ -41,6 +41,31 @@ export default {
 @import "normalize.css";
 @import "../styles/mixins.pcss";
 @import "../styles/layout/base.pcss";
+
+.page-component {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-header {
+  display: flex;
+  margin-bottom: 60px;
+}
+
+.page-content {
+  padding: 60px 0 20px;
+  background: url("../images/bg/admin.jpg") center center / cover no-repeat;
+  flex: 1;
+}
+
+.page-title {
+  margin-right: 60px;
+  font-size: 21px;
+  font-weight: bold;
+  color: $text-color;
+}
+
 </style>
 
 <style lang="postcss" scoped src="./app.pcss"></style>

@@ -11,6 +11,7 @@
 import headline from "../headline";
 import navigation from "../navigation";
 import user from "../user";
+
 export default {
   components: { headline, navigation, user },
 };

@@ -21,7 +21,7 @@
           />
         </div>
         <div class="btn">
-          <app-button :disabled="isSubmitDisabled" title="Отправить" />
+          <app-button :disabled="isSubmitDisabled" typeAttr="submit" title="Отправить" />
         </div>
       </form>
     </div>
@@ -64,14 +64,14 @@ export default {
 
       try {
         const response = await $axios.post("/login", this.user);
-        
+        console.log(response);
         const token = response.data.token;
         localStorage.setItem("token", token);
         $axios.defaults.headers["Authorization"] = `Bearer ${token}`;
         this.$router.replace("/");
       } catch (error) {
         this.showTooltip({
-          text: error.response.data.error,
+          text: error.response.data.error || "Произошла ошибка",
           type: "error"
         });
       } finally {

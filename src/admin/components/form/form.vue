@@ -20,10 +20,7 @@
                   Перетащите или загрузите картинку
                 </div>
                 <div class="uploader-btn">
-                  <app-button
-                    typeAttr="file"
-                    @change="handleChange"
-                  />
+                  <app-button typeAttr="file" @change="handleChange" title="Загрузить" />
                 </div>
               </label>
             </div>
@@ -106,6 +103,13 @@ export default {
       this.newWork.photo = file;
       this.renderPhoto(file);
       this.hovered = false;
+    },
+    renderPhoto(file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        this.newWork.preview = reader.result;
+      };
     },
   },
 };

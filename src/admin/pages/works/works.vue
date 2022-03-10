@@ -2,7 +2,7 @@
   <div class="works-page-component page-component">
     <div class="page-content">
       <div class="container">
-          {{ works }}
+        {{ works }}
         <div class="page-header">
           <div class="page-title">Блок "Работы"</div>
         </div>
@@ -34,7 +34,15 @@ export default {
       works: (state) => state.data,
     }),
   },
-}
+  methods: {
+    ...mapActions({
+      fetchWorks: "works/fetch",
+    }),
+  },
+  mounted() {
+    this.fetchWorks();
+  }
+};
 </script>
 
 <style lang="postcss" scoped src="./works.pcss"></style>

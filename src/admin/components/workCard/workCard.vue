@@ -14,8 +14,16 @@
         </div>
         <a :href="work.link" class="link">{{ work.link }}</a>
         <div class="btns">
-          <icon symbol="pencil" title="Править"></icon>
-          <icon symbol="trash" title="Удалить"></icon>
+          <icon
+            symbol="pencil"
+            title="Править"
+            @click="currentWork.editmode = true">
+          </icon>
+          <icon
+            symbol="trash"
+            title="Удалить"
+            @click="$emit('remove')">
+          </icon>
         </div>
       </div>
     </div>

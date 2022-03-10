@@ -8,7 +8,10 @@ export default {
       state.data.push(newWork);
     },
     SET_WORKS(state, works) {
-      state.data = works
+      state.data = works;
+    },
+    REMOVE_WORK(state, workIdToRemove) {
+      state.data = state.data.filter(work => work.id !== workIdToRemove);
     }
   },
   actions: {
@@ -19,9 +22,9 @@ export default {
         formData.append(item, newWork[item]);
       });
 
-      // for (let entry of formData.entries()) { // вывод в консоль данных объекта formData
-      //   console.log(entry);
-      // }
+      for (let entry of formData.entries()) { // вывод в консоль данных объекта formData
+        console.log(entry);
+      }
 
       try {
         const { data } = await this.$axios.post('/works', formData);
@@ -36,6 +39,14 @@ export default {
         commit("SET_WORKS", data);
       } catch (error) {
         throw new Error("Произошла ошибка")
+      }
+    },
+    async remove({commit}, workIdToRemove) {
+      try {
+        const {data} = await this.$axios.delete(`/works/${workIdToRemove}`);
+        commit("REMOVE_WORK", workIdToRemove)
+      } catch(error) {
+        throw new Error("Произошла ошибка");
       }
     },
   }

@@ -11,7 +11,10 @@
         </div>
         <ul class="cards">
           <li class="item" v-for="work in works" :key="work.id">
-            <work-card :work="work" />
+            <work-card
+              :work="work"
+              @remove="removeWork(work.id)"
+            />
           </li>
         </ul>
       </div>
@@ -37,7 +40,23 @@ export default {
   methods: {
     ...mapActions({
       fetchWorks: "works/fetch",
+      removeWorkAction: "works/remove",
+      showTooltip: "tooltips/show",
     }),
+    async removeWork(workId) {
+      try {
+        await this.removeWorkAction(workId);
+        this.showTooltip({
+          text: "работа удалена",
+          type: "success",
+        });
+      } catch (error) {
+        this.showTooltip({
+          text: error.message,
+          type: "error",
+        })
+      }
+    }
   },
   mounted() {
     this.fetchWorks();

@@ -1,6 +1,6 @@
 <template>
   <ul class="tags-list-component">
-    <li class="item" v-for="tag in tagsArray" :key="tag">
+    <li class="item item-tagList" v-for="tag in tagsArray" :key="tag">
       <tag :title="tag" />
     </li>
   </ul>
@@ -33,5 +33,8 @@ li {
   &:last-child {
     margin-right: 0;
   }
+}
+.item-tagList {
+  margin-bottom: 0;
 }
 </style>

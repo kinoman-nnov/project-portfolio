@@ -1,6 +1,6 @@
 <template>
-  <div class="form-component">
-    <form class="form" @submit.prevent="handleSubmit">
+  <div class="form-component" v-if="currentWork.editmode === false">
+    <form class="form" @submit.prevent="handleSubmitAddWork">
       <card title="добавление работы">
         <div class="form-container" slot="content">
           <div class="form-columns">
@@ -20,7 +20,11 @@
                   Перетащите или загрузите картинку
                 </div>
                 <div class="uploader-btn">
-                  <app-button typeAttr="file" @change="handleChange" title="Загрузить" />
+                  <app-button
+                    typeAttr="file"
+                    @change="handleChange"
+                    title="Загрузить"
+                  />
                 </div>
               </label>
             </div>
@@ -55,6 +59,66 @@
       </card>
     </form>
   </div>
+  <div class="form-component" v-else>
+    <form class="form" @submit.prevent="handleSubmitEditWork">
+      <card title="редактирование работы">
+        <div class="form-container" slot="content">
+          <div class="form-columns">
+            <div class="form-col">
+              <label
+                :style="{ backgroundImage: `url(${coverPreview})` }"
+                :class="[
+                  'uploader',
+                  { active: currentWork.preview },
+                  { hovered: hovered },
+                ]"
+                @dragover="handleDragOver"
+                @dragleave="hovered = false"
+                @drop="handleChange"
+              >
+                <div class="uploader-title">
+                  Перетащите или загрузите картинку
+                </div>
+                <div class="uploader-btn">
+                  <app-button
+                    typeAttr="file"
+                    @change="handleChange"
+                    title="Загрузить"
+                  />
+                </div>
+              </label>
+            </div>
+            <div class="form-col">
+              <div class="form-row">
+                <app-input v-model="currentWork.title" title="Название" />
+              </div>
+              <div class="form-row">
+                <app-input v-model="currentWork.link" title="Ссылка" />
+              </div>
+              <div class="form-row">
+                <app-input
+                  v-model="currentWork.description"
+                  field-type="textarea"
+                  title="Описание"
+                />
+              </div>
+              <div class="form-row">
+                <tags-adder v-model="currentWork.techs" />
+              </div>
+            </div>
+          </div>
+          <div class="form-btns">
+            <div class="btn">
+              <app-button title="Отмена" plain />
+            </div>
+            <div class="btn">
+              <app-button title="Сохранить" typeAttr="submit" />
+            </div>
+          </div>
+        </div>
+      </card>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -63,6 +127,9 @@ import appButton from "../button";
 import appInput from "../input";
 import tagsAdder from "../tagsAdder";
 import { mapActions } from "vuex";
+import $axios from "../../requests";
+
+const baseUrl = $axios.defaults.baseURL;
 
 export default {
   components: {
@@ -70,6 +137,18 @@ export default {
     appButton,
     appInput,
     tagsAdder,
+  },
+  props: {
+    currentWork: Object,
+  },
+  computed: {
+    coverPreview() {
+      if (!!this.currentWork.preview === false) {
+        return `${baseUrl}/${this.currentWork.photoUpload}`;
+      } else {
+        return this.currentWork.preview;
+      }
+    },
   },
   data() {
     return {
@@ -87,13 +166,19 @@ export default {
   methods: {
     ...mapActions({
       addNewWork: "works/add",
+      editCurrentWork: "works/edit",
     }),
     handleDragOver(e) {
       e.preventDefault();
       this.hovered = true;
     },
-    async handleSubmit() {
+    async handleSubmitAddWork() {
+      console.log("this.newWork", this.newWork);
       await this.addNewWork(this.newWork);
+    },
+    async handleSubmitEditWork() {
+      console.log("this.currentWork", this.currentWork);
+      // await this.editCurrentWork(this.currentWork);
     },
     handleChange(event) {
       event.preventDefault();
@@ -101,6 +186,7 @@ export default {
         ? event.dataTransfer.files[0]
         : event.target.files[0];
       this.newWork.photo = file;
+      this.currentWork.photoUpload = file;
       this.renderPhoto(file);
       this.hovered = false;
     },
@@ -109,6 +195,7 @@ export default {
       reader.readAsDataURL(file);
       reader.onloadend = () => {
         this.newWork.preview = reader.result;
+        this.currentWork.preview = reader.result;
       };
     },
   },

@@ -2,18 +2,20 @@
   <div class="works-page-component page-component">
     <div class="page-content">
       <div class="container">
-        {{ works }}
         <div class="page-header">
           <div class="page-title">Блок "Работы"</div>
         </div>
         <div class="form">
-          <form-component />
+          <form-component
+            :currentWork="currentWork"
+          />
         </div>
         <ul class="cards">
           <li class="item" v-for="work in works" :key="work.id">
             <work-card
               :work="work"
               @remove="removeWork(work.id)"
+              @editWork="editWork"
             />
           </li>
         </ul>
@@ -37,6 +39,13 @@ export default {
       works: (state) => state.data,
     }),
   },
+  data() {
+    return {
+      currentWork: {
+        editmode: false
+      }
+    }
+  },
   methods: {
     ...mapActions({
       fetchWorks: "works/fetch",
@@ -55,6 +64,11 @@ export default {
           text: error.message,
           type: "error",
         })
+      }
+    },
+    editWork(work) {
+      this.currentWork = {
+        ...work
       }
     }
   },

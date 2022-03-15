@@ -22,9 +22,9 @@ export default {
         formData.append(item, newWork[item]);
       });
 
-      for (let entry of formData.entries()) { // вывод в консоль данных объекта formData
-        console.log(entry);
-      }
+      // for (let entry of formData.entries()) { // вывод в консоль данных объекта formData
+      //   console.log(entry);
+      // }
 
       try {
         const { data } = await this.$axios.post('/works', formData);
@@ -41,11 +41,11 @@ export default {
         throw new Error("Произошла ошибка")
       }
     },
-    async remove({commit}, workIdToRemove) {
+    async remove({ commit }, workIdToRemove) {
       try {
-        const {data} = await this.$axios.delete(`/works/${workIdToRemove}`);
+        const { data } = await this.$axios.delete(`/works/${workIdToRemove}`);
         commit("REMOVE_WORK", workIdToRemove)
-      } catch(error) {
+      } catch (error) {
         throw new Error("Произошла ошибка");
       }
     },

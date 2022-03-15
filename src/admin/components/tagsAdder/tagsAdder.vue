@@ -1,20 +1,13 @@
 <template>
   <div class="tags-adder-component">
-    <app-input 
-      title="Добавление тега" 
+    <app-input
+      title="Добавление тега"
       v-model="currentTags"
       @input="$emit('change', currentTags)"
     />
     <ul class="tags">
-      <li class="tag"
-        v-for="(tag, index) in tagsArray"
-        :key="`${tag}${index}`"
-      >
-        <tag
-          interactive 
-          :title="tag"
-          @click="removeTag(tag)"
-        /> 
+      <li class="tag" v-for="(tag, index) in tagsArray" :key="`${tag}${index}`">
+        <tag interactive :title="tag" @click="removeTag(tag)" />
       </li>
     </ul>
   </div>
@@ -31,26 +24,28 @@ export default {
   },
   props: {
     tags: {
-      type: String, 
-      default: ""
-    }
+      type: String,
+      default: "",
+    },
   },
   model: {
     prop: "tags",
-    event: "change"
+    event: "change",
   },
   data() {
     return {
-      currentTags: this.tags
-    }
+      currentTags: this.tags,
+    };
   },
   computed: {
     tagsArray() {
-      let tagsArr =  this.currentTags.trim().split(','); 
-      tagsArr = tagsArr.map(tag => tag.trim());
-      tagsArr = tagsArr.filter(tag => tag !== '');
+      this.currentTags = this.tags; // подставить данные в поле v-model для tech при редактировании формы
+
+      let tagsArr = this.currentTags.trim().split(",");
+      tagsArr = tagsArr.map((tag) => tag.trim());
+      tagsArr = tagsArr.filter((tag) => tag !== "");
       return tagsArr; // возвращает массив тегов без пробелов
-    }
+    },
   },
   methods: {
     removeTag(tag) {
@@ -63,18 +58,18 @@ export default {
       this.currentTags = tags.join(", ");
 
       this.$emit("change", this.currentTags);
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="postcss" scoped>
-  .tags {
-    display: flex;
-    margin-top: 20px;
-  }
+.tags {
+  display: flex;
+  margin-top: 20px;
+}
 
-  .tag {
-    margin-right: 10px;
-  }
+.tag {
+  margin-right: 10px;
+}
 </style>

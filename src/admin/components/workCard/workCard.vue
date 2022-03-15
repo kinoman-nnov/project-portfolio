@@ -17,7 +17,7 @@
           <icon
             symbol="pencil"
             title="Править"
-            @click="currentWork.editmode = true">
+            @click="editWork">
           </icon>
           <icon
             symbol="trash"
@@ -34,6 +34,9 @@
 import card from "../card";
 import icon from "../icon";
 import tagsList from "../tagsList";
+import $axios from "../../requests";
+
+const baseUrl = $axios.defaults.baseURL;
 
 export default {
   components: {
@@ -44,11 +47,30 @@ export default {
   props: {
     work: Object,
   },
-  computed: {
+  data() {
+    return {
+      currentWork: {
+        id: this.work.id,
+        title: this.work.title,
+        description: this.work.description,
+        link: this.work.link,
+        techs: this.work.techs,
+        photoUpload: this.work.photo,
+        preview: "",
+      }
+    }
+  },
+  computed: {    
     cover() {
-      return `https://webdev-api.loftschool.com/${this.work.photo}`;
+      return `${baseUrl}/${this.work.photo}`;
     },
   },
+  methods: {
+    editWork() {
+      this.currentWork.editmode = true;
+      this.$emit("editWork", this.currentWork); 
+    }
+  }
 };
 </script>
 

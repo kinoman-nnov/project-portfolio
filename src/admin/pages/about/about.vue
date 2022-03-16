@@ -49,7 +49,7 @@ export default {
   },
   data() {
     return {
-      // categories: [], // шаблонные категории из json
+      // categories: [], // шаблонные категории из json (до введения store)
       emptyCatIsShown: false,
     };
   },

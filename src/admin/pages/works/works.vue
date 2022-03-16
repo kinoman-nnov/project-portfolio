@@ -11,7 +11,16 @@
           />
         </div>
         <ul class="cards">
-          <li class="item" v-for="work in works" :key="work.id">
+          <li class="item" v-if="emptyWorkIsShown">
+            <card simple>
+              <square-btn 
+                type="square"
+                title="Добавить работу"
+                
+              />
+            </card>
+          </li>
+          <li class="item item-works" v-for="work in works" :key="work.id">
             <work-card
               :work="work"
               @remove="removeWork(work.id)"
@@ -26,13 +35,17 @@
 
 <script>
 import form from "../../components/form";
+import card from "../../components/card";
 import workCard from "../../components/workCard";
+import squareBtn from "../../components/button";
 import { mapState, mapActions } from "vuex";
 
 export default {
   components: {
     formComponent: form,
+    card,
     workCard,
+    squareBtn
   },
   computed: {
     ...mapState("works", {
@@ -41,6 +54,7 @@ export default {
   },
   data() {
     return {
+      emptyWorkIsShown: true,
       currentWork: {
         editmode: false
       }

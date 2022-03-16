@@ -12,7 +12,7 @@
         <div class="text">
           <p>{{ work.description }}</p>
         </div>
-        <a :href="work.link" class="link">{{ work.link }}</a>
+        <a :href="work.link" class="link link-workCard">{{ work.link }}</a>
         <div class="btns">
           <icon
             symbol="pencil"
@@ -55,7 +55,7 @@ export default {
         description: this.work.description,
         link: this.work.link,
         techs: this.work.techs,
-        photoUpload: this.work.photo,
+        photo: `${baseUrl}/${this.work.photo}`,
         preview: "",
       }
     }

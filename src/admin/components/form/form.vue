@@ -69,7 +69,7 @@
                 :style="{ backgroundImage: `url(${coverPreview})` }"
                 :class="[
                   'uploader',
-                  { active: currentWork.preview },
+                  { active: currentWork.preview || currentWork.photo },
                   { hovered: hovered },
                 ]"
                 @dragover="handleDragOver"
@@ -127,9 +127,6 @@ import appButton from "../button";
 import appInput from "../input";
 import tagsAdder from "../tagsAdder";
 import { mapActions } from "vuex";
-import $axios from "../../requests";
-
-const baseUrl = $axios.defaults.baseURL;
 
 export default {
   components: {
@@ -144,7 +141,7 @@ export default {
   computed: {
     coverPreview() {
       if (!!this.currentWork.preview === false) {
-        return `${baseUrl}/${this.currentWork.photoUpload}`;
+        return this.currentWork.photo;
       } else {
         return this.currentWork.preview;
       }
@@ -167,18 +164,39 @@ export default {
     ...mapActions({
       addNewWork: "works/add",
       editCurrentWork: "works/edit",
+      showTooltip: "tooltips/show",
     }),
     handleDragOver(e) {
       e.preventDefault();
       this.hovered = true;
     },
     async handleSubmitAddWork() {
-      console.log("this.newWork", this.newWork);
-      await this.addNewWork(this.newWork);
+      try {
+        await this.addNewWork(this.newWork);
+        this.showTooltip({
+          text: "работа добавлена",
+          type: "success",
+        });
+      } catch(error) {
+        this.showTooltip({
+          text: error.message,
+          type: "error",
+        });
+      }
     },
     async handleSubmitEditWork() {
-      console.log("this.currentWork", this.currentWork);
-      // await this.editCurrentWork(this.currentWork);
+      try {
+        await this.editCurrentWork(this.currentWork);
+        this.showTooltip({
+          text: "работа отредактирована",
+          type: "success",
+        });
+      } catch(error) {
+        this.showTooltip({
+          text: error.message,
+          type: "error",
+        });
+      }
     },
     handleChange(event) {
       event.preventDefault();
@@ -186,7 +204,7 @@ export default {
         ? event.dataTransfer.files[0]
         : event.target.files[0];
       this.newWork.photo = file;
-      this.currentWork.photoUpload = file;
+      this.currentWork.photo = file;
       this.renderPhoto(file);
       this.hovered = false;
     },

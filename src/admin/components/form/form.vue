@@ -30,26 +30,38 @@
             </div>
             <div class="form-col">
               <div class="form-row">
-                <app-input v-model="newWork.title" title="Название" />
+                <app-input
+                  v-model="newWork.title"
+                  title="Название"
+                  :errorMessage="validation.firstError('newWork.title')"
+                />
               </div>
               <div class="form-row">
-                <app-input v-model="newWork.link" title="Ссылка" />
+                <app-input
+                  v-model="newWork.link"
+                  title="Ссылка"
+                  :errorMessage="validation.firstError('newWork.link')"
+                />
               </div>
               <div class="form-row">
                 <app-input
                   v-model="newWork.description"
                   field-type="textarea"
                   title="Описание"
+                  :errorMessage="validation.firstError('newWork.description')"
                 />
               </div>
               <div class="form-row">
-                <tags-adder v-model="newWork.techs" />
+                <tags-adder
+                  v-model="newWork.techs"
+                  :errorMessage="validation.firstError('newWork.techs')"
+                />
               </div>
             </div>
           </div>
           <div class="form-btns">
             <div class="btn">
-              <app-button title="Отмена" plain />
+              <app-button title="Отмена" @click="cancelForm" plain />
             </div>
             <div class="btn">
               <app-button title="Сохранить" typeAttr="submit" />
@@ -90,26 +102,38 @@
             </div>
             <div class="form-col">
               <div class="form-row">
-                <app-input v-model="currentWork.title" title="Название" />
+                <app-input
+                  v-model="currentWork.title"
+                  title="Название"
+                  :errorMessage="validation.firstError('currentWork.title')"
+                />
               </div>
               <div class="form-row">
-                <app-input v-model="currentWork.link" title="Ссылка" />
+                <app-input
+                  v-model="currentWork.link"
+                  title="Ссылка"
+                  :errorMessage="validation.firstError('currentWork.link')"
+                />
               </div>
               <div class="form-row">
                 <app-input
                   v-model="currentWork.description"
                   field-type="textarea"
                   title="Описание"
+                  :errorMessage="validation.firstError('currentWork.description')"
                 />
               </div>
               <div class="form-row">
-                <tags-adder v-model="currentWork.techs" />
+                <tags-adder
+                  v-model="currentWork.techs"
+                  :errorMessage="validation.firstError('currentWork.techs')"
+                />
               </div>
             </div>
           </div>
           <div class="form-btns">
             <div class="btn">
-              <app-button title="Отмена" plain />
+              <app-button title="Отмена" @click="cancelForm" plain />
             </div>
             <div class="btn">
               <app-button title="Сохранить" typeAttr="submit" />
@@ -127,8 +151,39 @@ import appButton from "../button";
 import appInput from "../input";
 import tagsAdder from "../tagsAdder";
 import { mapActions } from "vuex";
+import { Validator, mixin as ValidatorMixin } from "simple-vue-validator";
 
 export default {
+  mixin: [ValidatorMixin],
+  validators: {
+    "newWork.preview": (value) => {
+      return Validator.value(value).required("Не может быть пустым");
+    },
+    "newWork.title": (value) => {
+      return Validator.value(value).required("Не может быть пустым");
+    },
+    "newWork.link": (value) => {
+      return Validator.value(value).required("Не может быть пустым");
+    },
+    "newWork.description": (value) => {
+      return Validator.value(value).required("Не может быть пустым");
+    },
+    "newWork.techs": (value) => {
+      return Validator.value(value).required("Не может быть пустым");
+    },
+    "currentWork.title": (value) => {
+      return Validator.value(value).required("Не может быть пустым");
+    },
+    "currentWork.link": (value) => {
+      return Validator.value(value).required("Не может быть пустым");
+    },
+    "currentWork.description": (value) => {
+      return Validator.value(value).required("Не может быть пустым");
+    },
+    "currentWork.techs": (value) => {
+      return Validator.value(value).required("Не может быть пустым");
+    },
+  },
   components: {
     card,
     appButton,
@@ -171,13 +226,29 @@ export default {
       this.hovered = true;
     },
     async handleSubmitAddWork() {
+      const nameFieldWorkArr = [
+        "newWork.preview",
+        "newWork.title",
+        "newWork.link",
+        "newWork.description",
+        "newWork.techs",
+      ];
+      if ((await this.$validate(nameFieldWorkArr)) === false) return;
+
       try {
         await this.addNewWork(this.newWork);
+        // if (this.title.trim() === this.value.trim()) {
+        //   this.currentCategory.editmode = false;
+        // } else {
+        //   this.$emit("approve", this.currentCategory);
+        // }
+
+        this.$emit("cancelForm");
         this.showTooltip({
           text: "работа добавлена",
           type: "success",
         });
-      } catch(error) {
+      } catch (error) {
         this.showTooltip({
           text: error.message,
           type: "error",
@@ -185,13 +256,23 @@ export default {
       }
     },
     async handleSubmitEditWork() {
+      const nameFieldCurWorkArr = [
+        // "currentWork.preview",
+        "currentWork.title",
+        "currentWork.link",
+        "currentWork.description",
+        "currentWork.techs",
+      ];
+      if ((await this.$validate(nameFieldCurWorkArr)) === false) return;
+
       try {
         await this.editCurrentWork(this.currentWork);
+        this.$emit("cancelForm");
         this.showTooltip({
           text: "работа отредактирована",
           type: "success",
         });
-      } catch(error) {
+      } catch (error) {
         this.showTooltip({
           text: error.message,
           type: "error",
@@ -215,6 +296,10 @@ export default {
         this.newWork.preview = reader.result;
         this.currentWork.preview = reader.result;
       };
+    },
+    cancelForm() {
+      this.currentWork.editmode = false;
+      this.$emit("cancelForm");
     },
   },
 };

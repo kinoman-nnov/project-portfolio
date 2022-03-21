@@ -68,7 +68,7 @@ export default {
   methods: {
     editWork() {
       this.currentWork.editmode = true;
-      this.$emit("editWork", this.currentWork); 
+      this.$emit("editWork", this.currentWork);
     }
   }
 };

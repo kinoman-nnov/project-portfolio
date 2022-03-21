@@ -7,16 +7,18 @@
         </div>
         <div class="form">
           <form-component
+            v-if="formIsShown"
             :currentWork="currentWork"
+            @cancelForm="formIsShown = false"
           />
         </div>
         <ul class="cards">
-          <li class="item" v-if="emptyWorkIsShown">
+          <li class="item">
             <card simple>
               <square-btn 
                 type="square"
                 title="Добавить работу"
-                
+                @click="formIsShown = true"
               />
             </card>
           </li>
@@ -54,7 +56,7 @@ export default {
   },
   data() {
     return {
-      emptyWorkIsShown: true,
+      formIsShown: false,
       currentWork: {
         editmode: false
       }
@@ -81,6 +83,7 @@ export default {
       }
     },
     editWork(work) {
+      this.formIsShown = true;
       this.currentWork = {
         ...work
       }

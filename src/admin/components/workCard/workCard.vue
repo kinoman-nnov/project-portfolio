@@ -14,16 +14,8 @@
         </div>
         <a :href="work.link" class="link link-workCard">{{ work.link }}</a>
         <div class="btns">
-          <icon
-            symbol="pencil"
-            title="Править"
-            @click="editWork">
-          </icon>
-          <icon
-            symbol="trash"
-            title="Удалить"
-            @click="$emit('remove')">
-          </icon>
+          <icon symbol="pencil" title="Править" @click="editWork"> </icon>
+          <icon symbol="trash" title="Удалить" @click="$emit('remove')"> </icon>
         </div>
       </div>
     </div>
@@ -50,27 +42,37 @@ export default {
   data() {
     return {
       currentWork: {
-        id: this.work.id,
-        title: this.work.title,
-        description: this.work.description,
-        link: this.work.link,
-        techs: this.work.techs,
-        photo: `${baseUrl}/${this.work.photo}`,
-        preview: "",
-      }
-    }
+        id: "",
+        title: "",
+        description: "",
+        link: "",
+        techs: "",
+        photo: "",
+      },
+    };
   },
-  computed: {    
+  computed: {
     cover() {
       return `${baseUrl}/${this.work.photo}`;
     },
   },
   methods: {
     editWork() {
-      this.currentWork.editmode = true;
+      const { id, title, description, link, techs } = this.work;
+      this.currentWork = {
+        id,
+        title,
+        description,
+        link,
+        techs,
+        preview: "",
+        photo: `${baseUrl}/${this.work.photo}`,
+        editmode: true,
+      };
+
       this.$emit("editWork", this.currentWork);
-    }
-  }
+    },
+  },
 };
 </script>
 

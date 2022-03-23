@@ -27,6 +27,11 @@
                   />
                 </div>
               </label>
+              <div class="input__error-tooltip">
+                <tooltip
+                  :text="validation.firstError('newWork.preview')"
+                ></tooltip>
+              </div>
             </div>
             <div class="form-col">
               <div class="form-row">
@@ -120,7 +125,9 @@
                   v-model="currentWork.description"
                   field-type="textarea"
                   title="Описание"
-                  :errorMessage="validation.firstError('currentWork.description')"
+                  :errorMessage="
+                    validation.firstError('currentWork.description')
+                  "
                 />
               </div>
               <div class="form-row">
@@ -157,8 +164,16 @@ export default {
   mixin: [ValidatorMixin],
   validators: {
     "newWork.preview": (value) => {
-      return Validator.value(value).required("Не может быть пустым");
+      return Validator.value(value).required("Загрузите картинку");
     },
+    // checkUploader: function (value) {
+    //   return Validator.custom(function () {
+    //     if (!Validator.isEmpty(value)) {
+          
+    //       return "Not an odd number!!!";
+    //     }
+    //   });
+    // },
     "newWork.title": (value) => {
       return Validator.value(value).required("Не может быть пустым");
     },
@@ -189,6 +204,7 @@ export default {
     appButton,
     appInput,
     tagsAdder,
+    tooltip: () => import("components/tooltip"),
   },
   props: {
     currentWork: Object,
@@ -212,6 +228,13 @@ export default {
         techs: "",
         photo: {},
         preview: "",
+      },
+      currentWorkValue: {
+        title: this.currentWork.title,
+        link: this.currentWork.link,
+        description: this.currentWork.description,
+        techs: this.currentWork.techs,
+        photo: this.currentWork.photo,
       },
     };
   },
@@ -237,11 +260,6 @@ export default {
 
       try {
         await this.addNewWork(this.newWork);
-        // if (this.title.trim() === this.value.trim()) {
-        //   this.currentCategory.editmode = false;
-        // } else {
-        //   this.$emit("approve", this.currentCategory);
-        // }
 
         this.$emit("cancelForm");
         this.showTooltip({
@@ -265,18 +283,37 @@ export default {
       ];
       if ((await this.$validate(nameFieldCurWorkArr)) === false) return;
 
-      try {
-        await this.editCurrentWork(this.currentWork);
+      const { title, link, description, techs, photo } = this.currentWork;
+      const {
+        title: t,
+        link: ref,
+        description: desc,
+        techs: tec,
+        photo: ph,
+      } = this.currentWorkValue;
+
+      if (
+        title.trim() === t.trim() &&
+        link.trim() === ref.trim() &&
+        description.trim() === desc.trim() &&
+        techs.trim() === tec.trim() &&
+        photo === ph
+      ) {
         this.$emit("cancelForm");
-        this.showTooltip({
-          text: "работа отредактирована",
-          type: "success",
-        });
-      } catch (error) {
-        this.showTooltip({
-          text: error.message,
-          type: "error",
-        });
+      } else {
+        try {
+          await this.editCurrentWork(this.currentWork);
+          this.$emit("cancelForm");
+          this.showTooltip({
+            text: "работа отредактирована",
+            type: "success",
+          });
+        } catch (error) {
+          this.showTooltip({
+            text: error.message,
+            type: "error",
+          });
+        }
       }
     },
     handleChange(event) {

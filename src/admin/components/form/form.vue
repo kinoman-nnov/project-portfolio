@@ -11,27 +11,30 @@
                   'uploader',
                   { active: newWork.preview },
                   { hovered: hovered },
+                  { error: validation.firstError('newWork.preview') },
                 ]"
                 @dragover="handleDragOver"
                 @dragleave="hovered = false"
                 @drop="handleChange"
               >
-                <div class="uploader-title">
-                  Перетащите или загрузите картинку
+                <div class="uploader-content">
+                  <div class="uploader-title">
+                    Перетащите или загрузите картинку
+                  </div>
+                  <div class="uploader-btn">
+                    <app-button
+                      typeAttr="file"
+                      @change="handleChange"
+                      title="Загрузить"
+                    />
+                  </div>
                 </div>
-                <div class="uploader-btn">
-                  <app-button
-                    typeAttr="file"
-                    @change="handleChange"
-                    title="Загрузить"
-                  />
+                <div class="uploader__error-tooltip">
+                  <tooltip
+                    :text="validation.firstError('newWork.preview')"
+                  ></tooltip>
                 </div>
               </label>
-              <div class="input__error-tooltip">
-                <tooltip
-                  :text="validation.firstError('newWork.preview')"
-                ></tooltip>
-              </div>
             </div>
             <div class="form-col">
               <div class="form-row">
@@ -166,14 +169,6 @@ export default {
     "newWork.preview": (value) => {
       return Validator.value(value).required("Загрузите картинку");
     },
-    // checkUploader: function (value) {
-    //   return Validator.custom(function () {
-    //     if (!Validator.isEmpty(value)) {
-          
-    //       return "Not an odd number!!!";
-    //     }
-    //   });
-    // },
     "newWork.title": (value) => {
       return Validator.value(value).required("Не может быть пустым");
     },
@@ -186,6 +181,9 @@ export default {
     "newWork.techs": (value) => {
       return Validator.value(value).required("Не может быть пустым");
     },
+    // "currentWork.preview": (value) => {  // для редактирования работы поле загрузки картинки не будет пустым
+    //   return Validator.value(value).required("Загрузите картинку");  // поэтому его не надо валидировать
+    // },
     "currentWork.title": (value) => {
       return Validator.value(value).required("Не может быть пустым");
     },

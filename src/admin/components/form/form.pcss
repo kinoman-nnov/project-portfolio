@@ -36,10 +36,32 @@
   }
 }
 
+.uploader-content {
+
+}
+
 .uploader-title {
   color: $text-color;
   opacity: .5;
   margin-bottom: 30px;
+}
+
+.uploader__error-tooltip {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 30%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
+.error {
+  border-color: $errors-color;
+
+  .uploader__error-tooltip {
+    display: block;
+  }
 }
 
 .form-row {

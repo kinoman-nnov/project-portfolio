@@ -18,7 +18,7 @@
               <square-btn 
                 type="square"
                 title="Добавить работу"
-                @click="formIsShown = true"
+                @click="openForm"
               />
             </card>
           </li>
@@ -81,6 +81,10 @@ export default {
           type: "error",
         })
       }
+    },
+    openForm() {
+      this.formIsShown = true;
+      this.currentWork.editmode = false;
     },
     editWork(work) {
       this.formIsShown = true;

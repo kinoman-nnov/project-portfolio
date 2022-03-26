@@ -66,7 +66,7 @@ export default {
         link,
         techs,
         preview: "",
-        photo: `${baseUrl}/${this.work.photo}`,
+        photo: this.cover,
         editmode: true,
       };
 

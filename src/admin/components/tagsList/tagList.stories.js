@@ -1,24 +1,21 @@
-import tagsAdder from "./tagsAdder.vue";
+import tagsList from "./tagsList.vue";
 
 export default {
-  title: "tagsAdder",
-  components: {tagsAdder}
+  title: "tagsList",
+  components: { tagsList }
 }
 
 export const defaultView = () => ({
-  components: { tagsAdder },
+  components: { tagsList },
   data() {
     return {
-      tags: "One, two, three, four"
+      tags: "css, html, javascript"
     }
   },
   template: `
-    <div>
-      <pre>{{tags}}</pre>
-      <tags-adder
-        v-model="tags"
-      />
-    </div>
+    <tags-list
+      :tags="tags"
+    />
   `
 });
 

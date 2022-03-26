@@ -283,19 +283,19 @@ export default {
 
       const { title, link, description, techs, photo } = this.currentWork;
       const {
-        title: t,
-        link: ref,
-        description: desc,
-        techs: tec,
-        photo: ph,
+        title: titleValue,
+        link: linkValue,
+        description: descValue,
+        techs: techsValue,
+        photo: photoValue
       } = this.currentWorkValue;
 
       if (
-        title.trim() === t.trim() &&
-        link.trim() === ref.trim() &&
-        description.trim() === desc.trim() &&
-        techs.trim() === tec.trim() &&
-        photo === ph
+        title.trim() === titleValue.trim() &&
+        link.trim() === linkValue.trim() &&
+        description.trim() === descValue.trim() &&
+        techs.trim() === techsValue.trim() &&
+        photo === photoValue
       ) {
         this.$emit("cancelForm");
       } else {

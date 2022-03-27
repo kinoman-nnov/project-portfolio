@@ -10,7 +10,7 @@ export default {
       default: "Ошибка"
     }
   }
-};
+}
 </script>
 
 <style lang="postcss" scoped src="./tooltip.pcss"></style>

@@ -1,4 +1,5 @@
 .hero {
+  min-height: 650px;
   padding-top: 54px;
   position: relative;
 }
@@ -19,6 +20,14 @@
   @include desktop {
     padding: 0 10%;
   }
+  
+  @include tablets {
+    
+    &--close {
+      display: none;
+    }
+    padding: 0 10%;
+  }
 }
 
 .hero__downbutton {
@@ -28,4 +37,8 @@
   right: 0;
   display: flex;
   justify-content: center;
+
+  @include tablets {
+    display: none;
+  }
 }

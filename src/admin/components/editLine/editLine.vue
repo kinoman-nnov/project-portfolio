@@ -1,16 +1,18 @@
 <template>
   <div class="edit-line-component" :class="{'blocked' : blocked}">
-    <div class="title" v-if="editmode === false">
-      <div class="text">{{value}}</div>
+    <div class="title" v-if="currentCategory.editmode === false">
+      <div class="text">{{ value }}</div>
       <div class="icon">
-        <icon symbol="pencil" grayscale @click="editmode = true"></icon>
+        <icon symbol="pencil" grayscale @click="currentCategory.editmode = true"></icon>
       </div>
     </div>
     <div v-else class="title">
       <div class="input">
         <app-input
-          placeholder="Название новой группы"
+          placeholder=" Название новой группы"
           :value="value"
+          v-model="currentCategory.categoryTitle"
+          :errorMessage="validation.firstError('currentCategory.categoryTitle')"
           :errorText="errorText"
           @input="$emit('input', $event)"
           @keydown.native.enter="onApprove"
@@ -31,37 +33,50 @@
 </template>
 
 <script>
+import { Validator, mixin as ValidatorMixin } from "simple-vue-validator";
+
 export default {
+  mixin: [ValidatorMixin],
+    validators: {
+    "currentCategory.categoryTitle": (value) => {
+      return Validator.value(value).required("Не может быть пустым");
+    },
+  },
   props: {
     value: {
       type: String,
-      default: ""
+      default: "",
     },
     errorText: {
       type: String,
-      default: ""
+      default: "",
     },
-    blocked: Boolean
+    editModeByDefault: Boolean,
+    blocked: Boolean,
   },
   data() {
     return {
-      editmode: false,
-      title: this.value
+      title: this.value, 
+      currentCategory: {
+        editmode: this.editModeByDefault,
+        categoryTitle: this.value
+      }
     };
   },
   methods: {
-    onApprove() {
+    async onApprove() {
+      if (await this.$validate() === false) return;
       if (this.title.trim() === this.value.trim()) {
-        this.editmode = false;
+        this.currentCategory.editmode = false;
       } else {
-        this.$emit("approve", this.value);
+        this.$emit("approve", this.currentCategory);
       }
-    }
+    },
   },
   components: {
     icon: () => import("components/icon"),
-    appInput: () => import("components/input")
-  }
+    appInput: () => import("components/input"),
+  },
 };
 </script>
 

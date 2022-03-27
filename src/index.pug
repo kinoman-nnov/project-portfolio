@@ -2,35 +2,54 @@ extends ./main.layout.pug
 
 block content
   .welcome-section
-    section.fullscreen-section.hero
+    section.hero&attributes({'data-section-id': 'main'})
       .container.hero__container
         header.header
           .header__logo
             a.logo(href="") AY
-          .header__menu 
-            nav.menu
-              ul.menu__list
-                - var menuLinks = ["About me", "Skills", "Works", "Reviews"];
-                each item in menuLinks 
-                  li.menu__item
-                    a(href="#").menu__link #{item}
-          .header__buttons
-            ul.socials
-              - var socials = ['insta', 'vk', 'github', 'envelope'];
-              each item in socials
-                li.socials__item
-                  a(href=`${item === 'envelope' ? 'mailto:myMale@yandex.ru' : '#'}`, target="_blank").socials__link
-                    +icon(item, 'socials__icon')
+          .header-container
+            .header__menu 
+              nav.menu
+                ul.menu__list
+                  - var menuLinks = [{name:"About me", data:"about"}, {name:"Skills", data:"skills"}, {name:"Works", data:"works"}, {name:"Reviews", data:"reviews"}];
+                  each item in menuLinks 
+                    li.menu__item
+                      a(href="#").menu__link&attributes({'data-scroll-to':`${item.data}`}) #{item.name}
+            .header__buttons
+              ul.socials
+                - var socials = ['insta', 'vk', 'github', 'envelope'];
+                each item in socials
+                  li.socials__item
+                    a(href=`${item === 'envelope' ? 'mailto:myMale@yandex.ru' : '#'}`, target="_blank").socials__link
+                      +icon(item, 'socials__icon')
+          .header__modal
+            button.hamburger.hamburger--vortex
+              span.hamburger-box
+                span.hamburger-inner
+            .header__menu.header__menu-modal
+              nav.menu
+                ul.menu__list.menu__list--modal
+                  - var menuModalLinks = [{name:"Main", data:"main"}, {name:"About me", data:"about"}, {name:"Skills", data:"skills"}, {name:"Works", data:"works"}, {name:"Reviews", data:"reviews"}];
+                  each item in menuModalLinks
+                    li.menu__item.menu__item--modal
+                      a(href="#").menu__link.menu__link--modal&attributes({'data-scroll-to':`${item.data}`}) #{item.name}
+            .header__buttons.header__buttons-modal
+              ul.socials
+                - var socials = ['insta', 'vk', 'github', 'envelope'];
+                each item in socials
+                  li.socials__item
+                    a(href=`${item === 'envelope' ? 'mailto:myMale@yandex.ru' : '#'}`, target="_blank").socials__link
+                      +icon(item, 'socials__icon')
 
         .hero__content
           .userinfo
             .userinfo__title Personal website #[span.userinfo__occ web developer]
-            .userinfo__name Alexey Ya
+            .userinfo__name Mount
         .hero__downbutton
           .scroll-down
             a(href="").scroll-down__btn Scroll
-            
-    section.about
+
+    section.about&attributes({'data-section-id': 'about'})
       .container
         .about__columns
           .about__user
@@ -65,7 +84,7 @@ block content
     svg(viewBox="0 0 1000 100" preserveAspectRatio="none").triangles__shape.triangles__shape_right
       polygon(points="0,100 1000,100 1000,0")
   .middle-section
-    section.values
+    section.values&attributes({'data-section-id': 'skills'})
       .container.values__container
         .values__wrapper
           .values__title
@@ -74,8 +93,8 @@ block content
               .values__content
                 p I made this website as part of my training at the LoftSchool Online Education School. I will refresh my content in it a little later. In the meantime, look how cool and beautiful everything is here!
           .values__widget
-            #skills-component
-            //- .values__widget-container
+            .values__widget-container
+              #skills-component
             //-   - 
             //-     var skillsCategories = [
             //-       ["Frontend", ["HTML5", "CSS3", "Javascript", "Vue.js"]],
@@ -98,62 +117,64 @@ block content
             //-                       stop(offset="0%" stop-color="#5500f2")
             //-                       stop(offset="100%" stop-color="#8f00ef")
             //-                   .skill__circle-text #{skill}
-    section.works
+    section.works&attributes({'data-section-id': 'works'})
       .container.works__container
         .section-title.works__section-title My works
         .works__content
-          .works-slider
-            .works-slider__pics(data-slide="1")
-              .works-slider__pics-content
-                +image('content/slider-1.jpg', 'works-slider__fullpic')
-                .works-slider__buttons
-                  a(href="#").works-slider__btn.works-slider__btn_next
-                  a(href="#").works-slider__btn.works-slider__btn_prev
-                ul.works-slider__thumbs
-                  - for (var i = 3; i > 0; i--)
-                    li.works-slider__thumb-item(class=`${i === 1 ? 'active' : ''}`)
-                      a(href="").works-slider__thumb-link
-                        +image(`content/slider-${i}.jpg`, 'works-slider__thumb')
-            .works-slider__data
-              ul.works-slider__tags
-                - var tags = ['HTML', 'CSS', 'JavaScript'];
-                each item in tags
-                  li.works-slider__tag-item 
-                    .tag #{item}
-              .works-slider__title Website of the School of Education
-              .works-slider__desc
-                p This guy was trained in web development not somewhere, but at LoftSchool! 2 months of only the most difficult trials and sleepless nights!
-              .works-slider__link 
-                a(href="").iconed-link View the website
+          #preview-component
+          //- .works-slider
+          //-   .works-slider__pics(data-slide="1")
+          //-     .works-slider__pics-content
+          //-       +image('content/slider-1.jpg', 'works-slider__fullpic')
+          //-       ul.works-slider__thumbs
+          //-         - for (var i = 3; i > 0; i--)
+          //-           li.works-slider__thumb-item(class=`${i === 1 ? 'active' : ''}`)
+          //-             a(href="").works-slider__thumb-link
+          //-               +image(`content/slider-${i}.jpg`, 'works-slider__thumb')
+          //-       .works-slider__buttons
+          //-         a(href="#").works-slider__btn.works-slider__btn_next
+          //-         a(href="#").works-slider__btn.works-slider__btn_prev
+          //-   .works-slider__info
+          //-     ul.works-slider__tags
+          //-       - var tags = ['HTML', 'CSS', 'JavaScript'];
+          //-       each item in tags
+          //-         li.works-slider__tag-item 
+          //-           .tag #{item}
+          //-     .works-slider__title Website of the School of Education
+          //-     .works-slider__desc
+          //-       p This guy was trained in web development not somewhere, but at LoftSchool! 2 months of only the most difficult trials and sleepless nights!
+          //-     .works-slider__link 
+          //-       a(href="").iconed-link View the website
 
   .triangles.triangles_bottom
     svg(viewBox="0 0 1000 100" preserveAspectRatio="none").triangles__shape.triangles__shape_left
       polygon(points="0,0 1000,0 1000,100")
     svg(viewBox="0 0 1000 100" preserveAspectRatio="none").triangles__shape.triangles__shape_right
       polygon(points="0,0 0,100 1000,0")
-  section.contacts
+  section.contacts&attributes({'data-section-id': 'reviews'})
     .container.contacts__container
       .contacts__about
-        .reviews
-          .reviews__header
-            .reviews__title.section-title What they say about me
-            .reviews__buttons
-              .reviews__btn.reviews__btn_prev
-              .reviews__btn.reviews__btn_next
-          ul.reviews__content
-            - for (var i = 0; i < 2; i++)
-              li.reviews__content-item
-                .quote
-                  .quote__text
-                    p This guy was trained in web development not somewhere, but at LoftSchool! 2 months of only the most difficult trials and sleepless nights!
-                  .quote__user
-                    .user-min
-                      .user-min__avatar
-                        .user-min__pic-wrapper
-                          +image('content/user.jpg', 'user-min__avatar-pic')
-                      .user-min__info
-                        .user-min__name Ковальчук Дмитрий
-                        .user-min__occ Основатель Loftschool
+        #reviews-component
+        //- .reviews
+        //-   .reviews__header
+        //-     .reviews__title.section-title What they say about me
+        //-     .reviews__buttons
+        //-       .reviews__btn.reviews__btn_prev
+        //-       .reviews__btn.reviews__btn_next
+        //-   ul.reviews__content
+        //-     - for (var i = 0; i < 2; i++)
+        //-       li.reviews__content-item
+        //-         .quote
+        //-           .quote__text
+        //-             p This guy was trained in web development not somewhere, but at LoftSchool! 2 months of only the most difficult trials and sleepless nights!
+        //-           .quote__user
+        //-             .user-min
+        //-               .user-min__avatar
+        //-                 .user-min__pic-wrapper
+        //-                   +image('content/user.jpg', 'user-min__avatar-pic')
+        //-               .user-min__info
+        //-                 .user-min__name Ковальчук Дмитрий
+        //-                 .user-min__occ Основатель Loftschool
   footer.footer
     .container.footer__container
       .footer__copyright
@@ -167,7 +188,7 @@ block content
           ul.menu__list
             each item in menuLinks 
               li.menu__item
-                a(href="#").menu__link #{item}
+                a(href="#").menu__link&attributes({'data-scroll-to':`${item.data}`}) #{item.name}
         .footer__data-content
           .footer__data-col
             .footer__data-text

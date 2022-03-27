@@ -3,7 +3,6 @@ script(type="text/x-template")#skills-list
     li.skills__item(v-for="category in skills" :key="category.id")
       skills-row(
         :category="category"
-        :skills="skills"
       )
 
 script(type="text/x-template")#skills-row
@@ -13,7 +12,6 @@ script(type="text/x-template")#skills-row
       li.skills-row__item(v-for="skill in category.skills" :key="skill.id")
         skills-item(
           :skill="skill"
-          :skillPercents="skill.percent"
         )
 
 script(type="text/x-template")#skills-item

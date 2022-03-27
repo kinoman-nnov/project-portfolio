@@ -1,0 +1,48 @@
+.popup-menu--open {
+  @include tablets{
+  display: flex;
+  justify-content: space-between;
+  width: 43%;
+  height: 100vh;
+  text-align: center;
+  padding: 52px 20px 240px 20px;
+  background: #fff;
+  position: fixed;
+  transition: 0.3s;
+  animation: move 0.7s forwards;
+  }
+
+  @include phones {
+    width: 100%;
+  }
+}
+
+@include tablets {
+  @keyframes move {
+    from {
+      top: 0;
+      left: 120%;
+      opacity: 0;
+    },
+    to {
+      top: 0;
+      left: 57%;
+      opacity: 1;
+    }
+  }
+}
+
+@include phones {
+  @keyframes move {
+    from {
+      top: 0;
+      left: 120%;
+      opacity: 0;
+    },
+    to {
+      top: 0;
+      left: 0%;
+      opacity: 1;
+    }
+  }
+}

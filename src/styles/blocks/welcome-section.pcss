@@ -1,3 +1,9 @@
 .welcome-section {
   background: url('~images/bg/hero.jpg') center top / cover no-repeat;
+
+  @include tablets {
+    &--bg-change {
+    background: url('~images/bg/budda.jpg') right 26% top no-repeat;
+    }
+  }
 }

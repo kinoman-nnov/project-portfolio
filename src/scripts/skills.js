@@ -29,17 +29,17 @@ const skillsRow = {
 };
 
 new Vue({
-  el: "#skills-component",
-  template: "#skills-list",
+  el: "#skills-component", // id компонента Vue в index.pug
+  template: "#skills-list", // id шаблона компонента skills.pug
   components: {
     skillsRow
   },
-  data() {
+  data() { // записываем данные в объект data, чтобы обращаться к ним внутри компонента
     return {
       skills: []
     };
   },
-  created() {
+  created() { // запросить данные, не обращаясь к реальным дом-узлам
     this.skills = require("../data/skills.json");
   },
 });

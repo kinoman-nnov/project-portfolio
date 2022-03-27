@@ -1,0 +1,30 @@
+[
+  {
+    "id": 0,
+    "text": "1 this guy was trained by Vue",
+    "name": "Kovalchuk Dmitry",
+    "occ": "the founder of the school",
+    "pic": "user.jpg"
+  },
+  {
+    "id": 1,
+    "text": "2 this guy was trained by Vue",
+    "name": "Kovalchuk Dmitry",
+    "occ": "the founder of the school",
+    "pic": "user.jpg"
+  },
+  {
+    "id": 2,
+    "text": "3 this guy was trained by Vue",
+    "name": "Kovalchuk Dmitry",
+    "occ": "the founder of the school",
+    "pic": "user.jpg"
+  },
+  {
+    "id": 3,
+    "text": "4 this guy was trained by Vue",
+    "name": "Kovalchuk Dmitry",
+    "occ": "the founder of the school",
+    "pic": "user.jpg"
+  }
+]

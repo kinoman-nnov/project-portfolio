@@ -1,4 +1,10 @@
 import workCard from "./workCard.vue";
+import { action } from "@storybook/addon-actions";
+
+const methods = {
+  onRemoveWork: action("onRemoveWork"),
+  onEditWork: action("onEditWork")
+}
 
 export default {
   title: "workCard",
@@ -11,7 +17,7 @@ const work = {
   description: "description",
   link: "link",
   techs: "html, css, js",
-  photo: "uploads/1qcdca40bbc093d_origin.png",
+  photo: "",
 }
 
 export const defaultView = () => ({
@@ -24,8 +30,11 @@ export const defaultView = () => ({
   template: `
     <work-card
       :work="work"
+      @remove-work="onRemoveWork"
+      @edit-work="onEditWork"
     />
-  `
+  `,
+  methods
 });
 
 defaultView.story = {

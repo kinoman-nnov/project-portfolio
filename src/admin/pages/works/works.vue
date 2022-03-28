@@ -25,8 +25,8 @@
           <li class="item item-works" v-for="work in works" :key="work.id">
             <work-card
               :work="work"
-              @remove="removeWork(work.id)"
-              @editWork="editWork"
+              @remove-work="removeWork"
+              @edit-work="editWork"
             />
           </li>
         </ul>

@@ -1,7 +1,7 @@
 <template>
   <div class="form-component" v-if="currentWork.editmode === false">
     <form class="form" @submit.prevent="handleSubmitAddWork">
-      <card title="добавление работы">
+      <card :title="title">
         <div class="form-container" slot="content">
           <div class="form-columns">
             <div class="form-col">
@@ -205,6 +205,7 @@ export default {
     tooltip: () => import("components/tooltip"),
   },
   props: {
+    title: String,
     currentWork: Object,
   },
   computed: {

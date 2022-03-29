@@ -1,7 +1,7 @@
 <template>
   <div class="user-component">
     <avatar size="2.7" :src="userPic" />
-    <div class="username">Alexey Ya</div>
+    <div class="username">{{ title }}</div>
   </div>
 </template>
 
@@ -11,6 +11,9 @@ import avatar from "../avatar";
 export default {
   components: {
     avatar,
+  },
+  props: {
+    title: String,
   },
   computed: {
     userPic() {

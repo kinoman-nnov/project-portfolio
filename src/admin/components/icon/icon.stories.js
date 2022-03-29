@@ -35,6 +35,8 @@ export const iconedView = () => ({
       <icon symbol="cross" />
       <icon symbol="tick" />
       <icon symbol="trash" />
+      <icon symbol="user" />
+      <icon symbol="key" />
     </div>
   `,
 });
@@ -51,6 +53,8 @@ export const grayscaleView = () => ({
       <icon grayscale symbol="cross" />
       <icon grayscale symbol="tick" />
       <icon grayscale symbol="trash" />
+      <icon grayscale symbol="user" />
+      <icon grayscale symbol="key" />
     </div>
   `,
 });

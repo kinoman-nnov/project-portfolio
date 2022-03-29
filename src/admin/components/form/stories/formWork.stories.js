@@ -1,8 +1,7 @@
-import formComponent from "./form.vue";
+import formComponent from "../form.vue";
 import { action } from "@storybook/addon-actions";
 
 const methods = {
-  onRemoveWork: action("onRemoveWork"),
   onCancelForm: action("onCancelForm")
 }
 
@@ -24,11 +23,12 @@ export const defaultView = () => ({
     <form-component
       :currentWork="currentWork"
       @cancelForm="onCancelForm"
+      title="Добавление работы"
     />
   `,
   methods
 });
 
 defaultView.story = {
-  name: "Стандартный вид",
+  name: "Форма для блока Работы",
 }

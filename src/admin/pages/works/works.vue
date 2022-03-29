@@ -8,6 +8,7 @@
         <div class="form">
           <form-component
             v-if="formIsShown"
+            title="Добавление работы"
             :currentWork="currentWork"
             @cancelForm="formIsShown = false"
           />
@@ -64,7 +65,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchWorks: "works/fetch",
+      fetchWorksAction: "works/fetch",
       removeWorkAction: "works/remove",
       showTooltip: "tooltips/show",
     }),
@@ -94,7 +95,7 @@ export default {
     }
   },
   mounted() {
-    this.fetchWorks();
+    this.fetchWorksAction();
   }
 };
 </script>

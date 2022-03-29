@@ -5,7 +5,12 @@
         <div class="form-container" slot="content">
           <div class="form-columns">
             <div class="form-col">
-              <label
+              <app-uploader
+                :currentWork="currentWork"
+                :errorMessage="validation.firstError('newWork.preview')"
+                @upload-image="uploaderImg"
+              />
+              <!-- <label
                 :style="{ backgroundImage: `url(${newWork.preview})` }"
                 :class="[
                   'uploader',
@@ -34,7 +39,7 @@
                     :text="validation.firstError('newWork.preview')"
                   ></tooltip>
                 </div>
-              </label>
+              </label> -->
             </div>
             <div class="form-col">
               <div class="form-row">
@@ -157,6 +162,7 @@
 
 <script>
 import card from "../card";
+import appUploader from "../uploader";
 import appButton from "../button";
 import appInput from "../input";
 import tagsAdder from "../tagsAdder";
@@ -199,6 +205,7 @@ export default {
   },
   components: {
     card,
+    appUploader,
     appButton,
     appInput,
     tagsAdder,
@@ -246,6 +253,12 @@ export default {
     handleDragOver(e) {
       e.preventDefault();
       this.hovered = true;
+    },
+    uploaderImg(workPhoto, currentWorkPhoto){
+      
+        this.newWork = {
+          ...workPhoto
+        }
     },
     async handleSubmitAddWork() {
       const nameFieldWorkArr = [
@@ -315,29 +328,32 @@ export default {
         }
       }
     },
-    handleChange(event) {
-      event.preventDefault();
-      const file = event.dataTransfer
-        ? event.dataTransfer.files[0]
-        : event.target.files[0];
-      this.newWork.photo = file;
-      this.currentWork.photo = file;
-      this.renderPhoto(file);
-      this.hovered = false;
-    },
-    renderPhoto(file) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        this.newWork.preview = reader.result;
-        this.currentWork.preview = reader.result;
-      };
-    },
+    // handleChange(event) {
+    //   event.preventDefault();
+    //   const file = event.dataTransfer
+    //     ? event.dataTransfer.files[0]
+    //     : event.target.files[0];
+    //   this.newWork.photo = file;
+    //   this.currentWork.photo = file;
+    //   this.renderPhoto(file);
+    //   this.hovered = false;
+    // },
+    // renderPhoto(file) {
+    //   const reader = new FileReader();
+    //   reader.readAsDataURL(file);
+    //   reader.onloadend = () => {
+    //     this.newWork.preview = reader.result;
+    //     this.currentWork.preview = reader.result;
+    //   };
+    // },
     cancelForm() {
       this.currentWork.editmode = false;
       this.$emit("cancelForm");
     },
   },
+  mounted() {
+    console.log("form", this.newWork); 
+  }
 };
 </script>
 

@@ -94,7 +94,7 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted() { console.log("works", this.currentWork);
     this.fetchWorksAction();
   }
 };

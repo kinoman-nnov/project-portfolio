@@ -1,9 +1,9 @@
 <template>
   <label
-    :style="{ backgroundImage: `url(${newWork.preview})` }"
+    :style="{ backgroundImage: `url(${uploader.preview})` }"
     :class="[
       'uploader',
-      { active: newWork.preview },
+      { active: uploader.preview },
       { hovered: hovered },
       { error: errorMessage },
     ]"
@@ -12,21 +12,13 @@
     @drop="handleChange"
   >
     <div class="uploader-content">
-      <div class="uploader-title">
-        Перетащите или загрузите картинку
-      </div>
+      <div class="uploader-title">Перетащите или загрузите картинку</div>
       <div class="uploader-btn">
-        <app-button
-          typeAttr="file"
-          @change="handleChange"
-          title="Загрузить"
-        />
+        <app-button typeAttr="file" @change="handleChange" title="Загрузить" />
       </div>
     </div>
     <div class="uploader__error-tooltip">
-      <tooltip
-        :text="errorMessage"
-      ></tooltip>
+      <tooltip :text="errorMessage"></tooltip>
     </div>
   </label>
 </template>
@@ -39,28 +31,29 @@ import { Validator, mixin as ValidatorMixin } from "simple-vue-validator";
 export default {
   mixin: [ValidatorMixin],
   validators: {
-    "newWork.preview": (value) => {
+    "uploader.preview": (value) => {
       return Validator.value(value).required("Загрузите картинку");
     },
   },
   components: {
-    appButton, tooltip 
+    appButton,
+    tooltip,
   },
   props: {
     currentWork: Object,
     errorMessage: {
       type: String,
       default: "",
-    }
+    },
   },
   data() {
     return {
       hovered: false,
-      newWork: {
+      uploader: {
         photo: {},
         preview: "",
       },
-    }
+    };
   },
   methods: {
     handleDragOver(e) {
@@ -72,26 +65,31 @@ export default {
       const file = event.dataTransfer
         ? event.dataTransfer.files[0]
         : event.target.files[0];
-      this.newWork.photo = file;
-      this.currentWork.photo = file;
-      this.renderPhoto(file);
+      this.uploader.photo = file;
+      // this.currentWork.photo = file;
+
+      const promise = this.renderPhoto(file);
+      promise.then(
+        (value) => {
+          this.uploader.preview = value;
+          const newUploader = { ...this.uploader };
+          this.$emit("upload-image", newUploader);
+        },
+        (error) => console.log(`Ошибка: ${error.message}`)
+      );
       this.hovered = false;
-      this.$emit('upload-image', this.newWork, this.currentWork)
     },
     renderPhoto(file) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        this.newWork.preview = reader.result;
-        this.currentWork.preview = reader.result;
-      };
+      return new Promise(function (resolve, reject) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => resolve(reader.result);
+        reader.onerror = () =>
+          reject(new Error(`Ошибка загрузки картинки ${file}`));
+      });
     },
   },
-  
-  mounted() {
-    console.log("upload", this.newWork); 
-  }
-}
+};
 </script>
 
 <style lang="postcss" scoped src="./uploader.pcss"></style>

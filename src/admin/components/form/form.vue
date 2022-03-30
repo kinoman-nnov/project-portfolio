@@ -254,11 +254,10 @@ export default {
       e.preventDefault();
       this.hovered = true;
     },
-    uploaderImg(workPhoto, currentWorkPhoto){
-      
-        this.newWork = {
-          ...workPhoto
-        }
+    uploaderImg(workPhoto, currentWorkPhoto) {
+      const { photo, preview } = workPhoto;
+      this.newWork.photo = photo;
+      this.newWork.preview = preview;
     },
     async handleSubmitAddWork() {
       const nameFieldWorkArr = [
@@ -301,7 +300,7 @@ export default {
         link: linkValue,
         description: descValue,
         techs: techsValue,
-        photo: photoValue
+        photo: photoValue,
       } = this.currentWorkValue;
 
       if (
@@ -352,8 +351,8 @@ export default {
     },
   },
   mounted() {
-    console.log("form", this.newWork); 
-  }
+    console.log("form", this.newWork);
+  },
 };
 </script>
 

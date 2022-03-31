@@ -3,6 +3,7 @@
     :style="{ backgroundImage: `url(${uploader.preview})` }"
     :class="[
       'uploader',
+      { round },
       { active: uploader.preview },
       { hovered: hovered },
       { error: errorMessage },
@@ -17,6 +18,11 @@
         <app-button typeAttr="file" @change="handleChange" title="Загрузить" />
       </div>
     </div>
+    <div class="uploader-content">
+      <div class="uploader-btn">
+        <app-button plain typeAttr="file" @change="handleChange" title="Загрузить" />
+      </div>
+    </div>
     <div class="uploader__error-tooltip">
       <tooltip :text="errorMessage"></tooltip>
     </div>
@@ -26,21 +32,15 @@
 <script>
 import appButton from "../button";
 import tooltip from "../tooltip";
-import { Validator, mixin as ValidatorMixin } from "simple-vue-validator";
 
 export default {
-  mixin: [ValidatorMixin],
-  validators: {
-    "uploader.preview": (value) => {
-      return Validator.value(value).required("Загрузите картинку");
-    },
-  },
   components: {
     appButton,
     tooltip,
   },
   props: {
     currentWork: Object,
+    round: Boolean,
     errorMessage: {
       type: String,
       default: "",

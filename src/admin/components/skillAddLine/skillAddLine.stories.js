@@ -1,7 +1,4 @@
-import skillAddLine from "./skillAddLine"
-import Vue from 'vue';
-import SimpleVueValidation from 'simple-vue-validator';
-Vue.use(SimpleVueValidation);
+import skillAddLine from "./skillAddLine";
 
 export default {
   title: "skillAddLine",
@@ -13,4 +10,8 @@ export const defaultView = () => ({
   template: `
     <skill-add-line /> 
   `
-})
+});
+
+defaultView.story = {
+  name: "Стандартный вид",
+}

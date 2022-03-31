@@ -10,6 +10,13 @@
   text-align: center;
   position: relative;
   background-size: cover;
+
+  &.round {
+    max-width: 300px;
+    max-height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
   
   &.active {
     .uploader-title {
@@ -19,6 +26,14 @@
 
   &.hovered {
     border-color: blue;
+  }
+
+  &.error {
+    border-color: $errors-color;
+  
+    .uploader__error-tooltip {
+      display: block;
+    }
   }
 }
 
@@ -36,12 +51,4 @@
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
   z-index: 100;
-}
-
-.error {
-  border-color: $errors-color;
-
-  .uploader__error-tooltip {
-    display: block;
-  }
 }

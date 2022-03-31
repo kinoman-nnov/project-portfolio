@@ -350,9 +350,6 @@ export default {
       this.$emit("cancelForm");
     },
   },
-  mounted() {
-    console.log("form", this.newWork);
-  },
 };
 </script>
 

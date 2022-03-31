@@ -6,40 +6,11 @@
           <div class="form-columns">
             <div class="form-col">
               <app-uploader
+                
                 :currentWork="currentWork"
                 :errorMessage="validation.firstError('newWork.preview')"
                 @upload-image="uploaderImg"
               />
-              <!-- <label
-                :style="{ backgroundImage: `url(${newWork.preview})` }"
-                :class="[
-                  'uploader',
-                  { active: newWork.preview },
-                  { hovered: hovered },
-                  { error: validation.firstError('newWork.preview') },
-                ]"
-                @dragover="handleDragOver"
-                @dragleave="hovered = false"
-                @drop="handleChange"
-              >
-                <div class="uploader-content">
-                  <div class="uploader-title">
-                    Перетащите или загрузите картинку
-                  </div>
-                  <div class="uploader-btn">
-                    <app-button
-                      typeAttr="file"
-                      @change="handleChange"
-                      title="Загрузить"
-                    />
-                  </div>
-                </div>
-                <div class="uploader__error-tooltip">
-                  <tooltip
-                    :text="validation.firstError('newWork.preview')"
-                  ></tooltip>
-                </div>
-              </label> -->
             </div>
             <div class="form-col">
               <div class="form-row">

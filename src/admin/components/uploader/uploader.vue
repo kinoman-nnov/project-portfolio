@@ -1,32 +1,50 @@
 <template>
-  <label
-    :style="{ backgroundImage: `url(${uploader.preview})` }"
-    :class="[
-      'uploader',
-      { round },
-      { active: uploader.preview },
-      { hovered: hovered },
-      { error: errorMessage },
-    ]"
-    @dragover="handleDragOver"
-    @dragleave="hovered = false"
-    @drop="handleChange"
-  >
-    <div class="uploader-content">
-      <div class="uploader-title">Перетащите или загрузите картинку</div>
-      <div class="uploader-btn">
-        <app-button typeAttr="file" @change="handleChange" title="Загрузить" />
-      </div>
+  <div class="uploader-wrapper">
+    <div class="uploader-container" v-if="round === false">
+      <label
+        :style="{ backgroundImage: `url(${uploader.preview})` }"
+        :class="[
+          'uploader',
+          { active: uploader.preview },
+          { hovered: hovered },
+          { error: errorMessage },
+        ]"
+        @dragover="handleDragOver"
+        @dragleave="hovered = false"
+        @drop="handleChange"
+      >
+        <div class="uploader-content">
+          <div class="uploader-title">Перетащите или загрузите картинку</div>
+          <div class="uploader-btn">
+            <app-button typeAttr="file" @change="handleChange" title="Загрузить" />
+          </div>
+        </div>      
+      </label>
     </div>
-    <div class="uploader-content">
-      <div class="uploader-btn">
-        <app-button plain typeAttr="file" @change="handleChange" title="Загрузить" />
+    <div class="uploader-container  uploader-container--round" v-else>
+      <label
+        :style="{ backgroundImage: `url(${uploader.preview})` }"
+        :class="[
+          'uploader',
+          { round },
+          { active: uploader.preview },
+          { hovered: hovered },
+          { error: errorMessage },
+        ]"
+        @dragover="handleDragOver"
+        @dragleave="hovered = false"
+        @drop="handleChange"
+      ></label>
+      <div class="uploader-content uploader-content--round">
+        <div class="uploader-btn">
+          <app-button plain typeAttr="file" @change="handleChange" title="Загрузить" />
+        </div>
       </div>
     </div>
     <div class="uploader__error-tooltip">
       <tooltip :text="errorMessage"></tooltip>
     </div>
-  </label>
+  </div>  
 </template>
 
 <script>
@@ -46,7 +64,7 @@ export default {
       default: "",
     },
   },
-  data() {
+  data() { console.log("round",this.round);
     return {
       hovered: false,
       uploader: {

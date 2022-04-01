@@ -1,4 +1,4 @@
-import formComponent from "../form.vue";
+import formReview from "../../form.vue";
 import { action } from "@storybook/addon-actions";
 
 const methods = {
@@ -7,11 +7,11 @@ const methods = {
 
 export default {
   title: "form/formReview",
-  components: { formComponent }
+  components: { formReview }
 }
 
 export const defaultView = () => ({
-  components: { formComponent },
+  components: { formReview },
   data() {
     return {
       currentWork: {
@@ -20,7 +20,7 @@ export const defaultView = () => ({
     }
   },
   template: `
-    <form-component
+    <form-review
       :currentWork="currentWork"
       @cancelForm="onCancelForm"
       title="Добавление отзыва"

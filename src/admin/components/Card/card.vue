@@ -23,9 +23,6 @@ export default {
     simple: Boolean,
     slim: Boolean,
   },
-  mounted() {
-     console.log("simple",this.simple);
-  }
 };
 </script>
 

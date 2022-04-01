@@ -6,7 +6,8 @@
           <div class="page-title">Блок "Отзывы"</div>
         </div>
         <div class="form">
-          <form-component
+          <form-review
+            type="review"
             v-if="formIsShown"
             :currentWork="currentReview"
             @cancelForm="formIsShown = false"
@@ -37,7 +38,7 @@
 </template>
 
 <script>
-import form from "../../components/form";
+import formReview from "../../components/form";
 import card from "../../components/card";
 import reviewCard from "../../components/reviewCard";
 import squareBtn from "../../components/button";
@@ -45,7 +46,7 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   components: {
-    formComponent: form,
+    formReview,
     card,
     reviewCard,
     squareBtn

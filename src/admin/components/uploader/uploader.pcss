@@ -1,3 +1,13 @@
+.uploader-wrapper {
+  position: relative;
+}
+
+.uploader-wrapper--round {
+  .uploader__error-tooltip {
+    left: 50%;
+  }
+}
+
 .uploader {
   min-height: 276px;
   display: flex;
@@ -27,14 +37,6 @@
   &.hovered {
     border-color: blue;
   }
-
-  &.error {
-    border-color: $errors-color;
-  
-    .uploader__error-tooltip {
-      display: block;
-    }
-  }
 }
 
 .uploader-container--round {
@@ -61,4 +63,12 @@
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
   z-index: 100;
+}
+
+.error {
+  border-color: $errors-color;
+
+  .uploader__error-tooltip {
+    display: block;
+  }
 }

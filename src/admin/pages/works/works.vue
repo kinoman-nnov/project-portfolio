@@ -6,7 +6,7 @@
           <div class="page-title">Блок "Работы"</div>
         </div>
         <div class="form">
-          <form-component
+          <form-work
             v-if="formIsShown"
             title="Добавление работы"
             :currentWork="currentWork"
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import form from "../../components/form";
+import formWork from "../../components/form";
 import card from "../../components/card";
 import workCard from "../../components/workCard";
 import squareBtn from "../../components/button";
@@ -45,7 +45,7 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   components: {
-    formComponent: form,
+    formWork,
     card,
     workCard,
     squareBtn
@@ -94,7 +94,7 @@ export default {
       }
     }
   },
-  mounted() { console.log("works", this.currentWork);
+  mounted() {
     this.fetchWorksAction();
   }
 };

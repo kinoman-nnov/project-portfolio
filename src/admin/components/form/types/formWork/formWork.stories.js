@@ -1,4 +1,4 @@
-import formComponent from "../form.vue";
+import formWork from "../../form.vue";
 import { action } from "@storybook/addon-actions";
 
 const methods = {
@@ -7,11 +7,11 @@ const methods = {
 
 export default {
   title: "form/formWork",
-  components: { formComponent }
+  components: { formWork }
 }
 
 export const defaultView = () => ({
-  components: { formComponent },
+  components: { formWork },
   data() {
     return {
       currentWork: {
@@ -20,7 +20,7 @@ export const defaultView = () => ({
     }
   },
   template: `
-    <form-component
+    <form-work
       :currentWork="currentWork"
       @cancelForm="onCancelForm"
       title="Добавление работы"

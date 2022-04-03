@@ -84,8 +84,8 @@ export default {
       }
     },
     openForm() {
-      this.formIsShown = true;
       this.currentWork.editmode = false;
+      this.formIsShown = true;
     },
     editWork(work) {
       this.formIsShown = true;

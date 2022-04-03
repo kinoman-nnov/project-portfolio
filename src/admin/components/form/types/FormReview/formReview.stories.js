@@ -21,6 +21,7 @@ export const defaultView = () => ({
   },
   template: `
     <form-review
+      type="review"
       :currentWork="currentWork"
       @cancelForm="onCancelForm"
       title="Добавление отзыва"

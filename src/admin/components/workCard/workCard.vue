@@ -65,7 +65,7 @@ export default {
         description,
         link,
         techs,
-        preview: "",
+        preview: this.cover,
         photo: this.cover,
         editmode: true,
       };

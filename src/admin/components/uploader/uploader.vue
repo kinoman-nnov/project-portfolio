@@ -8,10 +8,10 @@
   >
     <div class="uploader-container" v-if="round === false">
       <label
-        :style="{ backgroundImage: `url(${uploader.preview})` }"
+        :style="{ backgroundImage: `url(${coverPreview})` }"
         :class="[
           'uploader',
-          { active: uploader.preview },
+          { active: coverPreview },
           { hovered: hovered },
           { error: !!errorMessage },
         ]"
@@ -33,11 +33,11 @@
     </div>
     <div class="uploader-container uploader-container--round" v-else>
       <label
-        :style="{ backgroundImage: `url(${uploader.preview})` }"
+        :style="{ backgroundImage: `url(${coverPreview})` }"
         :class="[
           'uploader',
           { round },
-          { active: uploader.preview },
+          { active: coverPreview },
           { hovered: hovered },
           { error: !!errorMessage },
         ]"
@@ -79,6 +79,17 @@ export default {
       default: "",
     },
   },
+  computed: {
+    coverPreview() {
+      if (this.currentWork.editmode !== true) { // форма редактирования закрыта
+        return this.uploader.preview;
+      } else if (!!this.uploader.preview === false) { // форма редактирования открыта
+        return this.currentWork.photo; // возвращается загруженная картинка при нажатии на кнопку Править
+      } else {
+        return this.uploader.preview; // возвращается при повторной загрузке preview
+      }
+    },
+  },
   data() {
     return {
       hovered: false,
@@ -99,13 +110,13 @@ export default {
         ? event.dataTransfer.files[0]
         : event.target.files[0];
       this.uploader.photo = file;
-      // this.currentWork.photo = file;
 
       const promise = this.renderPhoto(file);
       promise.then(
         (value) => {
           this.uploader.preview = value;
           const newUploader = { ...this.uploader };
+
           this.$emit("upload-image", newUploader);
         },
         (error) => console.log(`Ошибка: ${error.message}`)

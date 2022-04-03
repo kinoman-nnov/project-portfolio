@@ -60,28 +60,10 @@
         <div class="form-container" slot="content">
           <div class="form-columns">
             <div class="form-col">
-              <label
-                :style="{ backgroundImage: `url(${coverPreview})` }"
-                :class="[
-                  'uploader',
-                  { active: currentWork.preview || currentWork.photo },
-                  { hovered: hovered },
-                ]"
-                @dragover="handleDragOver"
-                @dragleave="hovered = false"
-                @drop="handleChange"
-              >
-                <div class="uploader-title">
-                  Перетащите или загрузите картинку
-                </div>
-                <div class="uploader-btn">
-                  <app-button
-                    typeAttr="file"
-                    @change="handleChange"
-                    title="Загрузить"
-                  />
-                </div>
-              </label>
+              <app-uploader
+                :currentWork="currentWork"
+                @upload-image="uploaderImgCurrentWork"
+              />
             </div>
             <div class="form-col">
               <div class="form-row">
@@ -116,6 +98,7 @@
               </div>
             </div>
           </div>
+          {{ currentWork }}
           <div class="form-btns">
             <div class="btn">
               <app-button title="Отмена" @click="cancelForm" plain />
@@ -124,6 +107,7 @@
               <app-button title="Сохранить" typeAttr="submit" />
             </div>
           </div>
+          {{ currentWorkValue }}
         </div>
       </card>
     </form>
@@ -157,8 +141,8 @@ export default {
     "newWork.techs": (value) => {
       return Validator.value(value).required("Не может быть пустым");
     },
-    // "currentWork.preview": (value) => {  // для редактирования работы поле загрузки картинки не будет пустым
-    //   return Validator.value(value).required("Загрузите картинку");  // поэтому его не надо валидировать
+    // "currentWork.preview": (value) => { // в форме редактора картинка всегда загружена, нет смысла
+    //   return Validator.value(value).required("Загрузите картинку"); // валидировать загрузчик на ее наличие
     // },
     "currentWork.title": (value) => {
       return Validator.value(value).required("Не может быть пустым");
@@ -184,15 +168,6 @@ export default {
   props: {
     title: String,
     currentWork: Object,
-  },
-  computed: {
-    coverPreview() {
-      if (!!this.currentWork.preview === false) {
-        return this.currentWork.photo;
-      } else {
-        return this.currentWork.preview;
-      }
-    },
   },
   data() {
     return {
@@ -224,10 +199,15 @@ export default {
       e.preventDefault();
       this.hovered = true;
     },
-    uploaderImg(workPhoto, currentWorkPhoto) {
+    uploaderImg(workPhoto) {
       const { photo, preview } = workPhoto;
       this.newWork.photo = photo;
       this.newWork.preview = preview;
+    },
+    uploaderImgCurrentWork(currentWorkPhoto) {
+      const { photo, preview } = currentWorkPhoto;
+      this.currentWork.photo = photo;
+      this.currentWork.preview = preview;
     },
     async handleSubmitAddWork() {
       const nameFieldWorkArr = [
@@ -256,7 +236,7 @@ export default {
     },
     async handleSubmitEditWork() {
       const nameFieldCurWorkArr = [
-        // "currentWork.preview",
+        // "currentWork.preview", // нет смысла валидировать на наличие изображения
         "currentWork.title",
         "currentWork.link",
         "currentWork.description",
@@ -272,7 +252,7 @@ export default {
         techs: techsValue,
         photo: photoValue,
       } = this.currentWorkValue;
-
+      
       if (
         title.trim() === titleValue.trim() &&
         link.trim() === linkValue.trim() &&

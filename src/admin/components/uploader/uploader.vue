@@ -81,13 +81,24 @@ export default {
   },
   computed: {
     coverPreview() {
-      if (this.currentWork.editmode !== true) { // форма редактирования закрыта
-        return this.uploader.preview;
-      } else if (!!this.uploader.preview === false) { // форма редактирования открыта
-        return this.currentWork.photo; // возвращается загруженная картинка при нажатии на кнопку Править
-      } else {
-        return this.uploader.preview; // возвращается при повторной загрузке preview
+      switch (this.currentWork.editmode) {
+        case false:
+          return this.uploader.preview;
+        case true:
+          if (!!this.uploader.previewEditmode === false) {
+            // форма редактирования открыта
+            return this.currentWork.photo; // возвращается загруженная картинка при нажатии на кнопку Править
+          } else {
+            return this.currentWork.preview || this.uploader.previewEditmode; // возвращается при повторной загрузке preview
+          }
       }
+      // if (this.currentWork.editmode !== true) { // форма редактирования закрыта
+      //   return this.uploader.preview;
+      // } else if (!!this.uploader.preview === false) { // форма редактирования открыта
+      //   return this.currentWork.photo; // возвращается загруженная картинка при нажатии на кнопку Править
+      // } else {
+      //   return this.uploader.preview; // возвращается при повторной загрузке preview
+      // }
     },
   },
   data() {
@@ -96,6 +107,7 @@ export default {
       uploader: {
         photo: {},
         preview: "",
+        previewEditmode: "",
       },
     };
   },
@@ -114,7 +126,11 @@ export default {
       const promise = this.renderPhoto(file);
       promise.then(
         (value) => {
-          this.uploader.preview = value;
+          if (this.currentWork.editmode === false) {
+            this.uploader.preview = value;
+          } else {
+            this.uploader.previewEditmode = value;
+          }
           const newUploader = { ...this.uploader };
 
           this.$emit("upload-image", newUploader);

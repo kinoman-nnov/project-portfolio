@@ -98,7 +98,6 @@
               </div>
             </div>
           </div>
-          {{ currentWork }}
           <div class="form-btns">
             <div class="btn">
               <app-button title="Отмена" @click="cancelForm" plain />
@@ -107,7 +106,6 @@
               <app-button title="Сохранить" typeAttr="submit" />
             </div>
           </div>
-          {{ currentWorkValue }}
         </div>
       </card>
     </form>
@@ -189,6 +187,15 @@ export default {
       },
     };
   },
+  watch: {
+    currentWork: function watchCurrentWorkProp(newVal, oldVal) {
+      if (!!newVal === true) {
+        this.currentWorkValue = {
+          ...newVal,
+        };
+      }
+    },
+  },
   methods: {
     ...mapActions({
       addNewWork: "works/add",
@@ -205,9 +212,9 @@ export default {
       this.newWork.preview = preview;
     },
     uploaderImgCurrentWork(currentWorkPhoto) {
-      const { photo, preview } = currentWorkPhoto;
+      const { photo, previewEditmode } = currentWorkPhoto;
       this.currentWork.photo = photo;
-      this.currentWork.preview = preview;
+      this.currentWork.preview = previewEditmode;
     },
     async handleSubmitAddWork() {
       const nameFieldWorkArr = [
@@ -252,7 +259,7 @@ export default {
         techs: techsValue,
         photo: photoValue,
       } = this.currentWorkValue;
-      
+
       if (
         title.trim() === titleValue.trim() &&
         link.trim() === linkValue.trim() &&

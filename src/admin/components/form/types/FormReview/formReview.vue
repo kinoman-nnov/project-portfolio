@@ -1,10 +1,10 @@
 <template>
   <div class="form-component" v-if="currentWork.editmode === false">
     <form class="form" @submit.prevent="handleSubmitAddWork">
-      <card :title="title">
+      <card :title="title" class="card-component__review">
         <div class="form-container" slot="content">
           <div class="form-columns">
-            <div class="form-col">
+            <div class="form-col form-col__review-left">
               <app-uploader
                 round
                 :currentWork="currentWork"
@@ -12,7 +12,7 @@
                 @upload-image="uploaderImg"
               />
             </div>
-            <div class="form-col">
+            <div class="form-col form-col__review-right">
               <div class="form-row">
                 <app-input
                   v-model="newWork.title"

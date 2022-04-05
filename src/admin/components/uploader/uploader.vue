@@ -32,19 +32,21 @@
       </label>
     </div>
     <div class="uploader-container uploader-container--round" v-else>
-      <label
-        :style="{ backgroundImage: `url(${coverPreview})` }"
-        :class="[
-          'uploader',
-          { round },
-          { active: coverPreview },
-          { hovered: hovered },
-          { error: !!errorMessage },
-        ]"
-        @dragover="handleDragOver"
-        @dragleave="hovered = false"
-        @drop="handleChange"
-      ></label>
+      <div class="uploader-container--round-field">
+        <label
+          :style="{ backgroundImage: `url(${coverPreview})` }"
+          :class="[
+            'uploader',
+            { round },
+            { active: coverPreview },
+            { hovered: hovered },
+            { error: !!errorMessage },
+          ]"
+          @dragover="handleDragOver"
+          @dragleave="hovered = false"
+          @drop="handleChange"
+        ></label>
+      </div>
       <div class="uploader-content uploader-content--round">
         <div class="uploader-btn">
           <app-button
@@ -92,13 +94,6 @@ export default {
             return this.currentWork.preview || this.uploader.previewEditmode; // возвращается при повторной загрузке preview
           }
       }
-      // if (this.currentWork.editmode !== true) { // форма редактирования закрыта
-      //   return this.uploader.preview;
-      // } else if (!!this.uploader.preview === false) { // форма редактирования открыта
-      //   return this.currentWork.photo; // возвращается загруженная картинка при нажатии на кнопку Править
-      // } else {
-      //   return this.uploader.preview; // возвращается при повторной загрузке preview
-      // }
     },
   },
   data() {

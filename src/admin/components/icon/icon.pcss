@@ -34,7 +34,7 @@
   }
 
   @each $icon, $fill in (pencil, cross, tick, trash, user, key),
-  (#3942cc, #c73033, #00d70a, #414c62, #414C63, #414c63) {
+  (#3942cc, #c73033, #00d70a, #414c62, #fff, #414c63) {
     &.is-$(icon) {
       &:after {
         background: svg-load("$(icon).svg", fill=$(fill)) center center / contain no-repeat;
@@ -42,8 +42,19 @@
     }
   }
 
-  &.grayscale {
+  &.changeSize {
+    cursor: inherit;
+    outline: none;
 
+    &:after {
+      content: "";
+      width: 100px;
+      height: 100px;
+      display: block;
+    }
+  }
+
+  &.grayscale {
     @each $icon, $fill in (pencil, cross, tick, trash, user, key),
     (#3942cc, #c73033, #00d70a, #414c62, #414C63, #414c63) {
       &.is-$(icon) {

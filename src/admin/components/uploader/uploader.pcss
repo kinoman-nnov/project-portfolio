@@ -22,8 +22,9 @@
   background-size: cover;
 
   &.round {
-    max-width: 200px;
-    max-height: 200px;
+    height: 100%;
+    width: 100%;
+    min-height: 0;
     border-radius: 50%;
     overflow: hidden;
   }
@@ -43,6 +44,11 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+
+  &-field {
+    width: 200px;
+    height: 200px;
+  }
 }
 
 .uploader-content--round {

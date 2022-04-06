@@ -45,7 +45,10 @@
           @dragover="handleDragOver"
           @dragleave="hovered = false"
           @drop="handleChange"
-        ></label>
+          v-on="$listeners" 
+        >
+          <icon symbol="user" changeSize />
+        </label>
       </div>
       <div class="uploader-content uploader-content--round">
         <div class="uploader-btn">
@@ -53,7 +56,7 @@
             plain
             typeAttr="file"
             @change="handleChange"
-            title="Загрузить"
+            title="Добавить фото"
           />
         </div>
       </div>
@@ -67,10 +70,12 @@
 <script>
 import appButton from "../button";
 import tooltip from "../tooltip";
+import icon from "../icon";
 
 export default {
   components: {
     appButton,
+    icon,
     tooltip,
   },
   props: {

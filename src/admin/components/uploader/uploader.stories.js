@@ -7,8 +7,16 @@ export default {
 
 export const defaultView = () => ({
   components: { appUploader },
+  data() {
+    return {
+      currentWork: {
+        editmode: false
+      },
+    }
+  },
   template: `
     <app-uploader
+      currentWork="currentWork"
     />
   `,
 });
@@ -19,9 +27,17 @@ defaultView.story = {
 
 export const roundView = () => ({
   components: { appUploader },
+  data() {
+    return {
+      currentWork: {
+        editmode: false
+      },
+    }
+  },
   template: `
     <app-uploader
       round
+      currentWork="currentWork"
     />
   `,
 });
@@ -32,8 +48,16 @@ roundView.story = {
 
 export const activetView = () => ({
   components: { appUploader },
+  data() {
+    return {
+      currentWork: {
+        editmode: false
+      },
+    }
+  },
   template: `
     <app-uploader
+      currentWork="currentWork"
       errorMessage="Загрузите картинку"
     />
   `,

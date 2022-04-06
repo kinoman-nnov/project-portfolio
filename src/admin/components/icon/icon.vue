@@ -3,6 +3,7 @@
     :class="[
       'icon-component',
       iconClass,
+      { changeSize: this.changeSize },
       { grayscale: this.grayscale },
       { 'no-words': !!title === false },
     ]"
@@ -20,6 +21,9 @@ export default {
       default: "pencil",
       validator: (value) =>
         ["pencil", "cross", "tick", "trash", "user", "key"].includes(value),
+    },
+    changeSize: {
+      type: Boolean,
     },
     grayscale: {
       type: Boolean,

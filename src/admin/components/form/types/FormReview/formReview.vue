@@ -10,35 +10,32 @@
                 :currentWork="currentWork"
                 :errorMessage="validation.firstError('newWork.preview')"
                 @upload-image="uploaderImg"
+                @click.native="handleClickTest"
               />
             </div>
             <div class="form-col form-col__review-right">
-              <div class="form-row">
-                <app-input
-                  v-model="newWork.title"
-                  title="Название"
-                  :errorMessage="validation.firstError('newWork.title')"
-                />
-              </div>
-              <div class="form-row">
-                <app-input
-                  v-model="newWork.link"
-                  title="Ссылка"
-                  :errorMessage="validation.firstError('newWork.link')"
-                />
+              <div class="form-row__container">
+                <div class="form-row form-row--review">
+                  <app-input
+                    v-model="newWork.title"
+                    title="Имя автора"
+                    :errorMessage="validation.firstError('newWork.title')"
+                  />
+                </div>
+                <div class="form-row form-row--review">
+                  <app-input
+                    v-model="newWork.link"
+                    title="Титул автора"
+                    :errorMessage="validation.firstError('newWork.link')"
+                  />
+                </div>
               </div>
               <div class="form-row">
                 <app-input
                   v-model="newWork.description"
                   field-type="textarea"
-                  title="Описание"
+                  title="Отзыв"
                   :errorMessage="validation.firstError('newWork.description')"
-                />
-              </div>
-              <div class="form-row">
-                <tags-adder
-                  v-model="newWork.techs"
-                  :errorMessage="validation.firstError('newWork.techs')"
                 />
               </div>
             </div>
@@ -60,59 +57,39 @@
       <card title="редактирование работы">
         <div class="form-container" slot="content">
           <div class="form-columns">
-            <div class="form-col">
-              <label
-                :style="{ backgroundImage: `url(${coverPreview})` }"
-                :class="[
-                  'uploader',
-                  { active: currentWork.preview || currentWork.photo },
-                  { hovered: hovered },
-                ]"
-                @dragover="handleDragOver"
-                @dragleave="hovered = false"
-                @drop="handleChange"
-              >
-                <div class="uploader-title">
-                  Перетащите или загрузите картинку
-                </div>
-                <div class="uploader-btn">
-                  <app-button
-                    typeAttr="file"
-                    @change="handleChange"
-                    title="Загрузить"
-                  />
-                </div>
-              </label>
-            </div>
-            <div class="form-col">
-              <div class="form-row">
-                <app-input
-                  v-model="currentWork.title"
-                  title="Название"
-                  :errorMessage="validation.firstError('currentWork.title')"
+            <div class="form-col form-col__review-left">
+              <div class="form-col form-col__review-left">
+                <app-uploader
+                  round
+                  :currentWork="currentWork"
+                  :errorMessage="validation.firstError('newWork.preview')"
+                  @upload-image="uploaderImg"
                 />
               </div>
-              <div class="form-row">
-                <app-input
-                  v-model="currentWork.link"
-                  title="Ссылка"
-                  :errorMessage="validation.firstError('currentWork.link')"
-                />
+            </div>
+            <div class="form-col form-col__review-right">
+              <div class="form-row__container">
+                <div class="form-row form-row--review">
+                  <app-input
+                    v-model="currentWork.title"
+                    title="Название"
+                    :errorMessage="validation.firstError('currentWork.title')"
+                  />
+                </div>
+                <div class="form-row form-row--review">
+                  <app-input
+                    v-model="currentWork.link"
+                    title="Ссылка"
+                    :errorMessage="validation.firstError('currentWork.link')"
+                  />
+                </div>
               </div>
               <div class="form-row">
                 <app-input
                   v-model="currentWork.description"
                   field-type="textarea"
                   title="Описание"
-                  :errorMessage="
-                    validation.firstError('currentWork.description')
-                  "
-                />
-              </div>
-              <div class="form-row">
-                <tags-adder
-                  v-model="currentWork.techs"
-                  :errorMessage="validation.firstError('currentWork.techs')"
+                  :errorMessage="validation.firstError('currentWork.description')"
                 />
               </div>
             </div>
@@ -221,6 +198,9 @@ export default {
       editCurrentWork: "works/edit",
       showTooltip: "tooltips/show",
     }),
+    handleClickTest(e) {
+      console.log("click", e.target);
+    },
     handleDragOver(e) {
       e.preventDefault();
       this.hovered = true;

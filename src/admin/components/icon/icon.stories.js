@@ -43,6 +43,11 @@ export const iconedView = () => ({
 
 iconedView.story = {
   name: "Доступные иконки",
+  parameters: {
+    backgrounds: [
+      { name: 'grey', value: '#8395a7', default: true },
+    ],
+  },
 };
 
 export const grayscaleView = () => ({

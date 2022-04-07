@@ -10,7 +10,6 @@
                 :currentWork="currentWork"
                 :errorMessage="validation.firstError('newWork.preview')"
                 @upload-image="uploaderImg"
-                @click.native="handleClickTest"
               />
             </div>
             <div class="form-col form-col__review-right">
@@ -198,9 +197,6 @@ export default {
       editCurrentWork: "works/edit",
       showTooltip: "tooltips/show",
     }),
-    handleClickTest(e) {
-      console.log("click", e.target);
-    },
     handleDragOver(e) {
       e.preventDefault();
       this.hovered = true;

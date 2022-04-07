@@ -31,36 +31,43 @@
         </div>
       </label>
     </div>
-    <div class="uploader-container uploader-container--round" v-else>
-      <div class="uploader-container--round-field">
-        <label
-          :style="{ backgroundImage: `url(${coverPreview})` }"
-          :class="[
-            'uploader',
-            { round },
-            { active: coverPreview },
-            { hovered: hovered },
-            { error: !!errorMessage },
-          ]"
-          @dragover="handleDragOver"
-          @dragleave="hovered = false"
-          @drop="handleChange"
-          v-on="$listeners" 
-        >
-          <icon symbol="user" changeSize />
-        </label>
-      </div>
-      <div class="uploader-content uploader-content--round">
-        <div class="uploader-btn">
-          <app-button
-            plain
-            typeAttr="file"
-            @change="handleChange"
-            title="Добавить фото"
-          />
+    <div class="uploader-container uploader-container--type-round" v-else>
+      <div class="uploader-container__round"></div>
+        <div class="uploader-container--round-field">
+          <label
+            :style="{ backgroundImage: `url(${coverPreview})` }"
+            :class="[
+              'uploader',
+              { round },
+              { active: coverPreview },
+              { hovered: hovered },
+              { error: !!errorMessage },
+            ]"
+            @dragover="handleDragOver"
+            @dragleave="hovered = false"
+            @drop="handleChange"
+          >
+            <icon symbol="user" changeSize />
+          </label>
         </div>
-      </div>
+        <div class="uploader-content uploader-content--round">
+          <div class="uploader-btn">
+            <app-button
+              plain
+              typeAttr="file"
+              @change="handleChange"
+              title="Добавить фото"
+            />
+          </div>
+        </div>
     </div>
+    <app-button
+      type="user"
+      plain
+      typeAttr="file"
+      @change="handleChange"
+      title="Добавить фото"
+    />
     <div class="uploader__error-tooltip">
       <tooltip :text="errorMessage"></tooltip>
     </div>
@@ -116,7 +123,7 @@ export default {
       e.preventDefault();
       this.hovered = true;
     },
-    handleChange(event) {
+    handleChange(event) { console.log("handleChange");
       event.preventDefault();
       const file = event.dataTransfer
         ? event.dataTransfer.files[0]

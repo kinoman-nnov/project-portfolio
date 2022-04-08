@@ -43,14 +43,16 @@
   }
 
   &.changeSize {
-    cursor: inherit;
     outline: none;
 
+    &:before {
+      margin-right: 0;
+    }
+
     &:after {
-      content: "";
+      cursor: inherit;
       width: 100px;
       height: 100px;
-      display: block;
     }
   }
 
@@ -70,4 +72,10 @@
       }
     }
   }
+}
+
+.icon-btn-file-input {
+  position: absolute;
+  top: 0;
+  left: -9999px;
 }

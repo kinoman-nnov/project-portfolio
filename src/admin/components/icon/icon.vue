@@ -1,5 +1,6 @@
 <template>
   <button
+    v-if="typeAttr !== 'file'"
     :class="[
       'icon-component',
       iconClass,
@@ -11,6 +12,13 @@
     type="button"
     v-on="$listeners"
   ></button>
+
+  <label
+    v-else-if="typeAttr === 'file'"
+    :class="['icon-component', iconClass, { changeSize: this.changeSize }]"
+  >
+    <input class="icon-btn-file-input" type="file" v-on="$listeners" />
+  </label>
 </template>
 
 <script>
@@ -22,6 +30,7 @@ export default {
       validator: (value) =>
         ["pencil", "cross", "tick", "trash", "user", "key"].includes(value),
     },
+    typeAttr: String,
     changeSize: {
       type: Boolean,
     },

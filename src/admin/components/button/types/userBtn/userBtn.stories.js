@@ -19,7 +19,7 @@ export const fileView = () => ({
 });
 
 fileView.story = {
-  name: "С иконкой пользователя",
+  name: "Тип - файл с иконкой пользователя",
   parameters: {
     backgrounds: [
       { name: 'grey', value: '#8395a7', default: true },

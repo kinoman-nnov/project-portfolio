@@ -9,14 +9,14 @@ export const defaultView = () => ({
   components: { appUploader },
   data() {
     return {
-      currentWork: {
+      currentForm: {
         editmode: false
       },
     }
   },
   template: `
     <app-uploader
-      currentWork="currentWork"
+      currentForm="currentForm"
     />
   `,
 });
@@ -29,7 +29,7 @@ export const roundView = () => ({
   components: { appUploader },
   data() {
     return {
-      currentWork: {
+      currentForm: {
         editmode: false
       },
     }
@@ -37,7 +37,7 @@ export const roundView = () => ({
   template: `
     <app-uploader
       round
-      currentWork="currentWork"
+      currentForm="currentForm"
     />
   `,
 });
@@ -50,14 +50,14 @@ export const activetView = () => ({
   components: { appUploader },
   data() {
     return {
-      currentWork: {
+      currentForm: {
         editmode: false
       },
     }
   },
   template: `
     <app-uploader
-      currentWork="currentWork"
+      currentForm="currentForm"
       errorMessage="Загрузите картинку"
     />
   `,

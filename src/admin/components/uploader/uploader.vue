@@ -47,7 +47,7 @@
           @drop="handleChange"
           
         >
-          <app-button type="user" typeAttr="file" @change="handleClick" />
+          <app-button class="user-btn" type="user" typeAttr="file" @change="handleChange" />
         </label>
       </div>
       <div class="uploader-content uploader-content--round">
@@ -79,7 +79,7 @@ export default {
     tooltip,
   },
   props: {
-    currentWork: Object,
+    currentForm: Object,
     round: Boolean,
     errorMessage: {
       type: String,
@@ -88,15 +88,15 @@ export default {
   },
   computed: {
     coverPreview() {
-      switch (this.currentWork.editmode) {
+      switch (this.currentForm.editmode) {
         case false:
           return this.uploader.preview;
         case true:
           if (!!this.uploader.previewEditmode === false) {
             // форма редактирования открыта
-            return this.currentWork.photo; // возвращается загруженная картинка при нажатии на кнопку Править
+            return this.currentForm.photo; // возвращается загруженная картинка при нажатии на кнопку Править
           } else {
-            return this.currentWork.preview || this.uploader.previewEditmode; // возвращается при повторной загрузке preview
+            return this.currentForm.preview || this.uploader.previewEditmode; // возвращается при повторной загрузке preview
           }
       }
     },
@@ -112,14 +112,11 @@ export default {
     };
   },
   methods: {
-    handleClick(e) {
-      console.log("handleClick",e);
-    },
     handleDragOver(e) {
       e.preventDefault();
       this.hovered = true;
     },
-    handleChange(event) { console.log("handleChange", event);
+    handleChange(event) {
       event.preventDefault();
       const file = event.dataTransfer
         ? event.dataTransfer.files[0]
@@ -129,7 +126,7 @@ export default {
       const promise = this.renderPhoto(file);
       promise.then(
         (value) => {
-          if (this.currentWork.editmode === false) {
+          if (this.currentForm.editmode === false) {
             this.uploader.preview = value;
           } else {
             this.uploader.previewEditmode = value;

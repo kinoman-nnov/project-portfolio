@@ -4,12 +4,13 @@
       <div class="container">
         <div class="page-header">
           <div class="page-title">Блок "Отзывы"</div>
+          {{reviews}}
         </div>
         <div class="form">
           <form-review
             type="review"
             v-if="formIsShown"
-            :currentWork="currentReview"
+            :currentReview="currentReview"
             @cancelForm="formIsShown = false"
             title="Добавление отзыва"
           />
@@ -70,7 +71,7 @@ export default {
       removeReviewAction: "reviews/remove",
       showTooltip: "tooltips/show",
     }),
-    async removeReviews(reviewId) {
+    async removeReview(reviewId) {
       try {
         await this.removeReviewAction(reviewId);
         this.showTooltip({
@@ -85,10 +86,10 @@ export default {
       }
     },
     openForm() {
-      this.formIsShown = true;
       this.currentReview.editmode = false;
+      this.formIsShown = true;
     },
-    editWork(review) {
+    editReview(review) {
       this.formIsShown = true;
       this.currentReview = {
         ...review

@@ -6,7 +6,7 @@
           <div class="form-columns">
             <div class="form-col">
               <app-uploader
-                :currentWork="currentWork"
+                :currentForm="currentWork"
                 :errorMessage="validation.firstError('newWork.preview')"
                 @upload-image="uploaderImg"
               />
@@ -61,7 +61,7 @@
           <div class="form-columns">
             <div class="form-col">
               <app-uploader
-                :currentWork="currentWork"
+                :currentForm="currentWork"
                 @upload-image="uploaderImgCurrentWork"
               />
             </div>

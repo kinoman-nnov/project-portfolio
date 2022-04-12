@@ -14,10 +14,15 @@ export default {
   },
   props: {
     title: String,
+    src: String
   },
   computed: {
     userPic() {
-      return require("../../../images/content/user.jpg").default;
+      if (!!this.src) {
+        return this.src;
+      } else {
+        return require("../../../images/content/user.jpg").default;
+      }
     },
   },
 };

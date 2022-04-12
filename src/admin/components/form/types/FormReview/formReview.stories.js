@@ -14,7 +14,7 @@ export const defaultView = () => ({
   components: { formReview },
   data() {
     return {
-      currentWork: {
+      currentReview: {
         editmode: false
       },
     }
@@ -22,7 +22,7 @@ export const defaultView = () => ({
   template: `
     <form-review
       type="review"
-      :currentWork="currentWork"
+      :currentReview="currentReview"
       @cancelForm="onCancelForm"
       title="Добавление отзыва"
     />

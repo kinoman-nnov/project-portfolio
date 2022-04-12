@@ -4,9 +4,9 @@ export default {
     data: [],
   },
   mutations: {
-    // ADD_WORK(state, newWork) {
-    //   state.data.push(newWork);
-    // },
+    ADD_REVIEW(state, newReview) {
+      state.data.push(newReview);
+    },
     // EDIT_WORK(state, workToEdit) {
     //   state.data = state.data.map(work => {
     //     if (work.id === workToEdit.work.id) { 
@@ -18,29 +18,29 @@ export default {
     SET_REVIEWS(state, reviews) {
       state.data = reviews;
     },
-    // REMOVE_WORK(state, workIdToRemove) {
-    //   state.data = state.data.filter(work => work.id !== workIdToRemove);
-    // }
+    REMOVE_REVIEW(state, reviewIdToRemove) {
+      state.data = state.data.filter(work => work.id !== reviewIdToRemove);
+    }
   },
   actions: {
-    // async add({ commit }, newWork) {
-    //   const formData = new FormData();
+    async add({ commit }, newReview) {
+      const formData = new FormData();
 
-    //   Object.keys(newWork).forEach(item => {
-    //     formData.append(item, newWork[item]);
-    //   });
+      Object.keys(newReview).forEach(item => {
+        formData.append(item, newReview[item]);
+      });
 
-    //   // for (let entry of formData.entries()) { // вывод в консоль данных объекта formData
-    //   //   console.log(entry);
-    //   // }
+      // for (let entry of formData.entries()) { // вывод в консоль данных объекта formData
+      //   console.log(entry);
+      // }
 
-    //   try {
-    //     const { data } = await this.$axios.post('/works', formData);
-    //     commit("ADD_WORK", data);
-    //   } catch (error) {
-    //     throw new Error("Произошла ошибка")
-    //   }
-    // },
+      try {
+        const { data } = await this.$axios.post('/reviews', formData);
+        commit("ADD_REVIEW", data);
+      } catch (error) {
+        throw new Error("Произошла ошибка")
+      }
+    },
     // async edit({ commit }, workToEdit) {
     //   const formData = new FormData();
 
@@ -61,19 +61,19 @@ export default {
     // },
     async fetch({ commit }) {
       try {
-        const { data } = await this.$axios.get('/reviews/{user_id}'); // с сервера в data возвращается массив объектов с отзывами
+        const { data } = await this.$axios.get('/reviews/1'); // с сервера в data возвращается массив объектов с отзывами
         commit("SET_REVIEWS", data);
       } catch (error) {
         throw new Error("Произошла ошибка")
       }
     },
-    // async remove({ commit }, workIdToRemove) {
-    //   try {
-    //     const { data } = await this.$axios.delete(`/works/${workIdToRemove}`);
-    //     commit("REMOVE_WORK", workIdToRemove)
-    //   } catch (error) {
-    //     throw new Error("Произошла ошибка");
-    //   }
-    // },
+    async remove({ commit }, reviewIdToRemove) {
+      try {
+        const { data } = await this.$axios.delete(`/reviews/${reviewIdToRemove}`);
+        commit("REMOVE_REVIEW", reviewIdToRemove)
+      } catch (error) {
+        throw new Error("Произошла ошибка");
+      }
+    },
   }
 }

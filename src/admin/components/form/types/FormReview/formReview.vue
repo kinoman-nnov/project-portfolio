@@ -60,7 +60,7 @@
               <app-uploader
                 round
                 :currentForm="currentReview"
-                @upload-image="uploaderImg"
+                @upload-image="uploaderImgCurrentReview"
               />
             </div>
             <div class="form-col form-col__review-right">
@@ -128,7 +128,7 @@ export default {
     "newReview.text": (value) => {
       return Validator.value(value).required("Не может быть пустым");
     },
-    // "currentReview.preview": (value) => {  // для редактирования работы поле загрузки картинки не будет пустым
+    // "currentReview.preview": (value) => {  // для редактирования отзыва поле загрузки картинки не будет пустым
     //   return Validator.value(value).required("Загрузите картинку");  // поэтому его не надо валидировать
     // },
     "currentReview.author": (value) => {
@@ -170,6 +170,15 @@ export default {
         photo: this.currentReview.photo,
       },
     };
+  },
+  watch: {
+    currentReview(newVal, oldVal) {
+      if (!!newVal === true) { 
+        this.currentReviewValue = {
+          ...newVal,
+        };
+      }
+    }
   },
   methods: {
     ...mapActions({

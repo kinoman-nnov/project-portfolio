@@ -3,6 +3,7 @@
     <div slot="title" class="card-review__header">
       <user
         :title="review.author"
+        :occ="review.occ"
         :src="cover"
         class="review-user-title"
       />

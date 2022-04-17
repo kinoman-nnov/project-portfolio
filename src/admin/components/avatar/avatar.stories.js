@@ -26,7 +26,7 @@ defaultView.story = {
   name: "Стандартный вид"
 }
 
-export const activetView = () => ({
+export const activeView = () => ({
   components: { avatar },
   props: {
     size: {
@@ -42,6 +42,6 @@ export const activetView = () => ({
   `,
 });
 
-activetView.story = {
+activeView.story = {
   name: "С подсвеченной граицей"
 }

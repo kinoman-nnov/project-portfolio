@@ -22,3 +22,22 @@ defaultView.story = {
     ],
   },
 };
+
+export const defaultViewWithOcc = () => ({
+  components: { user },
+  template: `
+    <user
+      title="User Name"
+      occ="Occupation"
+    /> 
+  `
+});
+
+defaultViewWithOcc.story = {
+  name: "С полем - занятость",
+  parameters: {
+    backgrounds: [
+      { name: 'grey', value: '#8395a7', default: true },
+    ],
+  },
+};

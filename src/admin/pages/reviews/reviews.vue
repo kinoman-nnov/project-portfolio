@@ -4,7 +4,6 @@
       <div class="container">
         <div class="page-header">
           <div class="page-title">Блок "Отзывы"</div>
-          {{reviews}}
         </div>
         <div class="form">
           <form-review

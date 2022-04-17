@@ -7,14 +7,14 @@ export default {
     ADD_REVIEW(state, newReview) {
       state.data.push(newReview);
     },
-    // EDIT_WORK(state, workToEdit) {
-    //   state.data = state.data.map(work => {
-    //     if (work.id === workToEdit.work.id) { 
-    //       work = workToEdit.work;
-    //     }
-    //     return work;
-    //   });
-    // },
+    EDIT_REVIEW(state, reviewToEdit) {
+      state.data = state.data.map(review => {
+        if (review.id === reviewToEdit.review.id) { 
+          review = reviewToEdit.review;
+        }
+        return review;
+      });
+    },
     SET_REVIEWS(state, reviews) {
       state.data = reviews;
     },
@@ -41,24 +41,24 @@ export default {
         throw new Error("Произошла ошибка")
       }
     },
-    // async edit({ commit }, workToEdit) {
-    //   const formData = new FormData();
+    async edit({ commit }, reviewToEdit) {
+      const formData = new FormData();
 
-    //   Object.keys(workToEdit).forEach(item => {
-    //     formData.append(item, workToEdit[item]);
-    //   });
+      Object.keys(reviewToEdit).forEach(item => {
+        formData.append(item, reviewToEdit[item]);
+      });
 
-    //   // for (let entry of formData.entries()) { // вывод в консоль данных объекта formData
-    //   //   console.log(entry);
-    //   // }
+      // for (let entry of formData.entries()) { // вывод в консоль данных объекта formData
+      //   console.log(entry);
+      // }
 
-    //   try {
-    //     const { data } = await this.$axios.post(`/works/${workToEdit.id}`, formData);
-    //     commit("EDIT_WORK", data);
-    //   } catch (error) {
-    //     throw new Error("Произошла ошибка")
-    //   }
-    // },
+      try {
+        const { data } = await this.$axios.post(`/reviews/${reviewToEdit.id}`, formData);
+        commit("EDIT_REVIEW", data);
+      } catch (error) {
+        throw new Error("Произошла ошибка")
+      }
+    },
     async fetch({ commit }) {
       try {
         const { data } = await this.$axios.get('/reviews/1'); // с сервера в data возвращается массив объектов с отзывами

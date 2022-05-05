@@ -45,9 +45,13 @@
           @dragover="handleDragOver"
           @dragleave="hovered = false"
           @drop="handleChange"
-          
         >
-          <app-button class="user-btn" type="user" typeAttr="file" @change="handleChange" />
+          <app-button
+            class="user-btn"
+            type="user"
+            typeAttr="file"
+            @change="handleChange"
+          />
         </label>
       </div>
       <div class="uploader-content uploader-content--round">
@@ -94,9 +98,10 @@ export default {
         case true:
           if (!!this.uploader.previewEditmode === false) {
             // форма редактирования открыта
-            return this.currentForm.photo; // возвращается загруженная картинка при нажатии на кнопку Править
-          } else {
-            return this.currentForm.preview || this.uploader.previewEditmode; // возвращается при повторной загрузке preview
+            return this.currentForm.photo; // возвращается загруженная картинка
+            // при нажатии на кнопку Править
+          } else { // возвращается при повторной загрузке preview
+            return this.currentForm.preview || this.uploader.previewEditmode;
           }
       }
     },

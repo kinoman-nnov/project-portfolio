@@ -1,4 +1,4 @@
- import axios from "axios";
+import axios from "axios";
 
 axios.defaults.baseURL = "https://webdev-api.loftschool.com";
 
@@ -8,27 +8,27 @@ if (token) {
   axios.defaults.headers['Authorization'] = `Bearer ${token}`;
 }
 
-axios.interceptors.response.use(function (response) {
-  
+axios.interceptors.response.use(function (response) { // перехватчик axios
+
   // Any status code that lie within the range of 2xx cause this function to trigger
   // Do something with response data
 
   return response;
 
-}, async function (error) { 
+}, async function (error) {
 
-  const originalRequest = error.config;
+  const originalRequest = error.config; // сохранил конфиг запроса с истекшим токеном
 
   if (error.response.status === 401) {
-    
-    const response = await axios.post("/refreshToken");
-    const newToken = response.data.token;
 
-    localStorage.setItem("token", newToken);
-    
-    axios.defaults.headers["Authorization"] = `Bearer ${newToken}`;
-    originalRequest.headers["Authorization"] = `Bearer ${newToken}`;
-    
+    const response = await axios.post("/refreshToken");
+    const refreshedToken = response.data.token;
+
+    localStorage.setItem("token", refreshedToken);
+
+    axios.defaults.headers["Authorization"] = `Bearer ${refreshedToken}`;
+    originalRequest.headers["Authorization"] = `Bearer ${refreshedToken}`;
+
     return axios(originalRequest);
   }
 
@@ -36,7 +36,7 @@ axios.interceptors.response.use(function (response) {
   // Do something with response error
 
   return Promise.reject(error);
-  
+
 });
 
 export default axios;

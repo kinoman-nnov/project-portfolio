@@ -48,22 +48,24 @@ const guard = axios.create({
   baseURL: "https://webdev-api.loftschool.com"
 });
 
-router.beforeEach(async(to, from, next) => {
-  const isPublicRoute = to.matched.some(route => route.meta.public);
-  console.log(isPublicRoute);
-  const isUserLoggedIn = store.getters["user/userIsLoggedIn"];
-  
-  if (isPublicRoute === false && isUserLoggedIn === false) {
+router.beforeEach(async (to, from, next) => { // проверка залогиненного пользовотеля
+
+  const isPublicRoute = to.matched.some(route => route.meta.public); // возвращает true если роут публичный  
+  const isUserLoggedIn = store.getters["user/userIsLoggedIn"]; // возвращает true если пользователь залогинен
+
+  if (isPublicRoute === false && isUserLoggedIn === false) { console.log(isPublicRoute, isUserLoggedIn);
+
     const token = localStorage.getItem("token");
-    
+
     guard.defaults.headers['Authorization'] = `Bearer ${token}`;
 
     try {
-      const response = await guard.get("/user");
+      const response = await guard.get("/user"); 
+      console.log(response);
       store.dispatch("user/login", await response.data.user);
 
       next();
-    } catch (error) {
+    } catch (error) { console.log("ошибка");
       router.replace("/login");
       localStorage.removeItem("token");
     }

@@ -21,7 +21,7 @@ export default {
       localStorage.removeItem("token");
       location.reload(); // перезагрузка страницы, чтобы отправить пустой токен
     },
-    login({ commit }) {
+    login({ commit }, user) {
       commit("SET_USER", user)
     }
   }

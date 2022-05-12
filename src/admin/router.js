@@ -44,7 +44,7 @@ const routes = [
 
 const router = new VueRouter({ routes });
 
-const guard = axios.create({
+const guard = axios.create({ // создал новый экземпляр axios, старый вызовет refreshToken
   baseURL: "https://webdev-api.loftschool.com"
 });
 
@@ -53,19 +53,20 @@ router.beforeEach(async (to, from, next) => { // проверка залогин
   const isPublicRoute = to.matched.some(route => route.meta.public); // возвращает true если роут публичный  
   const isUserLoggedIn = store.getters["user/userIsLoggedIn"]; // возвращает true если пользователь залогинен
 
-  if (isPublicRoute === false && isUserLoggedIn === false) { console.log(isPublicRoute, isUserLoggedIn);
+  // проверка то, что был ли пользователь в системе и его токен истек
+  if (isPublicRoute === false && isUserLoggedIn === false) {
 
+    // проверка токена на действительность
     const token = localStorage.getItem("token");
-
     guard.defaults.headers['Authorization'] = `Bearer ${token}`;
 
     try {
-      const response = await guard.get("/user"); 
-      console.log(response);
+      // пробный запрос на user, который вызовет ошибку при отсутсвии токена
+      const response = await guard.get("/user");
       store.dispatch("user/login", await response.data.user);
 
       next();
-    } catch (error) { console.log("ошибка");
+    } catch (error) {
       router.replace("/login");
       localStorage.removeItem("token");
     }

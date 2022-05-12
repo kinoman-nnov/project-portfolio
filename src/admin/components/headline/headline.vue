@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   props: {
     title: {
@@ -18,6 +20,11 @@ export default {
       default: "Панель администрирования",
     },
   },
+  methods: {
+    ...mapActions({
+      logout: "user/logout"
+    })
+  }
 };
 </script>
 

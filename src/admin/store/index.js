@@ -11,5 +11,11 @@ import reviews from "./modules/reviews";
 import user from "./modules/user";
 
 export default new Vuex.Store({
-  modules: { categories, skills, tooltips, works, reviews, user }
+  modules: {
+    categories,
+    skills,
+    tooltips,
+    works,
+    reviews,
+    user }
 });

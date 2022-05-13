@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import formWork from "../../components/form";
+// import formWork from "../../components/form";
 import card from "../../components/card";
 import workCard from "../../components/workCard";
 import squareBtn from "../../components/button";
@@ -45,7 +45,8 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   components: {
-    formWork,
+    formWork: () => import("../../components/form"),
+    // formWork,
     card,
     workCard,
     squareBtn

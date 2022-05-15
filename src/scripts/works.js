@@ -1,12 +1,17 @@
 import Vue from "vue";
+import axios from "axios";
+import config from "../../env.paths.json";
 
+axios.defaults.baseURL = config.BASE_URL;
+
+// компоненты vue
 const thumbs = {
   props: ["works", "currentWork"],
-  template: "#slider-thumbs"
+  template: "#slider-thumbs",
 };
 
 const btns = {
-  template: "#slider-btns",
+  template: "#slider-btns"
 };
 
 const display = {
@@ -37,7 +42,7 @@ const info = {
   },
   computed: {
     tagsArray() {
-      return this.currentWork.skills.split(",");
+      return this.currentWork.techs.split(",");
     }
   }
 };
@@ -48,7 +53,7 @@ new Vue({
   components: {
     display,
     info
-  }, 
+  },
   data() { // записываем данные в объект data, чтобы обращаться к ним внутри компонента
     return {
       works: [],
@@ -56,9 +61,9 @@ new Vue({
     };
   },
   computed: {
-    currentWork() {
+    currentWork() { console.log(this.works[0]);
       return this.works[0];
-    }
+    },
   },
   watch: {
     currentIndex(value) {
@@ -67,20 +72,27 @@ new Vue({
   },
   methods: {
     makeInfiniteLoopForNdx(index) {
-      const workNumber = this.works.length - 1
-      if (index < 0) this.currentIndex = this.works.length - 1;
+      const workNumber = this.works.length - 1; // номер последней работы
+      if (index < 0) this.currentIndex = workNumber;
       if (index > workNumber) this.currentIndex = 0;
     },
-    requireImagesToArray(data) {
-      return data.map(item => {
-        const requireImages = require(`../images/content/${item.photo}`).default;  // вебпэк генерирует ключ default
-        item.photo = requireImages;
+    // requireImagesToArray(data) { // запросить картинки для вебпак, при работе с сервером указать абсолютный путь
+    //   return data.map(item => {
+    //     const requireImages = require(`../images/content/${item.photo}`).default;  // поле default генерирует вебпэк
+    //     item.photo = requireImages;
+    //     return item;
+    //   });
+    // }, 
+    coverImage(worksArr) {
+      return worksArr.map(item => {
+        const path = `${config.BASE_URL}/${item.photo}`;
+        item.photo = path;
         return item;
       });
     },
     slide(direction) {
       const lastItem = this.works[this.works.length - 1]; // последний элемент в слайдере
-      switch(direction) {
+      switch (direction) {
         case "next":
           this.works.push(this.works[0]);
           this.works.shift();
@@ -92,10 +104,33 @@ new Vue({
           this.currentIndex--;
           break;
       }
+    },
+    handleClick(slideId) { // клик по картинке слайдера
+      // const newWorksArr = [];
+      // let objToReplace = {};
+      // for (let i = 0; i < this.works.length; i++) {
+      //   if (this.works[i].id === slideId) {
+      //     objToReplace = this.works[i];
+      //   } else {
+      //     newWorksArr.push(this.works[i]);
+      //   }
+      // }
+      // newWorksArr.unshift(objToReplace);
+      // this.works = newWorksArr;
+      // console.log(objToReplace.id);
+      // this.currentIndex = objToReplace.id -1;
+
+      console.log(this.currentWork.title);
     }
   },
-  created() { // запросить данные, не обращаясь к реальным дом-узлам
-    const data = require("../data/works.json");
-    this.works = this.requireImagesToArray(data);
+  async created() { // запросить данные, не обращаясь к реальным дом-узлам
+    let { data } = await axios.get("/works/1");
+    data = this.coverImage(data);
+    console.log(data);
+    this.works = data;
+    // this.works.photo = this.coverImage(this.works.photo)
+
+    // const data = require("../data/works.json");
+    // this.works = this.requireImagesToArray(data);
   }
 });

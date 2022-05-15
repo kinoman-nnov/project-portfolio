@@ -30,5 +30,13 @@
     "photo": "user.jpg",
     "link": "//rambler.ru",
     "desc": "this guy was trained by Vue"
+  },
+  {
+    "id": 5,
+    "title": "5 this guy was trained by Vue",
+    "skills": "5 Html, Css, JavaScript",
+    "photo": "user.jpg",
+    "link": "//rambler.ru",
+    "desc": "this guy was trained by Vue"
   }
 ]

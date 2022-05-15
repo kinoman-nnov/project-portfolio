@@ -5,6 +5,7 @@ script(type="text/x-template")#slider-container
       :works="works",
       :currentIndex="currentIndex",
       @slide="slide"
+      @handleClick="handleClick"
     )
     info(
       :currentWork="currentWork"
@@ -17,9 +18,10 @@ script(type="text/x-template")#slider-display
       thumbs(
         :works="reversedWorks"
         :currentWork="currentWork"
+        @handleClick="$emit('handleClick', $event)" 
       )
       btns(
-        @slide="$emit('slide', $event)"
+        @slide="$emit('slide', $event)" 
       )
 
 script(type="text/x-template")#slider-thumbs
@@ -28,18 +30,20 @@ script(type="text/x-template")#slider-thumbs
       v-for="slide in works" :key="slide.id"
       :class="{active: currentWork.id === slide.id}"
     )
-      button.works-slider__thumb-link
+      button(
+        @click="$emit('handleClick', slide.id)" 
+      ).works-slider__thumb-link
         img(:src="slide.photo").works-slider__thumb
 
 script(type="text/x-template")#slider-btns
   .works-slider__buttons
     button(
       type="button"
-      @click="$emit('slide', 'next')"
+      @click="$emit('slide', 'next')" 
       ).works-slider__btn.works-slider__btn_next
     button(
       type="button"
-      @click="$emit('slide', 'prev')"
+      @click="$emit('slide', 'prev')" 
       ).works-slider__btn.works-slider__btn_prev
 
 script(type="text/x-template")#slider-info
@@ -48,13 +52,13 @@ script(type="text/x-template")#slider-info
       tags(
         :tags="tagsArray"
       )
-    .works-slider__title {{currentWork.title}}
+    .works-slider__title {{ currentWork.title }}
     .works-slider__desc
-      p {{currentWork.desc}}
+      p {{ currentWork.description }}
     .works-slider__link 
       a(href="currentWork.link").iconed-link View the website
 
 script(type="text/x-template")#slider-tags
   ul.works-slider__tags(v-if="tags.length")
-    li.works-slider__tag-item(v-for="tag in tags")
-      .tag {{tag}}
+    li.works-slider__tag-item(v-for="tag in tags" :key="tag.id")
+      .tag {{ tag }}

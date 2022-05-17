@@ -61,7 +61,7 @@ new Vue({
     };
   },
   computed: {
-    currentWork() { console.log(this.works[0]);
+    currentWork() {
       return this.works[0];
     },
   },
@@ -106,27 +106,30 @@ new Vue({
       }
     },
     handleClick(slideId) { // клик по картинке слайдера
-      // const newWorksArr = [];
-      // let objToReplace = {};
-      // for (let i = 0; i < this.works.length; i++) {
-      //   if (this.works[i].id === slideId) {
-      //     objToReplace = this.works[i];
-      //   } else {
-      //     newWorksArr.push(this.works[i]);
+      let newWorks = this.works;
+      let slice = [];
+
+      // for (let i = 0; i < newWorks.length; i++) {
+      //   if (newWorks[i].id === slideId) {
+      //     slice = newWorks.splice(1,i);
+          
+      //     continue;
       //   }
       // }
+      
+      
+      // const newWorksArr = [];
+      // let objToReplace = {};
       // newWorksArr.unshift(objToReplace);
       // this.works = newWorksArr;
       // console.log(objToReplace.id);
       // this.currentIndex = objToReplace.id -1;
-
-      console.log(this.currentWork.title);
     }
   },
   async created() { // запросить данные, не обращаясь к реальным дом-узлам
     let { data } = await axios.get("/works/1");
     data = this.coverImage(data);
-    console.log(data);
+
     this.works = data;
     // this.works.photo = this.coverImage(this.works.photo)
 

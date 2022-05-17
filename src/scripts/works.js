@@ -71,12 +71,12 @@ new Vue({
     }
   },
   methods: {
-    makeInfiniteLoopForNdx(index) {
+    makeInfiniteLoopForNdx(index) { console.log(index);
       const workNumber = this.works.length - 1; // номер последней работы
       if (index < 0) this.currentIndex = workNumber;
       if (index > workNumber) this.currentIndex = 0;
     },
-    // requireImagesToArray(data) { // запросить картинки для вебпак, при работе с сервером указать абсолютный путь
+    // requireImagesToArray(data) { // запросить картинки для вебпак из json, при работе с сервером указать абсолютный путь
     //   return data.map(item => {
     //     const requireImages = require(`../images/content/${item.photo}`).default;  // поле default генерирует вебпэк
     //     item.photo = requireImages;
@@ -105,25 +105,18 @@ new Vue({
           break;
       }
     },
-    handleClick(slideId) { // клик по картинке слайдера
-      let newWorks = this.works;
+    handleClick(slideId) { // клик по slider-thumbs
       let slice = [];
 
-      // for (let i = 0; i < newWorks.length; i++) {
-      //   if (newWorks[i].id === slideId) {
-      //     slice = newWorks.splice(1,i);
-          
-      //     continue;
-      //   }
-      // }
-      
-      
-      // const newWorksArr = [];
-      // let objToReplace = {};
-      // newWorksArr.unshift(objToReplace);
-      // this.works = newWorksArr;
-      // console.log(objToReplace.id);
-      // this.currentIndex = objToReplace.id -1;
+      for (let i = 0; i < this.works.length; i++) {
+        if (this.works[i].id === slideId) {
+          slice = this.works.splice(0,i); // вырезать часть массива
+          // this.currentIndex += i;
+          // console.log("i", i, "currentIndex", this.currentIndex);
+          break;
+        }
+      }
+      this.works.push(...slice) // вставить в конец массива
     }
   },
   async created() { // запросить данные, не обращаясь к реальным дом-узлам

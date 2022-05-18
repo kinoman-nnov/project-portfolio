@@ -71,10 +71,11 @@ new Vue({
     }
   },
   methods: {
-    makeInfiniteLoopForNdx(index) { console.log(index);
-      const workNumber = this.works.length - 1; // номер последней работы
-      if (index < 0) this.currentIndex = workNumber;
-      if (index > workNumber) this.currentIndex = 0;
+    makeInfiniteLoopForNdx(index) {
+      const lastNumber = this.works.length - 1; // номер последней работы
+      const delta = index - lastNumber;
+      if (index < 0) this.currentIndex = lastNumber; // сбросить индекс к максимальному в массиве
+      if (delta > 0) this.currentIndex = delta - 1; // сбросить индекс к Дельте в массиве
     },
     // requireImagesToArray(data) { // запросить картинки для вебпак из json, при работе с сервером указать абсолютный путь
     //   return data.map(item => {
@@ -111,8 +112,7 @@ new Vue({
       for (let i = 0; i < this.works.length; i++) {
         if (this.works[i].id === slideId) {
           slice = this.works.splice(0,i); // вырезать часть массива
-          // this.currentIndex += i;
-          // console.log("i", i, "currentIndex", this.currentIndex);
+          this.currentIndex += i;
           break;
         }
       }
@@ -124,7 +124,6 @@ new Vue({
     data = this.coverImage(data);
 
     this.works = data;
-    // this.works.photo = this.coverImage(this.works.photo)
 
     // const data = require("../data/works.json");
     // this.works = this.requireImagesToArray(data);

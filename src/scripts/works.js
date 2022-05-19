@@ -48,13 +48,13 @@ const info = {
 };
 
 new Vue({
-  el: "#preview-component",
+  el: "#works-component",
   template: "#slider-container",
   components: {
     display,
     info
   },
-  data() { // записываем данные в объект data, чтобы обращаться к ним внутри компонента
+  data() {
     return {
       works: [],
       currentIndex: 0
@@ -84,7 +84,7 @@ new Vue({
     //     return item;
     //   });
     // }, 
-    coverImage(worksArr) {
+    pathToImages(worksArr) {
       return worksArr.map(item => {
         const path = `${config.BASE_URL}/${item.photo}`;
         item.photo = path;
@@ -121,7 +121,7 @@ new Vue({
   },
   async created() { // запросить данные, не обращаясь к реальным дом-узлам
     let { data } = await axios.get("/works/1");
-    data = this.coverImage(data);
+    data = this.pathToImages(data);
 
     this.works = data;
 

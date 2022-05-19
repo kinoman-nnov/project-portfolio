@@ -22,24 +22,25 @@ block content
                   li.socials__item
                     a(href=`${item === 'envelope' ? 'mailto:myMale@yandex.ru' : '#'}`, target="_blank").socials__link
                       +icon(item, 'socials__icon')
-          .header__modal
-            button.hamburger.hamburger--vortex
-              span.hamburger-box
-                span.hamburger-inner
-            .header__menu.header__menu-modal
-              nav.menu
-                ul.menu__list.menu__list--modal
-                  - var menuModalLinks = [{name:"Main", data:"main"}, {name:"About me", data:"about"}, {name:"Skills", data:"skills"}, {name:"Works", data:"works"}, {name:"Reviews", data:"reviews"}];
-                  each item in menuModalLinks
-                    li.menu__item.menu__item--modal
-                      a(href="#").menu__link.menu__link--modal&attributes({'data-scroll-to':`${item.data}`}) #{item.name}
-            .header__buttons.header__buttons-modal
-              ul.socials
-                - var socials = ['insta', 'vk', 'github', 'envelope'];
-                each item in socials
-                  li.socials__item
-                    a(href=`${item === 'envelope' ? 'mailto:myMale@yandex.ru' : '#'}`, target="_blank").socials__link
-                      +icon(item, 'socials__icon')
+          #popup-menu
+          //- .header__modal
+          //-   button.hamburger.hamburger--vortex
+          //-     span.hamburger-box
+          //-       span.hamburger-inner
+          //-   .header__menu.header__menu-modal
+          //-     nav.menu
+          //-       ul.menu__list.menu__list--modal
+          //-         - var menuModalLinks = [{name:"Main", data:"main"}, {name:"About me", data:"about"}, {name:"Skills", data:"skills"}, {name:"Works", data:"works"}, {name:"Reviews", data:"reviews"}];
+          //-         each item in menuModalLinks
+          //-           li.menu__item.menu__item--modal
+          //-             a(href="#").menu__link.menu__link--modal&attributes({'data-scroll-to':`${item.data}`}) #{item.name}
+          //-   .header__buttons.header__buttons-modal
+          //-     ul.socials
+          //-       - var socials = ['insta', 'vk', 'github', 'envelope'];
+          //-       each item in socials
+          //-         li.socials__item
+          //-           a(href=`${item === 'envelope' ? 'mailto:myMale@yandex.ru' : '#'}`, target="_blank").socials__link
+          //-             +icon(item, 'socials__icon')
 
         .hero__content
           .userinfo
@@ -121,7 +122,7 @@ block content
       .container.works__container
         .section-title.works__section-title My works
         .works__content
-          #preview-component
+          #works-component
           //- .works-slider
           //-   .works-slider__pics(data-slide="1")
           //-     .works-slider__pics-content

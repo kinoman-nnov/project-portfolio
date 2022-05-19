@@ -9,12 +9,12 @@ script(type="text/x-template")#reviews-slider-container
       swiper-slide(v-for="review in reviews", :key="review.id")
         .quote
           .quote__text
-            p {{review.text}}
+            p {{ review.text }}
           .quote__user
             .user-min
               .user-min__avatar
                 .user-min__pic-wrapper
-                  img(:src="review.pic").user-min__avatar-pic
+                  img(:src="review.photo").user-min__avatar-pic
               .user-min__info
-                .user-min__name {{review.name}}
-                .user-min__occ {{review.occ}}
+                .user-min__name {{ review.author }}
+                .user-min__occ {{ review.occ }}

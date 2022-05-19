@@ -17,7 +17,8 @@ new Vue({
   },
   data() {
     return {
-      changed: false
+      modalIsShown: false,
+      // changed: false
     }
   },
   methods: {
@@ -25,8 +26,8 @@ new Vue({
       this.changed = !this.changed;
       
     },
-    openModal() {
-      console.log("click");
+    handleChange() {
+      this.modalIsShown = !this.modalIsShown;
     }
   }
 });

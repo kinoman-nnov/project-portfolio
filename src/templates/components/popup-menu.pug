@@ -1,13 +1,14 @@
 script(type="text/x-template")#popup-menu-container
   .popup-container
     btn(
-      @open-modal="openModal"
+      :class="{ 'is-active': modalIsShown }"
+      @handleChange="handleChange"
     )
     modal   
 
 script(type="text/x-template")#burger-btn
   button(
-    @click="$emit('open-modal')"
+    @click="$emit('handleChange')"
   ).hamburger.hamburger--vortex
     span.hamburger-box
       span.hamburger-inner

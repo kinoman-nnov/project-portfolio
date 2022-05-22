@@ -1,35 +1,24 @@
 import Vue from "vue";
 
-const btn = {
-  template: "#burger-btn"
-}
-
-const modal = {
-  template: "#modal-menu"
-}
-
 new Vue({
   el: "#popup-menu",
-  template: "#popup-menu-container",
-  components: {
-    modal,
-    btn
-  },
+  template: "#modal-menu",
   data() {
     return {
       modalIsShown: false,
       // changed: false
     }
   },
-  methods: {
-    changedClass() {
-      this.changed = !this.changed;
-      
-    },
-    handleChange() {
-      this.modalIsShown = !this.modalIsShown;
-    }
-  }
+  // methods: {
+  //   changedClass() {
+  //     const className = "modal-open"; // запретить скролл на body, когда модалка открыта
+  //     document.body.classList.toggle(className);
+  //   },
+  //   handleChange() {
+  //     this.modalIsShown = !this.modalIsShown;
+  //     this.changedClass();
+  //   }
+  // }
 });
 
 // const body = document.querySelector("body");
@@ -44,7 +33,7 @@ new Vue({
 // const bg = document.querySelector(".welcome-section");
 
 // function toggleMenu() {
-//   body.classList.toggle('open-modal');
+//   body.classList.toggle('modal-open');
 //   button.classList.toggle('is-active');
 //   menu.classList.toggle('popup-menu--open');
 //   modalMenu.classList.toggle('header__menu-modal--open');

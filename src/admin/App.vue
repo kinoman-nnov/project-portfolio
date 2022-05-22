@@ -65,7 +65,6 @@ export default {
   font-weight: bold;
   color: $text-color;
 }
-
 </style>
 
 <style lang="postcss" scoped src="./app.pcss"></style>

@@ -6,41 +6,26 @@ block content
       .container.hero__container
         header.header
           .header__logo
-            a.logo(href="") AY
-          .header-container
-            .header__menu 
-              nav.menu
-                ul.menu__list
-                  - var menuLinks = [{name:"About me", data:"about"}, {name:"Skills", data:"skills"}, {name:"Works", data:"works"}, {name:"Reviews", data:"reviews"}];
-                  each item in menuLinks 
-                    li.menu__item
-                      a(href="#").menu__link&attributes({'data-scroll-to':`${item.data}`}) #{item.name}
-            .header__buttons
-              ul.socials
-                - var socials = ['insta', 'vk', 'github', 'envelope'];
-                each item in socials
-                  li.socials__item
-                    a(href=`${item === 'envelope' ? 'mailto:myMale@yandex.ru' : '#'}`, target="_blank").socials__link
-                      +icon(item, 'socials__icon')
-          #popup-menu
-          //- .header__modal
-          //-   button.hamburger.hamburger--vortex
-          //-     span.hamburger-box
-          //-       span.hamburger-inner
-          //-   .header__menu.header__menu-modal
+            a.logo(href="#") AY
+          #header-component
+          //- .header-container
+          //-   .header__menu 
           //-     nav.menu
-          //-       ul.menu__list.menu__list--modal
-          //-         - var menuModalLinks = [{name:"Main", data:"main"}, {name:"About me", data:"about"}, {name:"Skills", data:"skills"}, {name:"Works", data:"works"}, {name:"Reviews", data:"reviews"}];
-          //-         each item in menuModalLinks
-          //-           li.menu__item.menu__item--modal
-          //-             a(href="#").menu__link.menu__link--modal&attributes({'data-scroll-to':`${item.data}`}) #{item.name}
-          //-   .header__buttons.header__buttons-modal
+          //-       ul.menu__list
+          //-         - var menuLinks = [{name:"About me", data:"about"}, {name:"Skills", data:"skills"}, {name:"Works", data:"works"}, {name:"Reviews", data:"reviews"}];
+          //-         each item in menuLinks 
+          //-           li.menu__item
+          //-             a(href="#").menu__link&attributes({'data-scroll-to':`${item.data}`}) #{item.name}
+          //-   .header__buttons
           //-     ul.socials
           //-       - var socials = ['insta', 'vk', 'github', 'envelope'];
           //-       each item in socials
           //-         li.socials__item
           //-           a(href=`${item === 'envelope' ? 'mailto:myMale@yandex.ru' : '#'}`, target="_blank").socials__link
           //-             +icon(item, 'socials__icon')
+          //-   button.header__hamburger-btn.hamburger.hamburger--vortex
+          //-     span.hamburger-box
+          //-       span.hamburger-inner
 
         .hero__content
           .userinfo
@@ -187,6 +172,7 @@ block content
       .footer__data
         nav.menu.menu--color-white.footer__data-menu
           ul.menu__list
+            - var menuLinks = [{name:"About me", data:"about"}, {name:"Skills", data:"skills"}, {name:"Works", data:"works"}, {name:"Reviews", data:"reviews"}];
             each item in menuLinks 
               li.menu__item
                 a(href="#").menu__link&attributes({'data-scroll-to':`${item.data}`}) #{item.name}
@@ -196,6 +182,7 @@ block content
               p Этот сайт я сделал в рамках обучения в Школе онлайн образования Loftschool
             .footer__data-socials
               ul.socials.socials--round-borders
+                - var socials = ['insta', 'vk', 'github', 'envelope'];
                 each item in socials
                   li.socials__item
                     a(href="#").socials__link

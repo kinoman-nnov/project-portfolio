@@ -1,0 +1,5 @@
+- var socials = ['insta', 'vk', 'github', 'envelope'];
+each item in socials
+  li.socials__item
+    a(href=`${item === 'envelope' ? 'mailto:myMale@yandex.ru' : '#'}`, target="_blank").socials__link
+      +icon(item, 'socials__icon')

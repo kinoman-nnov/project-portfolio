@@ -1,11 +1,14 @@
 import Vue from "vue";
 
 new Vue({
-  el: "#popup-menu",
+  el: "#popup-component",
   template: "#modal-menu",
-  data() {
+  props: {
+    modalIsShown: Boolean
+  },
+  data() { console.log(this.modalIsShown);
     return {
-      modalIsShown: false,
+      // modalIsShown: false,
       // changed: false
     }
   },

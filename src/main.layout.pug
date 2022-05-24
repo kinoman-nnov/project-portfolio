@@ -9,9 +9,9 @@ html(lang="en")
     link(rel="shortcut icon" href="#")
     title Portfolio | main page
   body
-    .wrapper
-      .maincontent
-        block content
-    #popup-menu
+    #x-wrapper
 
+    //- подключение шаблона обертки
+    include ./x-wrapper.pug
+    //- подключение компонентов шаблонов
     include ./templates/entry.pug

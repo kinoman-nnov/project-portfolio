@@ -14,7 +14,9 @@
 //-       span.hamburger-inner
 
 script(type="text/x-template")#modal-menu
-  .popup__container
+  .popup__container(
+    v-if="modalIsShown"
+  )
     .popup__menu-sidebar
       .popup__menu
         nav.menu

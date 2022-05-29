@@ -35,4 +35,8 @@ export const defaultView = () => ({
     /> 
   `,
   methods
-})
+});
+
+defaultView.story = {
+  name: "Стандартный вид",
+};

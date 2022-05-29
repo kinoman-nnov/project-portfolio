@@ -19,6 +19,7 @@ export default {
     square: () => import("./types/squareBtn"),
     iconed: () => import("./types/iconedBtn"),
     round: () => import("./types/roundBtn"),
-  }
+    user: () => import("./types/userBtn"),
+  },
 }
 </script>

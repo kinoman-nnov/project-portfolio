@@ -25,9 +25,6 @@
 <script>
 import input from "../input";
 import button from "../button";
-import Vue from 'vue';
-import SimpleVueValidation from 'simple-vue-validator';
-Vue.use(SimpleVueValidation);
 import { Validator, mixin as ValidatorMixin } from "simple-vue-validator";
 
 export default {

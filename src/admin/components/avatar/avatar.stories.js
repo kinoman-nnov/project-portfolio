@@ -15,10 +15,33 @@ export const defaultView = () => ({
     }
   },
   template: `
-    <avatar :size="size" src="https://picsum.photos/300/300" />
+    <avatar 
+      :size="size"
+      src="https://picsum.photos/300/300" 
+    />
   `,
 });
 
 defaultView.story = {
   name: "Стандартный вид"
+}
+
+export const activeView = () => ({
+  components: { avatar },
+  props: {
+    size: {
+      default: text("size", "3.1")
+    }
+  },
+  template: `
+    <avatar 
+      :size="size"
+      src="https://picsum.photos/300/300"
+      active
+    />
+  `,
+});
+
+activeView.story = {
+  name: "С подсвеченной граицей"
 }

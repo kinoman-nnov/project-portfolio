@@ -33,8 +33,8 @@
     display: block;
   }
 
-  @each $icon, $fill in (pencil, cross, tick, trash),
-  (#3942cc, #c73033, #00d70a, #414c62) {
+  @each $icon, $fill in (pencil, cross, tick, trash, user, key),
+  (#3942cc, #c73033, #00d70a, #414c62, #fff, #414c63) {
     &.is-$(icon) {
       &:after {
         background: svg-load("$(icon).svg", fill=$(fill)) center center / contain no-repeat;
@@ -42,10 +42,23 @@
     }
   }
 
-  &.grayscale {
+  &.changeSize {
+    outline: none;
 
-    @each $icon, $fill in (pencil, cross, tick, trash),
-    (#3942cc, #c73033, #00d70a, #414c62) {
+    &:before {
+      margin-right: 0;
+    }
+
+    &:after {
+      cursor: inherit;
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  &.grayscale {
+    @each $icon, $fill in (pencil, cross, tick, trash, user, key),
+    (#3942cc, #c73033, #00d70a, #414c62, #414C63, #414c63) {
       &.is-$(icon) {
         &:after {
           background: svg-load("$(icon).svg", fill=#a0a5b1) center center / contain no-repeat;
@@ -59,4 +72,10 @@
       }
     }
   }
+}
+
+.icon-btn-file-input {
+  position: absolute;
+  top: 0;
+  left: -9999px;
 }

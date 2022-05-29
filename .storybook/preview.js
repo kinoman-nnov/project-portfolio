@@ -1,5 +1,8 @@
 import { addParameters } from "@storybook/vue";
 import "./main.pcss";
+import Vue from 'vue';
+import SimpleVueValidation from 'simple-vue-validator';
+Vue.use(SimpleVueValidation);
 
 addParameters({
   backgrounds: [

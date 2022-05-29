@@ -9,7 +9,7 @@ export const defaultView = () => ({
   components: { tagsList },
   data() {
     return {
-      tags: "css, html, javascript"
+      tags: "css, html, javascript, vue.js"
     }
   },
   template: `

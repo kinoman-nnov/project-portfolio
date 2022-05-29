@@ -1,20 +1,65 @@
-.popup-menu--open {
-  @include tablets{
+.popup__container {  
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+
+  background: url('~images/bg/budda.jpg') right 28% top 28% no-repeat;
+  background-size: 400%;
+
+  @include tablets {
+    display: flex;
+  }
+}
+
+.popup__menu {
+  &-sidebar {
+    @include tablets {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 44%;
+      height: 100vh;
+      padding: 0px 60px;
+      background: #fff;
+      position: fixed;
+      transition: 0.3s;
+      animation: move 0.7s forwards;
+    }
+    
+    @include phones {
+      width: 100%;
+    }  
+  }
+  margin-bottom: 140px;
+}
+
+.menu__list {  
+  &--popup {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;  
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 21px;
+  }
+}
+
+.menu__item {
+  &--popup {
+    margin-bottom: 28px;
+    margin-right: 0;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.popup__socials {
   display: flex;
   justify-content: space-between;
-  width: 43%;
-  height: 100vh;
-  text-align: center;
-  padding: 52px 20px 240px 20px;
-  background: #fff;
-  position: fixed;
-  transition: 0.3s;
-  animation: move 0.7s forwards;
-  }
-
-  @include phones {
-    width: 100%;
-  }
 }
 
 @include tablets {

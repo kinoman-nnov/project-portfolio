@@ -1,4 +1,8 @@
 import Vue from "vue";
+import axios from "axios";
+import config from "../../env.paths.json";
+
+axios.defaults.baseURL = config.BASE_URL;
 
 const skillsItem = {
   props: ["skill"],
@@ -39,7 +43,9 @@ new Vue({
       skills: []
     };
   },
-  created() { // запросить данные, не обращаясь к реальным дом-узлам
-    this.skills = require("../data/skills.json");
+  async created() { // запросить данные, не обращаясь к реальным дом-узлам
+    const { data } = await axios.get("/categories/1");
+    this.skills = data;
+    // this.skills = require("../data/skills.json"); // запросить skills из файла json
   },
 });

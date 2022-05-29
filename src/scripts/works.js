@@ -1,12 +1,17 @@
 import Vue from "vue";
+import axios from "axios";
+import config from "../../env.paths.json";
 
+axios.defaults.baseURL = config.BASE_URL;
+
+// компоненты vue
 const thumbs = {
   props: ["works", "currentWork"],
-  template: "#slider-thumbs"
+  template: "#slider-thumbs",
 };
 
 const btns = {
-  template: "#slider-btns",
+  template: "#slider-btns"
 };
 
 const display = {
@@ -37,19 +42,19 @@ const info = {
   },
   computed: {
     tagsArray() {
-      return this.currentWork.skills.split(",");
+      return this.currentWork.techs.split(",");
     }
   }
 };
 
 new Vue({
-  el: "#preview-component",
+  el: "#works-component",
   template: "#slider-container",
   components: {
     display,
     info
-  }, 
-  data() { // записываем данные в объект data, чтобы обращаться к ним внутри компонента
+  },
+  data() {
     return {
       works: [],
       currentIndex: 0
@@ -58,7 +63,7 @@ new Vue({
   computed: {
     currentWork() {
       return this.works[0];
-    }
+    },
   },
   watch: {
     currentIndex(value) {
@@ -67,20 +72,28 @@ new Vue({
   },
   methods: {
     makeInfiniteLoopForNdx(index) {
-      const workNumber = this.works.length - 1
-      if (index < 0) this.currentIndex = this.works.length - 1;
-      if (index > workNumber) this.currentIndex = 0;
+      const lastNumber = this.works.length - 1; // номер последней работы
+      const delta = index - lastNumber;
+      if (index < 0) this.currentIndex = lastNumber; // сбросить индекс к максимальному в массиве
+      if (delta > 0) this.currentIndex = delta - 1; // сбросить индекс к Дельте в массиве
     },
-    requireImagesToArray(data) {
-      return data.map(item => {
-        const requireImages = require(`../images/content/${item.photo}`).default;  // вебпэк генерирует ключ default
-        item.photo = requireImages;
+    // requireImagesToArray(data) { // запросить картинки для вебпак из json, при работе с сервером указать абсолютный путь
+    //   return data.map(item => {
+    //     const requireImages = require(`../images/content/${item.photo}`).default;  // поле default генерирует вебпэк
+    //     item.photo = requireImages;
+    //     return item;
+    //   });
+    // }, 
+    pathToImages(worksArr) {
+      return worksArr.map(item => {
+        const path = `${config.BASE_URL}/${item.photo}`;
+        item.photo = path;
         return item;
       });
     },
     slide(direction) {
       const lastItem = this.works[this.works.length - 1]; // последний элемент в слайдере
-      switch(direction) {
+      switch (direction) {
         case "next":
           this.works.push(this.works[0]);
           this.works.shift();
@@ -92,10 +105,27 @@ new Vue({
           this.currentIndex--;
           break;
       }
+    },
+    handleClick(slideId) { // клик по slider-thumbs
+      let slice = [];
+
+      for (let i = 0; i < this.works.length; i++) {
+        if (this.works[i].id === slideId) {
+          slice = this.works.splice(0,i); // вырезать часть массива
+          this.currentIndex += i;
+          break;
+        }
+      }
+      this.works.push(...slice) // вставить в конец массива
     }
   },
-  created() { // запросить данные, не обращаясь к реальным дом-узлам
-    const data = require("../data/works.json");
-    this.works = this.requireImagesToArray(data);
+  async created() { // запросить данные, не обращаясь к реальным дом-узлам
+    let { data } = await axios.get("/works/1");
+    data = this.pathToImages(data);
+
+    this.works = data;
+
+    // const data = require("../data/works.json");
+    // this.works = this.requireImagesToArray(data);
   }
 });

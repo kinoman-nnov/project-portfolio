@@ -39,13 +39,13 @@
 
 <script>
 import button from "../../components/button";
-import category from "../../components/category";
+// import category from "../../components/category";
 import { mapActions, mapState } from "vuex";
 
 export default {
   components: {
     iconedButton: button,
-    category,
+    category: () => import("../../components/category"),
   },
   data() {
     return {

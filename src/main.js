@@ -1,9 +1,18 @@
+import Vue from 'vue';
+import mainpageApp from './mainpage-app.vue';
 import "./styles/main.pcss";
+
 if (process.env.NODE_ENV === "development") {
   require("file-loader!./index.pug");
 }
 
-import "./scripts/skills";
-import "./scripts/works";
-import "./scripts/reviews";
-import "./scripts/burger-menu";
+// import "./scripts/header";
+// import "./scripts/skills";
+// import "./scripts/works";
+// import "./scripts/reviews";
+// import "./scripts/popup-menu";
+
+new Vue({
+  el: "#mainpage-app",
+  render: h => h(mainpageApp)
+});

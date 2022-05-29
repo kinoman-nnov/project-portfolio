@@ -6,8 +6,9 @@
           <div class="page-title">Блок "Работы"</div>
         </div>
         <div class="form">
-          <form-component
+          <form-work
             v-if="formIsShown"
+            title="Добавление работы"
             :currentWork="currentWork"
             @cancelForm="formIsShown = false"
           />
@@ -25,8 +26,8 @@
           <li class="item item-works" v-for="work in works" :key="work.id">
             <work-card
               :work="work"
-              @remove="removeWork(work.id)"
-              @editWork="editWork"
+              @remove-work="removeWork"
+              @edit-work="editWork"
             />
           </li>
         </ul>
@@ -36,7 +37,7 @@
 </template>
 
 <script>
-import form from "../../components/form";
+// import formWork from "../../components/form";
 import card from "../../components/card";
 import workCard from "../../components/workCard";
 import squareBtn from "../../components/button";
@@ -44,7 +45,8 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   components: {
-    formComponent: form,
+    formWork: () => import("../../components/form"),
+    // formWork,
     card,
     workCard,
     squareBtn
@@ -64,7 +66,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchWorks: "works/fetch",
+      fetchWorksAction: "works/fetch",
       removeWorkAction: "works/remove",
       showTooltip: "tooltips/show",
     }),
@@ -83,8 +85,8 @@ export default {
       }
     },
     openForm() {
-      this.formIsShown = true;
       this.currentWork.editmode = false;
+      this.formIsShown = true;
     },
     editWork(work) {
       this.formIsShown = true;
@@ -94,7 +96,7 @@ export default {
     }
   },
   mounted() {
-    this.fetchWorks();
+    this.fetchWorksAction();
   }
 };
 </script>

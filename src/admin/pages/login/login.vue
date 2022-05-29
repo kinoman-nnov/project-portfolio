@@ -55,7 +55,8 @@ export default {
   components: { appInput, appButton },
   methods: {
     ...mapActions({
-      showTooltip: "tooltips/show"
+      showTooltip: "tooltips/show",
+      login: "user/login"
     }),
     async handleSubmit() {
       if ((await this.$validate()) === false) return;
@@ -64,11 +65,17 @@ export default {
 
       try {
         const response = await $axios.post("/login", this.user);
-        console.log(response);
+        
         const token = response.data.token;
+
         localStorage.setItem("token", token);
         $axios.defaults.headers["Authorization"] = `Bearer ${token}`;
+
+        const userResponse = await $axios.get("/user");
+        this.login(userResponse.data.user); // добавить в store залогиненного пользователя
+
         this.$router.replace("/");
+        
       } catch (error) {
         this.showTooltip({
           text: error.response.data.error || "Произошла ошибка",

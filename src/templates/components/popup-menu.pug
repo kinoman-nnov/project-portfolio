@@ -1,0 +1,32 @@
+//- script(type="text/x-template")#popup-menu-container
+  //- .popup-container
+    //- btn(
+    //-   :class="{ 'is-active': modalIsShown }"
+    //-   @handleChange="handleChange"
+    //- )
+    modal   
+
+//- script(type="text/x-template")#burger-btn
+//-   button(
+//-     @click="$emit('handleChange')"
+//-   ).hamburger.hamburger--vortex
+//-     span.hamburger-box
+//-       span.hamburger-inner
+
+script(type="text/x-template")#modal-menu
+  .popup__container
+    .popup__menu-sidebar
+      .popup__menu
+        nav.menu
+          ul.menu__list.menu__list--popup
+            - var menuModalLinks = [{name:"Main", data:"main"}, {name:"About me", data:"about"}, {name:"Skills", data:"skills"}, {name:"Works", data:"works"}, {name:"Reviews", data:"reviews"}];
+            each item in menuModalLinks
+              li.menu__item.menu__item--popup
+                a(href="#").menu__link.menu__link--modal&attributes({'data-scroll-to':`${item.data}`}) #{item.name}
+      .popup__buttons
+        ul.socials.popup__socials
+          - var socials = ['insta', 'vk', 'github', 'envelope'];
+          each item in socials
+            li.socials__item
+              a(href=`${item === 'envelope' ? 'mailto:myMale@yandex.ru' : '#'}`, target="_blank").socials__link
+                +icon(item, 'socials__icon')

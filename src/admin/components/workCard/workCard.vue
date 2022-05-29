@@ -15,7 +15,7 @@
         <a :href="work.link" class="link link-workCard">{{ work.link }}</a>
         <div class="btns">
           <icon symbol="pencil" title="Править" @click="editWork"> </icon>
-          <icon symbol="trash" title="Удалить" @click="$emit('remove')"> </icon>
+          <icon symbol="trash" title="Удалить" @click="$emit('remove-work', work.id)"> </icon>
         </div>
       </div>
     </div>
@@ -65,12 +65,12 @@ export default {
         description,
         link,
         techs,
-        preview: "",
+        preview: this.cover,
         photo: this.cover,
         editmode: true,
       };
 
-      this.$emit("editWork", this.currentWork);
+      this.$emit("edit-work", this.currentWork);
     },
   },
 };

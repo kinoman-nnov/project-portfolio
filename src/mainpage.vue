@@ -6,7 +6,6 @@
           header.header
             .header__logo
               a.logo(href="#") AY
-            //- #header-component
             .header-container
               .header__menu
                 menu-comp(
@@ -15,10 +14,11 @@
               .header__buttons
                 socials-comp(
                   :socials="socials"
-                )  
-              button.header__hamburger-btn.hamburger.hamburger--vortex
-                span.hamburger-box
-                  span.hamburger-inner
+                )
+              hamburger-btn-comp 
+              //- button.header__hamburger-btn.hamburger.hamburger--vortex
+              //-   span.hamburger-box
+              //-     span.hamburger-inner
 
           .hero__content
             .userinfo
@@ -201,32 +201,27 @@
 </template>
 
 <script>
+import images from "./components/images-app";
+import hamburger from "./components/hamburger-btn"  
 import menu from "./components/menu";
 import socials from "./components/socials";
-import images from "./components/images-app";
 import skills from "./components/skills";
 import works from "./components/works";
 import reviewsComponent from "./components/reviews";
 
 export default {
   components: {
+    imagesComp: images,
+    hamburgerBtnComp: hamburger,    
     menuComp: menu,
     socialsComp: socials,
-    imagesComp: images,
     skillsComp: skills,
     worksComp: works,
     reviewsComp: reviewsComponent
   },
-  data() {
-    return {
-      menuLinks: [
-        {name:"About me", data:"about"},
-        {name:"Skills", data:"skills"},
-        {name:"Works", data:"works"},
-        {name:"Reviews", data:"reviews"}
-      ],
-      socials: ['insta', 'vk', 'github', 'envelope']
-    }
+  props: {
+    menuLinks: Array,
+    socials: Array
   }
 }
 </script>

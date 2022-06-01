@@ -105,7 +105,7 @@
         .container.works__container
           .section-title.works__section-title My works
           .works__content
-            //- works-comp
+            works-comp
             //- .works-slider
             //-   .works-slider__pics(data-slide="1")
             //-     .works-slider__pics-content
@@ -202,13 +202,15 @@ import menu from "./components/menu";
 import socials from "./components/socials";
 import images from "./components/images-app";
 import skills from "./components/skills";
+import works from "./components/works";
 
 export default {
   components: {
     menuComp: menu,
     socialsComp: socials,
     imagesComp: images,
-    skillsComp: skills
+    skillsComp: skills,
+    worksComp: works
   },
   data() {
     return {

@@ -79,6 +79,7 @@
             .values__widget
               .values__widget-container
                 skills-comp
+              //- #skills-component //- подключение vue-компонента в index.pug
               //-   - 
               //-     var skillsCategories = [
               //-       ["Frontend", ["HTML5", "CSS3", "Javascript", "Vue.js"]],
@@ -106,6 +107,7 @@
           .section-title.works__section-title My works
           .works__content
             works-comp
+            //- #works-component
             //- .works-slider
             //-   .works-slider__pics(data-slide="1")
             //-     .works-slider__pics-content
@@ -137,7 +139,8 @@
     section.contacts&attributes({'data-section-id': 'reviews'})
       .container.contacts__container
         .contacts__about
-          #reviews-component
+          reviews-comp
+          //- #reviews-component
           //- .reviews
           //-   .reviews__header
           //-     .reviews__title.section-title What they say about me
@@ -203,6 +206,7 @@ import socials from "./components/socials";
 import images from "./components/images-app";
 import skills from "./components/skills";
 import works from "./components/works";
+import reviewsComponent from "./components/reviews";
 
 export default {
   components: {
@@ -210,7 +214,8 @@ export default {
     socialsComp: socials,
     imagesComp: images,
     skillsComp: skills,
-    worksComp: works
+    worksComp: works,
+    reviewsComp: reviewsComponent
   },
   data() {
     return {

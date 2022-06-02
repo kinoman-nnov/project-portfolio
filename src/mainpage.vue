@@ -15,7 +15,7 @@
                 socials-comp(
                   :socials="socials"
                 )
-              hamburger-btn-comp 
+              hamburger-btn-comp(@handleChange="$emit('handleChange', $event)")
               //- button.header__hamburger-btn.hamburger.hamburger--vortex
               //-   span.hamburger-box
               //-     span.hamburger-inner

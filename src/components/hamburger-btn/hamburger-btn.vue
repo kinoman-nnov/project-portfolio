@@ -17,6 +17,7 @@ export default {
   methods: {
     handleChange() {
       this.modalIsShown = !this.modalIsShown;
+      this.$emit('handleChange', this.modalIsShown);
     }
   }
 }

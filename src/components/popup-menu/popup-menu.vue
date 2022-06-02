@@ -3,6 +3,7 @@
     .popup__menu-sidebar
       .popup__menu
         menu-comp(
+          type="vertical"
           :menuLinks="menuLinks"
         )
         //- nav.menu

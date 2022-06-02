@@ -4,6 +4,7 @@
       mainpage(
         :menuLinks="menuLinks"
         :socials="socials"
+        @handleChange="handleChange"
       )
     popup-menu(
       v-if="modalIsShown"
@@ -31,6 +32,11 @@ export default {
         {name:"Reviews", data:"reviews"}
       ],
       socials: ['insta', 'vk', 'github', 'envelope']
+    }
+  },
+  methods: {
+    handleChange(change) {
+      this.modalIsShown = change;
     }
   }
 }

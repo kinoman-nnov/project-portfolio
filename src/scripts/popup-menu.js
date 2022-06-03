@@ -8,20 +8,20 @@ new Vue({
   },
   data() { console.log(this.modalIsShown);
     return {
-      // modalIsShown: false,
-      // changed: false
+      modalIsShown: false,
+      changed: false
     }
   },
-  // methods: {
-  //   changedClass() {
-  //     const className = "modal-open"; // запретить скролл на body, когда модалка открыта
-  //     document.body.classList.toggle(className);
-  //   },
-  //   handleChange() {
-  //     this.modalIsShown = !this.modalIsShown;
-  //     this.changedClass();
-  //   }
-  // }
+  methods: {
+    changedClass() {
+      const className = "modal-open"; // запретить скролл на body, когда модалка открыта
+      document.body.classList.toggle(className);
+    },
+    handleChange() {
+      this.modalIsShown = !this.modalIsShown;
+      this.changedClass();
+    }
+  }
 });
 
 // const body = document.querySelector("body");
@@ -78,11 +78,11 @@ new Vue({
 //   pageNavigation(e);
 // });
 
-const scrollToSection = (attr) => {
-  const elem = document.querySelector(`[data-section-id=${attr}]`);
-  window.scroll({
-    left: 0,
-    top: elem.offsetTop,
-    behavior: "smooth"
-  });
-};
+// const scrollToSection = (attr) => {
+//   const elem = document.querySelector(`[data-section-id=${attr}]`);
+//   window.scroll({
+//     left: 0,
+//     top: elem.offsetTop,
+//     behavior: "smooth"
+//   });
+// };

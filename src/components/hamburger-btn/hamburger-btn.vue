@@ -17,7 +17,8 @@ export default {
   methods: {
     handleChange() {
       this.modalIsShown = !this.modalIsShown;
-      this.$emit('handleChange', this.modalIsShown);
+      const toggleModal = (this.modalIsShown === true) ? "show" : "hide";
+      this.$emit('handleChange', toggleModal);
     }
   }
 }

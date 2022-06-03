@@ -1,7 +1,7 @@
 <template lang="pug">
   .maincontent
     .welcome-section
-      section.hero&attributes({'data-section-id': 'main'})
+      section(ref="main").hero&attributes({'data-section-id': 'main'})
         .container.hero__container
           header.header
             .header__logo
@@ -10,16 +10,13 @@
               .header__menu
                 menu-comp(
                   :menuLinks="menuLinks"
+                  @scroll-to="scrollTosection"
                 )  
               .header__buttons
                 socials-comp(
                   :socials="socials"
                 )
               hamburger-btn-comp(@handleChange="$emit('handleChange', $event)")
-              //- button.header__hamburger-btn.hamburger.hamburger--vortex
-              //-   span.hamburger-box
-              //-     span.hamburger-inner
-
           .hero__content
             .userinfo
               .userinfo__title Personal website #[span.userinfo__occ web developer]
@@ -28,7 +25,7 @@
             .scroll-down
               a(href="").scroll-down__btn Scroll
 
-      section.about&attributes({'data-section-id': 'about'})
+      section(ref="about").about&attributes({'data-section-id': 'about'})
         .container
           .about__columns
             .about__user
@@ -39,7 +36,6 @@
                       :path="'content/user.jpg'"
                       :className="'user__avatar-pic'"
                     )
-                    //- +image('content/user.jpg', 'user__avatar-pic')
                 .user__about
                   - 
                     var userinfo = [
@@ -67,100 +63,34 @@
       svg(viewBox="0 0 1000 100" preserveAspectRatio="none").triangles__shape.triangles__shape_right
         polygon(points="0,100 1000,100 1000,0")
     .middle-section
-      section.values&attributes({'data-section-id': 'skills'})
+      section(ref="skills").values&attributes({'data-section-id': 'skills'})
         .container.values__container
           .values__wrapper
             .values__title
               .values__title-container
                 .values__title-text What can I do for you
                 .values__content
-                  p I made this website as part of my training at the LoftSchool Online Education School. I will refresh my content in it a little later. In the meantime, look how cool and beautiful everything is here!
-    
+                  p I made this website as part of my training at the LoftSchool Online Education School. I will refresh my content in it a little later. In the meantime, look how cool and beautiful everything is here!    
             .values__widget
               .values__widget-container
                 skills-comp
-              //- #skills-component //- подключение vue-компонента в index.pug
-              //-   - 
-              //-     var skillsCategories = [
-              //-       ["Frontend", ["HTML5", "CSS3", "Javascript", "Vue.js"]],
-              //-       ["Workflow", ["GIT", "Terminal", "Gulp", "Webpack"]]
-              //-     ];
-              //-   ul.skills
-              //-     each category in skillsCategories
-              //-       li.skills__item(v-for="category in categories")
-              //-         .skills-row
-              //-           .skills-row__title #{category[0]}
-              //-           ul.skills-row__list
-              //-             each skill in category[1]
-              //-               li.skills-row__item
-              //-                 .skill
-              //-                   svg(viewBox="0 0 100 100").skill__circle-shape
-              //-                     circle(cx="50" cy="50" r="40").skill__circle.skill__circle_under
-              //-                     circle(cx="50" cy="50" r="40" stroke="url(#gradient)" transform='rotate(180 50 50)').skill__circle.skill__circle_above
-              //-                     linearGradient(id="gradient" x1="0%" y1="0%" x2="100%" y2="0")
-              //-                       stop(offset="0%" stop-color="#5500f2")
-              //-                       stop(offset="100%" stop-color="#8f00ef")
-              //-                   .skill__circle-text #{skill}
     
-      section.works&attributes({'data-section-id': 'works'})
+      section(ref="works").works&attributes({'data-section-id': 'works'})
         .container.works__container
           .section-title.works__section-title My works
           .works__content
             works-comp
-            //- #works-component
-            //- .works-slider
-            //-   .works-slider__pics(data-slide="1")
-            //-     .works-slider__pics-content
-            //-       +image('content/slider-1.jpg', 'works-slider__fullpic')
-            //-       ul.works-slider__thumbs
-            //-         - for (var i = 3; i > 0; i--)
-            //-           li.works-slider__thumb-item(class=`${i === 1 ? 'active' : ''}`)
-            //-             a(href="").works-slider__thumb-link
-            //-               +image(`content/slider-${i}.jpg`, 'works-slider__thumb')
-            //-       .works-slider__buttons
-            //-         a(href="#").works-slider__btn.works-slider__btn_next
-            //-         a(href="#").works-slider__btn.works-slider__btn_prev
-            //-   .works-slider__info
-            //-     ul.works-slider__tags
-            //-       - var tags = ['HTML', 'CSS', 'JavaScript'];
-            //-       each item in tags
-            //-         li.works-slider__tag-item 
-            //-           .tag #{item}
-            //-     .works-slider__title Website of the School of Education
-            //-     .works-slider__desc
-            //-       p This guy was trained in web development not somewhere, but at LoftSchool! 2 months of only the most difficult trials and sleepless nights!
-            //-     .works-slider__link 
-            //-       a(href="").iconed-link View the website
+            
     .triangles.triangles_bottom
       svg(viewBox="0 0 1000 100" preserveAspectRatio="none").triangles__shape.triangles__shape_left
         polygon(points="0,0 1000,0 1000,100")
       svg(viewBox="0 0 1000 100" preserveAspectRatio="none").triangles__shape.triangles__shape_right
         polygon(points="0,0 0,100 1000,0")
-    section.contacts&attributes({'data-section-id': 'reviews'})
+    section(ref="reviews").contacts&attributes({'data-section-id': 'reviews'})
       .container.contacts__container
         .contacts__about
           reviews-comp
-          //- #reviews-component
-          //- .reviews
-          //-   .reviews__header
-          //-     .reviews__title.section-title What they say about me
-          //-     .reviews__buttons
-          //-       .reviews__btn.reviews__btn_prev
-          //-       .reviews__btn.reviews__btn_next
-          //-   ul.reviews__content
-          //-     - for (var i = 0; i < 2; i++)
-          //-       li.reviews__content-item
-          //-         .quote
-          //-           .quote__text
-          //-             p This guy was trained in web development not somewhere, but at LoftSchool! 2 months of only the most difficult trials and sleepless nights!
-          //-           .quote__user
-          //-             .user-min
-          //-               .user-min__avatar
-          //-                 .user-min__pic-wrapper
-          //-                   +image('content/user.jpg', 'user-min__avatar-pic')
-          //-               .user-min__info
-          //-                 .user-min__name Ковальчук Дмитрий
-          //-                 .user-min__occ Основатель Loftschool
+
     footer.footer
       .container.footer__container
         .footer__copyright
@@ -172,13 +102,8 @@
         .footer__data
           menu-comp(
             :menuLinks="menuLinks"
+            @scroll-to="scrollTosection"
           ).menu--color-white.footer__data-menu
-          //- nav.menu.menu--color-white.footer__data-menu
-          //-   ul.menu__list
-          //-     - var menuLinks = [{name:"About me", data:"about"}, {name:"Skills", data:"skills"}, {name:"Works", data:"works"}, {name:"Reviews", data:"reviews"}];
-          //-     each item in menuLinks 
-          //-       li.menu__item
-          //-         a(href="#").menu__link&attributes({'data-scroll-to':`${item.data}`}) #{item.name}
           .footer__data-content
             .footer__data-col
               .footer__data-text
@@ -187,12 +112,6 @@
                 socials-comp(
                   :socials="socials"
                 ).socials--round-borders
-                //- ul.socials.socials--round-borders
-                //-   - var socials = ['insta', 'vk', 'github', 'envelope'];
-                //-   each item in socials
-                //-     li.socials__item
-                //-       a(href="#").socials__link
-                //-         +icon(item, 'socials__icon')
             .footer__data-col
               .text-quote
                 .text-quote__text
@@ -222,6 +141,20 @@ export default {
   props: {
     menuLinks: Array,
     socials: Array
+  },
+  methods: {
+    scrollTosection(attr) {
+      const elem = this.$refs[attr];
+      
+      let scrollBottom = elem.scrollHeight - elem.scrollTop - elem.clientHeight
+      console.log(elem.offsetTop);
+
+      // window.scrollTo({
+      //   top: elem.offsetTop,
+      //   left: 0,
+      //   behavior: "smooth",
+      // });
+    },
   }
 }
 </script>

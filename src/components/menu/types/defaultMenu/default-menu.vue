@@ -2,7 +2,7 @@
   nav.menu
     ul.menu__list 
       li(v-for="item in menuLinks" :key="item.id").menu__item
-        a(href="#" @click="$emit('scroll-to', item.data)").menu__link {{ item.name }}
+        a(href="#" @click.prevent="$emit('scroll-to', item.data)").menu__link {{ item.name }}
 </template>
 
 <script>

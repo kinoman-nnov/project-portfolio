@@ -25,7 +25,7 @@
             .scroll-down
               a(href="").scroll-down__btn Scroll
 
-      section(ref="about").about&attributes({'data-section-id': 'about'})
+      section(ref="about").about&attributes({'data-section-id': 'about'})#about
         .container
           .about__columns
             .about__user
@@ -143,17 +143,11 @@ export default {
     socials: Array
   },
   methods: {
-    scrollTosection(attr) {
+    scrollTosection(attr) { // добавил prevent на click
       const elem = this.$refs[attr];
-      
-      let scrollBottom = elem.scrollHeight - elem.scrollTop - elem.clientHeight
-      console.log(elem.offsetTop);
-
-      // window.scrollTo({
-      //   top: elem.offsetTop,
-      //   left: 0,
-      //   behavior: "smooth",
-      // });
+      elem.scrollIntoView({
+        behavior: 'smooth'
+      });
     },
   }
 }

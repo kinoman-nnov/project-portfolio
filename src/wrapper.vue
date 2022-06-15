@@ -2,6 +2,7 @@
 .x-wrapper
   .wrapper
     mainpage(
+      :modalIsActive="modalIsShown"
       :menuLinks="menuLinks",
       :socials="socials",
       @handleChange="handleChange"
@@ -9,8 +10,8 @@
   popup-menu(
     v-if="modalIsShown",
     :menuLinks="menuLinks",
-    :socials="socials",
-    @scroll-to="scrollTosection"
+    :socials="socials"
+    @handleChange="handleChange"
   )
 </template>
 
@@ -36,21 +37,21 @@ export default {
     };
   },
   methods: {
-    handleChange(state) {
+    handleChange(state) { console.log("handlechange-from wrapper");
       const className = "modal-open"; // запретить скролл на body, когда модалка открыта
 
       switch(state) {
-        case 'show':          
-          this.modalIsShown = true;
+        case 'show':
           document.body.classList.add(className);
+          this.modalIsShown = true;
           break;
-        case 'hide':          
-          this.modalIsShown = false;
+        case 'hide':
           document.body.classList.remove(className);
+          this.modalIsShown = false;
           break;
       }
     },
-  },
+  }
 };
 </script>
 

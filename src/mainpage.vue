@@ -10,13 +10,16 @@
               .header__menu
                 menu-comp(
                   :menuLinks="menuLinks"
-                  @scroll-to="scrollTosection"
+                  @scroll-to="scrollToSection"
                 )  
               .header__buttons
                 socials-comp(
                   :socials="socials"
                 )
-              hamburger-btn-comp(@handleChange="$emit('handleChange', $event)")
+              hamburger-btn-comp(
+                :modalIsActive="modalIsActive"
+                @handleChange="$emit('handleChange', $event)"
+              )
           .hero__content
             .userinfo
               .userinfo__title Personal website #[span.userinfo__occ web developer]
@@ -102,7 +105,7 @@
         .footer__data
           menu-comp(
             :menuLinks="menuLinks"
-            @scroll-to="scrollTosection"
+            @scroll-to="scrollToSection"
           ).menu--color-white.footer__data-menu
           .footer__data-content
             .footer__data-col
@@ -120,6 +123,7 @@
 </template>
 
 <script>
+import {eventBus} from "./main.js";
 import images from "./components/images-app";
 import hamburger from "./components/hamburger-btn"  
 import menu from "./components/menu";
@@ -139,16 +143,27 @@ export default {
     reviewsComp: reviewsComponent
   },
   props: {
+    modalIsActive: Boolean,
     menuLinks: Array,
     socials: Array
   },
-  methods: {
-    scrollTosection(attr) { // добавил prevent на click
+  methods: { 
+    scrollToSection(attr) { // добавил prevent на click в menu-comp
       const elem = this.$refs[attr];
       elem.scrollIntoView({
         behavior: 'smooth'
       });
     },
+  },
+  created() {
+    eventBus.$on('scrollFromPopup', data => {
+      console.log(data);
+      // const elem = this.$refs[data];
+      // console.log(elem);
+      // elem.scrollIntoView({
+      //   behavior: 'smooth'
+      // });
+    });
   }
 }
 </script>

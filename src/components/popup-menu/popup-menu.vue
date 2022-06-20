@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import {eventBus} from "../../main.js"
+// import { eventBus } from "../../main.js";
 import menu from "../menu";
 import socials from "../socials";
 
@@ -27,8 +27,8 @@ export default {
   },
   data() {
     return {
-      menuLinkToAdd: [{ name: "Main", data: "main" }]
-    }
+      menuLinkToAdd: [{ name: "Main", data: "main" }],
+    };
   },
   computed: {
     menuLinksSupplemented() {
@@ -39,10 +39,10 @@ export default {
   },
   methods: {
     scrollFromPopup(attr) {
-      // this.$emit('handleChange', 'hide')
-      eventBus.$emit('scrollFromPopup', {attr, state: 'hide'});
-    }
-  }
+      this.$emit('scrollFromPopup', {attr, state: 'hide'});
+      // eventBus.$emit("scrollFromPopup", { attr, state: "hide" });
+    },
+  },
 };
 </script>
 

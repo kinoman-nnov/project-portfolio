@@ -5,13 +5,14 @@
       :modalIsActive="modalIsShown"
       :menuLinks="menuLinks",
       :socials="socials",
+      :dataAttr="dataAttr",
       @handleChange="handleChange"
     )
   popup-menu(
     v-if="modalIsShown",
     :menuLinks="menuLinks",
     :socials="socials"
-    @handleChange="handleChange"
+    @scrollFromPopup="scrollFromPopup"
   )
 </template>
 
@@ -27,6 +28,7 @@ export default {
   data() {
     return {
       modalIsShown: false,
+      dataAttr: "",
       menuLinks: [
         { name: "About me", data: "about" },
         { name: "Skills", data: "skills" },
@@ -37,7 +39,7 @@ export default {
     };
   },
   methods: {
-    handleChange(state) { console.log("handlechange-from wrapper");
+    handleChange(state) {
       const className = "modal-open"; // запретить скролл на body, когда модалка открыта
 
       switch(state) {
@@ -51,6 +53,10 @@ export default {
           break;
       }
     },
+    scrollFromPopup(data) {
+      this.handleChange(data.state);
+      this.dataAttr = data.attr;
+    }
   }
 };
 </script>

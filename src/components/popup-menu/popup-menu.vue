@@ -12,7 +12,6 @@
 </template>
 
 <script>
-// import { eventBus } from "../../main.js";
 import menu from "../menu";
 import socials from "../socials";
 
@@ -40,7 +39,6 @@ export default {
   methods: {
     scrollFromPopup(attr) {
       this.$emit('scrollFromPopup', {attr, state: 'hide'});
-      // eventBus.$emit("scrollFromPopup", { attr, state: "hide" });
     },
   },
 };

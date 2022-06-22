@@ -54,8 +54,17 @@ export default {
       }
     },
     scrollFromPopup(data) {
-      this.handleChange(data.state);
-      this.dataAttr = data.attr;
+      const flag = this.dataAttr;
+
+      if (data.attr === flag) {
+        const repeatAttr = flag + "Retry"; // модифицировал data.attr, чтобы watcher отслеживал
+        this.handleChange(data.state); //  изменения при повторном скролле к той же секции
+        this.dataAttr = repeatAttr;
+        
+      } else {
+        this.handleChange(data.state);
+        this.dataAttr = data.attr;
+      }
     }
   }
 };

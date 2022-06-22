@@ -116,7 +116,6 @@
 </template>
 
 <script>
-// import { eventBus } from "./main.js";
 import images from "./components/images-app";
 import hamburger from "./components/hamburger-btn";
 import menu from "./components/menu";
@@ -151,18 +150,20 @@ export default {
     },
   },
   watch: {
-    dataAttr(newVal, oldVal) {
-      if (newVal !== oldVal) {
-        console.log(newVal);
+    dataAttr(newVal, oldVal) {      
+      if (!!newVal) {
+        const findFlag = newVal.indexOf("Retry"); // возвращает индекс, с которого начинается подстрока "Retry"
+        
+        if (findFlag > 0) { // удаляю модификатор
+          const attr = newVal.slice(0, findFlag); // вырезал часть строки до "Retry"
+          this.scrollToSection(attr); // в функцию приходит attr который был эмитирован из popup 
+        } else {
+          this.scrollToSection(newVal);
+        }
       }
-    }
+    },
+    flush: 'post'
   },
-  // created() {
-  //   eventBus.$on("scrollFromPopup", (data) => {
-  //     console.log(data.attr);
-  //     this.scrollToSection(data.attr);
-  //   });
-  // },
 };
 </script>
 

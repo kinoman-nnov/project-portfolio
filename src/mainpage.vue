@@ -24,7 +24,9 @@
             .userinfo__name Mount
         .hero__downbutton
           .scroll-down
-            a.scroll-down__btn(href="") Scroll
+            a.scroll-down__btn(
+              @click.prevent="scrollToSection('about')"
+            ) Scroll
     
     section#about.about(ref="about")&attributes({'data-section-id': 'about'})
       .container

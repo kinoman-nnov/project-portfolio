@@ -35,7 +35,7 @@ export default {
         { name: "Works", data: "works" },
         { name: "Reviews", data: "reviews" },
       ],
-      socials: ["insta", "vk", "github", "envelope"],
+      socials: ["tg", "vk", "github", "envelope"]
     };
   },
   methods: {

@@ -8,7 +8,7 @@
     .works-slider__desc
       p {{ currentWork.description }}
     .works-slider__link 
-      a(href="currentWork.link").iconed-link View the website
+      a(href="https://loftschool.com").iconed-link View the website
 </template>
 
 <script>

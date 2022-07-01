@@ -89,7 +89,8 @@
       polygon(points="0,0 1000,0 1000,100")
     svg.triangles__shape.triangles__shape_right(viewBox="0 0 1000 100", preserveAspectRatio="none")
       polygon(points="0,0 0,100 1000,0")
-  section.contacts(ref="reviews")&attributes({'data-section-id': 'reviews'})
+      
+  .reviews-section.contacts(ref="reviews")&attributes({'data-section-id': 'reviews'})
     .container.contacts__container
       .contacts__about
         reviews-comp

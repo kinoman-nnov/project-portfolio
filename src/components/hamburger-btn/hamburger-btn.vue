@@ -2,7 +2,7 @@
   button(
     :class="{ 'is-active': modalIsActive }"
     @click="handleChange"
-  ).header__hamburger-btn.hamburger.hamburger--vortex
+  ).hamburger.hamburger--vortex
     span.hamburger-box
       span.hamburger-inner
 </template>
@@ -23,6 +23,5 @@ export default {
 }
 </script>
 
-<style lang="postcss" scoped>
-
+<style lang="postcss" scoped src="./hamburger.pcss">
 </style>

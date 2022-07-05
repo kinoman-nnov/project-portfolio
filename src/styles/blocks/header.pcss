@@ -13,7 +13,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 75%;
+  width: 70%;
 
   @include tablets {
     width: 50%;
@@ -25,7 +25,8 @@
 }
 
 .header__menu {
-  width: 55%;
+  display: flex;
+  width: 50%;
 
   @include tablets {
     display: none;
@@ -33,6 +34,13 @@
 }
 
 .header__buttons {
+  display: flex;
+  width: 30%;
+  
+  @include tablets {
+    width: 60%;
+  }
+
   @include phones {
     display: none;
   }

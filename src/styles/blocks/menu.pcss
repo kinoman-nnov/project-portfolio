@@ -1,14 +1,21 @@
-.menu__list {
-  display: flex;
-  justify-content: center;
+.menu {
+  width: 100%;
+  max-width: 400px;
 }
 
-.menu__item {
-  // margin-right: 60px;
-  margin-right: 8%;
+.menu__list {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 
-  &:last-child {
-    margin-right: 0;
+  @include tablets {
+    flex-wrap: wrap;
+    width: 80%;
+  }
+
+  @include phones {
+    flex-wrap: wrap;
+    width: 80%;
   }
 }
 

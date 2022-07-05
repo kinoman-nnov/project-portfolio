@@ -14,10 +14,11 @@
               ) 
             .header__buttons
               socials-comp(:socials="socials")
-            hamburger-btn-comp(
-              :modalIsActive="modalIsActive",
-              @handleChange="$emit('handleChange', $event)"
-            )
+            .header__hamburger-btn
+              hamburger-btn-comp(
+                :modalIsActive="modalIsActive",
+                @handleChange="$emit('handleChange', $event)"
+              )
         .hero__content
           .userinfo
             .userinfo__title Personal website #[span.userinfo__occ web developer]
@@ -28,7 +29,7 @@
               @click.prevent="scrollToSection('about')"
             ) Scroll
     
-    section#about.about(ref="about")&attributes({'data-section-id': 'about'})
+    section.about(ref="about")&attributes({'data-section-id': 'about'})
       .container
         .about__columns
           .about__user

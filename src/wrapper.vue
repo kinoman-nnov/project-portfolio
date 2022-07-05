@@ -2,7 +2,7 @@
 .x-wrapper
   .wrapper
     mainpage(
-      :modalIsActive="modalIsShown"
+      :modalIsActive="modalIsShown",
       :menuLinks="menuLinks",
       :socials="socials",
       :dataAttr="dataAttr",

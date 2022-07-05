@@ -32,5 +32,5 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="postcss" scoped src="./socials.pcss">
 </style>

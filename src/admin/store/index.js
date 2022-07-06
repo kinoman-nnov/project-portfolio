@@ -17,5 +17,6 @@ export default new Vuex.Store({
     tooltips,
     works,
     reviews,
-    user }
+    user
+  }
 });

@@ -105,7 +105,11 @@
           .footer__copyright-name Alexey Ya
           .footer__data-text Личный сайт веб - разработчика
       .footer__data
-        menu-comp.menu--color-white.footer__data-menu(:menuLinks="menuLinks", @scroll-to="scrollToSection")
+        .footer__data-menu
+          menu-comp.menu--color-white(
+            :menuLinks="menuLinks",
+            @scroll-to="scrollToSection"
+          )
         .footer__data-content
           .footer__data-col
             .footer__data-text

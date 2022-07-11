@@ -83,7 +83,7 @@
       .container.works__container
         .section-title.works__section-title My works
         .works__content
-          works-comp
+          works-slider-comp
 
   .triangles.triangles_bottom
     svg.triangles__shape.triangles__shape_left(viewBox="0 0 1000 100", preserveAspectRatio="none")
@@ -129,7 +129,7 @@ import hamburger from "./components/hamburger-btn";
 import menu from "./components/menu";
 import socials from "./components/socials";
 import skills from "./components/skills";
-import works from "./components/works";
+import worksSlider from "./components/works-slider";
 import reviewsComponent from "./components/reviews";
 
 export default {
@@ -139,7 +139,7 @@ export default {
     menuComp: menu,
     socialsComp: socials,
     skillsComp: skills,
-    worksComp: works,
+    worksSliderComp: worksSlider,
     reviewsComp: reviewsComponent,
   },
   props: {
@@ -174,7 +174,3 @@ export default {
   },
 };
 </script>
-
-<style lang="postcss">
-@import "./styles/main.pcss";
-</style>

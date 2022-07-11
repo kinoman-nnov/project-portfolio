@@ -1,0 +1,1 @@
+export { default } from "./works-slider.vue";

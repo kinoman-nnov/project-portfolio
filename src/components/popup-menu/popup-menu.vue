@@ -44,4 +44,4 @@ export default {
 };
 </script>
 
-<style lang="postcss"></style>
+<style lang="postcss" src="./popup-menu.pcss"></style>

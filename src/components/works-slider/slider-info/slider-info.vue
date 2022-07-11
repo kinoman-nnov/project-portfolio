@@ -1,9 +1,8 @@
 <template lang="pug">
   .works-slider__info
-    ul.works-slider__tags
-      tags-comp(
-        :tags="tagsArray"
-      )
+    tags-comp(
+      :tags="tagsArray"
+    )
     .works-slider__title {{ currentWork.title }}
     .works-slider__desc
       p {{ currentWork.description }}
@@ -27,6 +26,5 @@ export default {
 }
 </script>
 
-<style lang="postcss" scoped>
-
+<style lang="postcss" scoped src="./slider-info.pcss">
 </style>

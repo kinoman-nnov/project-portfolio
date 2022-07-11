@@ -11,7 +11,7 @@
     slider-info(
       v-if="works.length"
       :currentWork="currentWork"
-      )
+    )
 </template>
 
 <script>
@@ -105,5 +105,15 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
+@import "../../styles/mixins.pcss";
 
+.works-slider {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  @include tablets {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+}
 </style>

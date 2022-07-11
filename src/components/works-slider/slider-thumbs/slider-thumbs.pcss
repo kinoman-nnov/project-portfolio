@@ -1,0 +1,33 @@
+@import "../../../styles/mixins.pcss";
+
+.works-slider__thumbs {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 184px;
+  z-index: 10;
+
+  @include phones {
+    display: none;
+  }
+}
+
+.works-slider__thumb-item {
+  height: 100px;
+  transition: .2s;
+  &.active,
+  &:hover {
+    outline: 3px solid #f29400;
+  }
+}
+
+.works-slider__thumb-link {
+  display: contents;
+  height: 100%;
+}
+
+.works-slider__thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

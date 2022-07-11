@@ -1,3 +1,5 @@
+@import "../../styles/mixins.pcss";
+
 .popup__container {  
   display: none;
   position: fixed;
@@ -11,6 +13,10 @@
 
   @include tablets {
     display: flex;
+  }
+
+  @include phones {
+    background: url('~images/bg/budda.jpg') right 28% top 0% no-repeat;
   }
 }
 

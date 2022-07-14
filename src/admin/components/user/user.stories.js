@@ -1,4 +1,9 @@
 import user from "./user";
+import { action } from "@storybook/addon-actions";
+
+const methods = {
+  onClick: action("onClick"),
+}
 
 export default {
   title: "user",
@@ -10,6 +15,7 @@ export const defaultView = () => ({
   template: `
     <user
       title="User Name"
+      plain
     /> 
   `
 });
@@ -23,18 +29,39 @@ defaultView.story = {
   },
 };
 
-export const defaultViewWithOcc = () => ({
+export const defaultViewWithText = () => ({
   components: { user },
   template: `
     <user
       title="User Name"
-      occ="Occupation"
+      text="Occupation"
+      plain
     /> 
   `
 });
 
-defaultViewWithOcc.story = {
-  name: "С полем - занятость",
+defaultViewWithText.story = {
+  name: "С текстом",
+  parameters: {
+    backgrounds: [
+      { name: 'grey', value: '#8395a7', default: true },
+    ],
+  },
+};
+
+export const defaultViewWithBtn = () => ({
+  components: { user },
+  template: `
+    <user
+      title="User Name"
+      @handleClick="onClick"
+    /> 
+  `,
+  methods
+});
+
+defaultViewWithBtn.story = {
+  name: "С кнопкой",
   parameters: {
     backgrounds: [
       { name: 'grey', value: '#8395a7', default: true },

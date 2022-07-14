@@ -1,0 +1,39 @@
+@import "../../../styles/mixins.pcss";
+
+.user-component {
+  display: flex;
+  font-size: 18px;
+  font-weight: 600;
+  align-items: center;
+  color: #fff;
+}
+
+.user-container {
+  margin-left: 18px;
+}
+
+.user-occupation{
+  font-size: 16px;
+  color: rgba(65, 76, 99, 0.5);
+
+  @include phones {
+    display: none;
+  }
+}
+
+.user__buttons{
+  display: none;
+
+  @include phones {
+    display: block;
+  }
+}
+
+.btn {
+  color: #ffffffb3;
+  text-decoration: underline;
+}
+
+.user__btn{
+  padding-left: 0;
+}

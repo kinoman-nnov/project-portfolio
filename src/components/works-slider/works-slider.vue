@@ -111,6 +111,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  
   @include tablets {
     flex-direction: column;
     justify-content: flex-start;

@@ -1,3 +1,11 @@
+@import "../../../styles/mixins.pcss";
+
+.page-title {
+  @include phones {
+    margin-bottom: 30px;
+  }
+}
+
 .skills {
   display: flex;
   flex-wrap: wrap;
@@ -6,5 +14,10 @@
 .item {
   width: calc(100% / 2 - 30px);
   margin-right: 30px;
+
+  @include phones {
+    width: 100%;
+    margin-right: 0;
+  }
 }
 

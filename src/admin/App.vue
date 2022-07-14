@@ -48,15 +48,30 @@ export default {
   flex-direction: column;
 }
 
-.page-header {
-  display: flex;
-  margin-bottom: 60px;
-}
-
 .page-content {
   padding: 60px 0 20px;
   background: url("../images/bg/admin.jpg") center center / cover no-repeat;
   flex: 1;
+}
+
+.full-screen-container {
+  @include phones {
+    margin: 0;
+    width: 100%;
+  }
+}
+
+.page-header {
+  display: flex;
+  margin-bottom: 60px;
+  
+  @include phones {
+    width: 85%;
+    margin: 0 auto;
+    max-width: 92.5rem;
+    flex-direction: column;
+    margin-bottom: 60px;
+  }
 }
 
 .page-title {

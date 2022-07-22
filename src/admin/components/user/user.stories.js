@@ -61,7 +61,7 @@ export const defaultViewWithBtn = () => ({
 });
 
 defaultViewWithBtn.story = {
-  name: "С кнопкой",
+  name: "С кнопкой в мобильной версии",
   parameters: {
     backgrounds: [
       { name: 'grey', value: '#8395a7', default: true },

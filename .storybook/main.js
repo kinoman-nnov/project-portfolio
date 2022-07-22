@@ -9,6 +9,7 @@ module.exports = {
     "@storybook/addon-backgrounds/register",
     "storybook-dark-mode/register",
     "@storybook/addon-knobs/register",
+    "@storybook/addon-viewport",
     {
       name: "@storybook/addon-storysource",
       options: {

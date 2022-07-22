@@ -1,5 +1,17 @@
+@import "../../../../../styles/mixins.pcss";
+
+.form-container {
+  @include tablets {
+    padding: 0 12%;
+  }
+}
+
 .form-columns {
   display: flex;
+
+  @include tablets {
+    flex-direction: column;
+  }
 }
 
 .form-col {
@@ -8,6 +20,16 @@
 
   &:last-child {
     margin-right: 0;
+  }
+
+  @include tablets {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 25px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 

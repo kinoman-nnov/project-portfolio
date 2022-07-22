@@ -1,9 +1,19 @@
+@import "../../../../../styles/mixins.pcss";
+
 .card-component__review {
   padding: 0px 205px 55px 33px;
+
+  @include phones {
+    padding: 33px;
+  }
 }
 
 .form-columns {
   display: flex;
+
+  @include phones {
+    flex-direction: column;
+  }
 }
 
 .form-col {
@@ -19,6 +29,16 @@
   
   &__review-right {
     width: 67%;
+  }
+
+  @include phones {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 25px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 

@@ -11,6 +11,7 @@
         :style="{ backgroundImage: `url(${coverPreview})` }"
         :class="[
           'uploader',
+          'uploader--rect',
           { active: coverPreview },
           { hovered: hovered },
           { error: !!errorMessage },
@@ -21,7 +22,7 @@
       >
         <div class="uploader-content">
           <div class="uploader-title">Перетащите или загрузите картинку</div>
-          <div class="uploader-btn">
+          <div class="uploader-btn uploader-btn--internal">
             <app-button
               typeAttr="file"
               @change="handleChange"
@@ -30,6 +31,14 @@
           </div>
         </div>
       </label>
+      <div class="uploader-btn uploader-btn--external">
+        <app-button
+          plain
+          typeAttr="file"
+          @change="handleChange"
+          title="Изменить превью"
+        />
+      </div>
     </div>
     <div class="uploader-container uploader-container--type-round" v-else>
       <div class="uploader-container--round-field">
@@ -54,15 +63,13 @@
           />
         </label>
       </div>
-      <div class="uploader-content uploader-content--round">
-        <div class="uploader-btn">
-          <app-button
-            plain
-            typeAttr="file"
-            @change="handleChange"
-            title="Добавить фото"
-          />
-        </div>
+      <div class="uploader-btn">
+        <app-button
+          plain
+          typeAttr="file"
+          @change="handleChange"
+          title="Добавить фото"
+        />
       </div>
     </div>
     <div class="uploader__error-tooltip">

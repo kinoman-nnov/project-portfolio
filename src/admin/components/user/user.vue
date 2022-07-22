@@ -9,7 +9,7 @@
     >
       <div class="username">{{ title }}</div>
       <div class="user-occupation">{{ text }}</div>
-      <div class="buttons user__buttons" v-if="!plain">
+      <div class="buttons user__button" v-if="!plain">
         <button
           type="button"
           @click="$emit('handleClick', 'logout')"

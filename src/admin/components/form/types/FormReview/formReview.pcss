@@ -3,6 +3,10 @@
 .card-component__review {
   padding: 0px 205px 55px 33px;
 
+  @include tablets {
+    padding: 0px 33px 55px 33px;
+  } 
+
   @include phones {
     padding: 33px;
   }
@@ -48,6 +52,10 @@
   &__container {
     display: flex;
     justify-content: space-between;
+
+    @include tablets {
+      flex-direction: column;
+    }
   }
 
   &--review {
@@ -57,12 +65,24 @@
     &:last-child {
       margin-right: 0;
     }
+
+    @include tablets {
+      width: 70%;
+    }
+
+    @include phones {
+      width: 100%;
+    }
   }
 }
 
 .form-btns {
   display: flex;
   justify-content: flex-end;
+
+  @include phones {
+    justify-content: space-between;
+  }
 }
 
 .btn {

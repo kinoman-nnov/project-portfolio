@@ -1,7 +1,7 @@
 <template>
   <label class="btn-file-container" v-if="typeAttr === 'file'">
     <div class="btn-file-fake user-btn-component" >
-      <icon symbol="user" changeSize :typeAttr="typeAttr" v-on="$listeners" />
+      <icon symbol="user" changeableSize :typeAttr="typeAttr" v-on="$listeners" />
     </div>  
   </label>
 </template>
@@ -21,4 +21,9 @@ export default {
 }
 </script>
 
-<style lang="postcss" scoped></style>
+<style lang="postcss" scoped>
+.user-btn-component {
+  width: 100%;
+  height: 100%;
+}
+</style>

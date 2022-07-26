@@ -11,7 +11,7 @@
             v-if="formIsShown"
             :currentReview="currentReview"
             @cancelForm="formIsShown = false"
-            title="Добавление отзыва"
+            title="Новый отзыв"
           />
         </div>
         <ul class="cards">

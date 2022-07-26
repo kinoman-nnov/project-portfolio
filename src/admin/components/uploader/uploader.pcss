@@ -58,8 +58,18 @@
   flex-direction: column;
 
   &--round-field {
-    width: 200px;
-    height: 200px;
+    width: 20vw;
+    height: 20vw;
+
+    @include tablets {
+      width: 22vw;
+      height: 22vw;
+    }
+
+    @include phones {
+      width: 40vw;
+      height: 40vw;
+    }
   }
 }
 
@@ -71,6 +81,16 @@
   color: $text-color;
   opacity: .5;
   margin-bottom: 30px;
+}
+
+.user-btn {
+  width: 10vw;
+  height: 10vw;
+
+  @include phones {
+    width: 20vw;
+    height: 20vw;
+  }
 }
 
 .uploader-btn {

@@ -56,7 +56,7 @@
   </div>
   <div class="form-component" v-else>
     <form class="form" @submit.prevent="handleSubmitEditWork">
-      <card title="редактирование работы">
+      <card title="Редактирование работы">
         <div class="form-container" slot="content">
           <div class="form-columns">
             <div class="form-col">

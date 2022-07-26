@@ -53,7 +53,7 @@
   </div>
   <div class="form-component" v-else>
     <form class="form" @submit.prevent="handleSubmitEditReview">
-      <card title="редактирование работы" class="card-component__review">
+      <card title="Редактирование отзыва" class="card-component__review">
         <div class="form-container" slot="content">
           <div class="form-columns">
             <div class="form-col form-col__review-left">

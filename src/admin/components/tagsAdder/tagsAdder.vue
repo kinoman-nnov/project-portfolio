@@ -69,9 +69,16 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
+@import "../../../styles/mixins.pcss";
+
 .tags {
   display: flex;
   margin-top: 20px;
+
+  @include phones {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 }
 
 .tag {

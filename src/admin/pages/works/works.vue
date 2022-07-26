@@ -8,7 +8,7 @@
         <div class="form">
           <form-work
             v-if="formIsShown"
-            title="Добавление работы"
+            title="Новая работа"
             :currentWork="currentWork"
             @cancelForm="formIsShown = false"
           />

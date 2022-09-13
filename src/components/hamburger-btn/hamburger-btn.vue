@@ -1,6 +1,6 @@
 <template lang="pug">
   button(
-    :class="{ 'is-active': modalIsShown }"
+    :class="{ 'is-active': modalIsActive }"
     @click="handleChange"
   ).header__hamburger-btn.hamburger.hamburger--vortex
     span.hamburger-box
@@ -9,15 +9,14 @@
 
 <script>
 export default {
-  data() {
-    return {
-      modalIsShown: false
-    }
+  props: {
+    modalIsActive: Boolean // по умолчанию false
   },
   methods: {
     handleChange() {
-      this.modalIsShown = !this.modalIsShown;
-      const toggleModal = (this.modalIsShown === true) ? "show" : "hide";
+      let showModal = this.modalIsActive;
+      showModal = !showModal;
+      const toggleModal = (showModal === true) ? "show" : "hide";
       this.$emit('handleChange', toggleModal);
     }
   }

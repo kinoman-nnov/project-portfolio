@@ -1,23 +1,29 @@
 <template lang="pug">
-  .reviews
-    .reviews__header
-      .reviews__title.section-title What they say about me
-      .reviews__buttons
-        button.reviews__btn.reviews__btn_prev(type="button", @click="slide('prev')")
-        button.reviews__btn.reviews__btn_next(type="button", @click="slide('next')")
-    swiper(ref="slider", :options="sliderOptions")
-      swiper-slide(v-for="review in reviews", :key="review.id")
-        .quote
-          .quote__text
-            p {{ review.text }}
-          .quote__user
-            .user-min
-              .user-min__avatar
-                .user-min__pic-wrapper
-                  img.user-min__avatar-pic(:src="review.photo")
-              .user-min__info
-                .user-min__name {{ review.author }}
-                .user-min__occ {{ review.occ }}
+.reviews
+  .reviews__header
+    .reviews__title.section-title What they say about me
+    .reviews__buttons
+      button.reviews__btn.reviews__btn_prev(
+        type="button",
+        @click="slide('prev')"
+      )
+      button.reviews__btn.reviews__btn_next(
+        type="button",
+        @click="slide('next')"
+      )
+  swiper(ref="slider", :options="sliderOptions")
+    swiper-slide(v-for="review in reviews", :key="review.id")
+      .quote
+        .quote__text
+          p {{ review.text }}
+        .quote__user
+          .user-min
+            .user-min__avatar
+              .user-min__pic-wrapper
+                img.user-min__avatar-pic(:src="review.photo")
+            .user-min__info
+              .user-min__name {{ review.author }}
+              .user-min__occ {{ review.occ }}
 </template>
 
 <script>

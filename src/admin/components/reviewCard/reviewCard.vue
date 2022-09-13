@@ -3,9 +3,10 @@
     <div slot="title" class="card-review__header">
       <user
         :title="review.author"
-        :occ="review.occ"
+        :text="review.occ"
         :src="cover"
         class="review-user-title"
+        plain
       />
     </div>
     <div class="review-container" slot="content">

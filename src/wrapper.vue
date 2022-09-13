@@ -2,16 +2,17 @@
 .x-wrapper
   .wrapper
     mainpage(
-      :modalIsActive="modalIsShown"
+      :modalIsActive="modalIsShown",
       :menuLinks="menuLinks",
       :socials="socials",
+      :dataAttr="dataAttr",
       @handleChange="handleChange"
     )
   popup-menu(
     v-if="modalIsShown",
     :menuLinks="menuLinks",
     :socials="socials"
-    @handleChange="handleChange"
+    @scrollFromPopup="scrollFromPopup"
   )
 </template>
 
@@ -27,17 +28,18 @@ export default {
   data() {
     return {
       modalIsShown: false,
+      dataAttr: "",
       menuLinks: [
         { name: "About me", data: "about" },
         { name: "Skills", data: "skills" },
         { name: "Works", data: "works" },
         { name: "Reviews", data: "reviews" },
       ],
-      socials: ["insta", "vk", "github", "envelope"],
+      socials: ["tg", "vk", "github", "envelope"]
     };
   },
   methods: {
-    handleChange(state) { console.log("handlechange-from wrapper");
+    handleChange(state) {
       const className = "modal-open"; // запретить скролл на body, когда модалка открыта
 
       switch(state) {
@@ -51,9 +53,19 @@ export default {
           break;
       }
     },
+    scrollFromPopup(data) {
+      const flag = this.dataAttr;
+
+      if (data.attr === flag) {
+        const repeatAttr = flag + "Retry"; // модифицировал data.attr, чтобы watcher отслеживал
+        this.handleChange(data.state); //  изменения при повторном скролле к той же секции
+        this.dataAttr = repeatAttr;
+        
+      } else {
+        this.handleChange(data.state);
+        this.dataAttr = data.attr;
+      }
+    }
   }
 };
 </script>
-
-<style lang="postcss">
-</style>

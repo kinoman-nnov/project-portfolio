@@ -4,7 +4,7 @@
     :class="[
       'icon-component',
       iconClass,
-      { changeSize: this.changeSize },
+      { changeableSize: this.changeableSize },
       { grayscale: this.grayscale },
       { 'no-words': !!title === false },
     ]"
@@ -15,7 +15,7 @@
 
   <label
     v-else-if="typeAttr === 'file'"
-    :class="['icon-component', iconClass, { changeSize: this.changeSize }]"
+    :class="['icon-component', iconClass, { changeableSize: this.changeableSize }]"
   >
     <input class="icon-btn-file-input" type="file" v-on="$listeners" />
   </label>
@@ -31,7 +31,7 @@ export default {
         ["pencil", "cross", "tick", "trash", "user", "key"].includes(value),
     },
     typeAttr: String,
-    changeSize: {
+    changeableSize: {
       type: Boolean,
     },
     grayscale: {

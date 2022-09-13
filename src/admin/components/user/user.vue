@@ -1,9 +1,21 @@
 <template>
   <div class="user-component">
     <avatar size="2.7" :src="userPic" />
-    <div class="user-container">
+    <div
+      :class="[
+        'user-container',
+        { 'user-container--with-btn': !plain }
+      ]"
+    >
       <div class="username">{{ title }}</div>
-      <div class="user-occupation">{{ occ }}</div>
+      <div class="user-occupation">{{ text }}</div>
+      <div class="buttons user__button" v-if="!plain">
+        <button
+          type="button"
+          @click="$emit('handleClick', 'logout')"
+          class="btn user__btn">Выйти
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -16,8 +28,12 @@ export default {
     avatar,
   },
   props: {
+    plain: Boolean,
     title: String,
-    occ: String,
+    text:{
+      type: String,
+      default: ""
+    },
     src: String
   },
   computed: {
@@ -32,21 +48,4 @@ export default {
 };
 </script>
 
-<style lang="postcss">
-.user-component {
-  display: flex;
-  font-size: 18px;
-  font-weight: 600;
-  align-items: center;
-  color: #fff;
-}
-
-.user-container {
-  margin-left: 18px;
-}
-
-.user-occupation{
-  font-size: 16px;
-  color: rgba(65, 76, 99, 0.5);
-}
-</style>
+<style lang="postcss" src="./user.pcss"></style>

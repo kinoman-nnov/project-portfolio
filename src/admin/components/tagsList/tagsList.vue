@@ -28,12 +28,18 @@ export default {
 ul {
   display: flex;
 }
-li {
+
+.tags-list-component {
+  flex-wrap: wrap;
+}
+
+/* li {
   margin-right: 10px;
   &:last-child {
     margin-right: 0;
   }
-}
+} */
+
 .item-tagList {
   margin-bottom: 0;
 }

@@ -43,7 +43,23 @@ export default {
     return {
       reviews: [],
       sliderOptions: {
-        slidesPerView: 2,
+        breakpoints: {
+          // // when window width is >= 320px
+          // 320: {
+          //   slidesPerView: 2,
+          //   spaceBetween: 20
+          // },
+          // when window width is >= 480px
+          480: {
+            slidesPerView: 2,
+            spaceBetween: 20
+          },
+          // when window width is >= 768px
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 40
+          }
+        }
       },
     };
   },
@@ -72,7 +88,7 @@ export default {
           slider.slidePrev();
           break;
       }
-    },
+    }
   },
   async created() {
     // запросить данные, не обращаясь к реальным дом-узлам
@@ -83,9 +99,9 @@ export default {
 
     // const data = require("../data/reviews.json");
     // this.reviews = this.requireImagesToArray(data);
-  },
+  }
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="postcss" scoped src="./reviews.pcss">
 </style>

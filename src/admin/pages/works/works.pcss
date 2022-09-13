@@ -1,3 +1,5 @@
+@import "../../../styles/mixins.pcss";
+
 .cards {
   display: flex;
   flex-wrap: wrap;
@@ -8,10 +10,14 @@
   width: calc(100% / 3 - 20px);
   margin-left: 20px;
   margin-bottom: 15px;
-}
 
-.item-works: last-child {
-  margin-bottom: 1.875rem;
+  @include tablets {
+    width: calc(100% / 2 - 20px);
+  }
+
+  @include phones {
+    width: 100%;
+  }
 }
 
 .form {

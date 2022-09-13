@@ -1,7 +1,10 @@
 <template>
   <div class="headline-component">
     <div class="container headline-container">
-      <slot />
+      <user
+        title="Alexey Ya"
+        @handleClick="logout"
+      />
       <div class="title">{{ title }}</div>
       <div class="buttons">
         <button type="button" @click="logout" class="btn">Выйти</button>
@@ -12,8 +15,10 @@
 
 <script>
 import { mapActions } from 'vuex';
+import user from "../user";
 
 export default {
+  components: { user },
   props: {
     title: {
       type: String,

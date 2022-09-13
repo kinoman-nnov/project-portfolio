@@ -1,14 +1,14 @@
 <template>
   <div class="works-page-component page-component">
     <div class="page-content">
-      <div class="container">
+      <div class="container full-screen-container">
         <div class="page-header">
           <div class="page-title">Блок "Работы"</div>
         </div>
         <div class="form">
           <form-work
             v-if="formIsShown"
-            title="Добавление работы"
+            title="Новая работа"
             :currentWork="currentWork"
             @cancelForm="formIsShown = false"
           />

@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === "development") {
 // import "./scripts/reviews";
 // import "./scripts/popup-menu";
 
-export const eventBus = new Vue(); // export default не раюотает, в компонент приходит undefined
+// export const eventBus = new Vue(); // export default не работает, в компонент приходит undefined
 
 new Vue({
   el: "#wrapper-component",

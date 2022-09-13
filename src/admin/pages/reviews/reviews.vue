@@ -1,7 +1,7 @@
 <template>
   <div class="reviews-page-component page-component">
     <div class="page-content">
-      <div class="container">
+      <div class="container full-screen-container">
         <div class="page-header">
           <div class="page-title">Блок "Отзывы"</div>
         </div>
@@ -11,7 +11,7 @@
             v-if="formIsShown"
             :currentReview="currentReview"
             @cancelForm="formIsShown = false"
-            title="Добавление отзыва"
+            title="Новый отзыв"
           />
         </div>
         <ul class="cards">

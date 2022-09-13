@@ -8,22 +8,28 @@
             a.logo(href="#") AY
           .header-container
             .header__menu
-              menu-comp(:menuLinks="menuLinks", @scroll-to="scrollToSection") 
+              menu-comp(
+                :menuLinks="menuLinks",
+                @scroll-to="scrollToSection"
+              ) 
             .header__buttons
               socials-comp(:socials="socials")
-            hamburger-btn-comp(
-              :modalIsActive="modalIsActive",
-              @handleChange="$emit('handleChange', $event)"
-            )
+            .header__hamburger-btn
+              hamburger-btn-comp(
+                :modalIsActive="modalIsActive",
+                @handleChange="$emit('handleChange', $event)"
+              )
         .hero__content
           .userinfo
             .userinfo__title Personal website #[span.userinfo__occ web developer]
             .userinfo__name Mount
         .hero__downbutton
           .scroll-down
-            a.scroll-down__btn(href="") Scroll
-
-    section#about.about(ref="about")&attributes({'data-section-id': 'about'})
+            a.scroll-down__btn(
+              @click.prevent="scrollToSection('about')"
+            ) Scroll
+    
+    section.about(ref="about")&attributes({'data-section-id': 'about'})
       .container
         .about__columns
           .about__user
@@ -77,14 +83,15 @@
       .container.works__container
         .section-title.works__section-title My works
         .works__content
-          works-comp
+          works-slider-comp
 
   .triangles.triangles_bottom
     svg.triangles__shape.triangles__shape_left(viewBox="0 0 1000 100", preserveAspectRatio="none")
       polygon(points="0,0 1000,0 1000,100")
     svg.triangles__shape.triangles__shape_right(viewBox="0 0 1000 100", preserveAspectRatio="none")
       polygon(points="0,0 0,100 1000,0")
-  section.contacts(ref="reviews")&attributes({'data-section-id': 'reviews'})
+      
+  .reviews-section.contacts(ref="reviews")&attributes({'data-section-id': 'reviews'})
     .container.contacts__container
       .contacts__about
         reviews-comp
@@ -98,7 +105,11 @@
           .footer__copyright-name Alexey Ya
           .footer__data-text Личный сайт веб - разработчика
       .footer__data
-        menu-comp.menu--color-white.footer__data-menu(:menuLinks="menuLinks", @scroll-to="scrollToSection")
+        .footer__data-menu
+          menu-comp.menu--color-white(
+            :menuLinks="menuLinks",
+            @scroll-to="scrollToSection"
+          )
         .footer__data-content
           .footer__data-col
             .footer__data-text
@@ -113,15 +124,13 @@
 </template>
 
 <script>
-import { eventBus } from "./main.js";
 import images from "./components/images-app";
 import hamburger from "./components/hamburger-btn";
 import menu from "./components/menu";
 import socials from "./components/socials";
 import skills from "./components/skills";
-import works from "./components/works";
+import worksSlider from "./components/works-slider";
 import reviewsComponent from "./components/reviews";
-
 export default {
   components: {
     imagesComp: images,
@@ -129,36 +138,38 @@ export default {
     menuComp: menu,
     socialsComp: socials,
     skillsComp: skills,
-    worksComp: works,
+    worksSliderComp: worksSlider,
     reviewsComp: reviewsComponent,
   },
   props: {
     modalIsActive: Boolean,
     menuLinks: Array,
     socials: Array,
+    dataAttr: String,
   },
   methods: {
     scrollToSection(attr) {
-      // добавил prevent на click в menu-comp
+      // добавил prevent на click в menu-comp, чтобы работал scrollIntoView
       const elem = this.$refs[attr];
       elem.scrollIntoView({
         behavior: "smooth",
       });
     },
   },
-  created() {
-    eventBus.$on("scrollFromPopup", (data) => {
-      console.log(data);
-      // const elem = this.$refs[data];
-      // console.log(elem);
-      // elem.scrollIntoView({
-      //   behavior: 'smooth'
-      // });
-    });
+  watch: {
+    dataAttr(newVal, oldVal) {      
+      if (!!newVal) {
+        const findFlag = newVal.indexOf("Retry"); // возвращает индекс, с которого начинается подстрока "Retry"
+        
+        if (findFlag > 0) { // удаляю модификатор
+          const attr = newVal.slice(0, findFlag); // вырезал часть строки до "Retry"
+          this.scrollToSection(attr); // в функцию приходит attr который был эмитирован из popup 
+        } else {
+          this.scrollToSection(newVal);
+        }
+      }
+    },
+    flush: 'post'
   },
 };
 </script>
-
-<style lang="postcss">
-@import "./styles/main.pcss";
-</style>

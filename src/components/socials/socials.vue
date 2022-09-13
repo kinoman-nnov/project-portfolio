@@ -1,27 +1,36 @@
 <template lang="pug">
-  ul.socials
-    //- - var socials = ['insta', 'vk', 'github', 'envelope'];
-    //- each item in socials
-    li(v-for="item in socials" :key="item.id").socials__item
-      a(href=`${item === 'envelope' ? 'mailto:myMale@yandex.ru' : '#'}`, target="_blank").socials__link
-        icons-comp(
-          :name="item"
-          :className="'socials__icon'"
-        )
-        //- +icon(item, 'socials__icon')
+ul.socials
+  li(v-for="(item, index) in socials", :key="item.id").socials__item
+    a(
+      :href="urls[index]"
+      target="_blank"
+    ).socials__link
+      icons-comp(:name="item", :className="'socials__icon'")
 </template>
 
 <script>
 import icons from "../icons-app";
+import config from "../../../env.paths.json";
+
 export default {
   components: {
-    iconsComp: icons
+    iconsComp: icons,
   },
   props: {
-    socials: Array
-  }
-}
+    socials: Array,
+  },
+  computed: {
+    urls() {
+      const socialsUrlsArr = [];
+      const socialsUrlsObj = config.SOCIALS_URL;
+      for (const url in socialsUrlsObj) {
+        socialsUrlsArr.push(socialsUrlsObj[url]);
+      }
+      return socialsUrlsArr;
+    }
+  },
+};
 </script>
 
-<style lang="postcss" scoped>
+<style lang="postcss" scoped src="./socials.pcss">
 </style>

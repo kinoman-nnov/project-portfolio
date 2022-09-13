@@ -4,7 +4,7 @@ nav.menu
     li(
       v-for="item in menuLinks", :key="item.id"
     ).menu__item.menu__item--vertical
-      a.menu__link(href="#" @click="$emit('scroll-to', item.data)") {{ item.name }}
+      a.menu__link(href="#" @click.prevent="$emit('scroll-to', item.data)") {{ item.name }}
 </template>
 
 <script>
@@ -15,5 +15,4 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
-</style>
+<style lang="postcss" scoped src="../../menu.pcss"></style>

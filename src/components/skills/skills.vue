@@ -30,5 +30,5 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="postcss" scoped src="./skills.pcss">
 </style>

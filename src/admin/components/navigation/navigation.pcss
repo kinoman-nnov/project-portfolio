@@ -1,5 +1,12 @@
+@import "../../../styles/mixins.pcss";
+
 .list {
   display: flex;
+
+  @include phones {
+    margin: 0 auto;
+    width: fit-content;
+  }
 }
 
 .link {
@@ -8,6 +15,10 @@
   font-weight: 600;
   display: block;
   text-decoration: none;
+
+  @include phones {
+    padding: 25px;
+  }
 
   &.active {
     color: #383bcf;

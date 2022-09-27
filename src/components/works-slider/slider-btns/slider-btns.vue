@@ -2,11 +2,11 @@
   .works-slider__buttons
     button(
       type="button"
-      @click="$emit('slide', 'next')" 
+      @click="$emit('slide', 'prev')" 
       ).works-slider__btn.works-slider__btn_next
     button(
       type="button"
-      @click="$emit('slide', 'prev')" 
+      @click="$emit('slide', 'next')" 
       ).works-slider__btn.works-slider__btn_prev
 </template>
 

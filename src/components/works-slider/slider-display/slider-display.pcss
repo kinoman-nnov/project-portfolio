@@ -10,6 +10,7 @@
     margin-bottom: 105px;
     width: 86%;
   }
+
   &:before {
     content: attr(data-slide);
     position: absolute;
@@ -21,12 +22,14 @@
     font-weight: 800;
     margin-left: -8%;
     color: rgba($text-color, .05);
+    
     @include desktop {
-      top: 0;
+      top: 46%;
       transform: translateY(-15%);
       margin-left: -11%;
     }
   }
+
   @include phones {
     width: 100%;
     margin-bottom: 60px;

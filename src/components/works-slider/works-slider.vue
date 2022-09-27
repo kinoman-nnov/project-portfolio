@@ -65,31 +65,44 @@ export default {
       });
     },
     slide(direction) {
-      const lastItem = this.works[this.works.length - 1]; // последний элемент в слайдере
       switch (direction) {
         case "next":
-          this.works.push(this.works[0]);
-          this.works.shift();
-          this.currentIndex++;
+          this.nextSlide();
           break;
         case "prev":
-          this.works.unshift(lastItem);
-          this.works.pop();
-          this.currentIndex--;
+          this.prevSlide();
           break;
       }
     },
     handleClick(slideId) { // клик по slider-thumbs
-      let slice = [];
-
-      for (let i = 0; i < this.works.length; i++) {
-        if (this.works[i].id === slideId) {
-          slice = this.works.splice(0,i); // вырезать часть массива
-          this.currentIndex += i;
-          break;
-        }
+      const ind = this.works.map(item => item.id).indexOf(slideId);
+      
+      for (let i = 0; i < ind; i++) { console.log(i);
+        this.nextSlide();
       }
-      this.works.push(...slice) // вставить в конец массива
+
+      // let slice = [];
+
+      // for (let i = 0; i < this.works.length; i++) {
+      //   if (this.works[i].id === slideId) {
+      //     slice = this.works.splice(0,i); // вырезать часть массива
+          
+      //     this.currentIndex += i;
+      //     break;
+      //   }
+      // }
+      // this.works.push(...slice); // вставить в конец массива
+    },
+    nextSlide() {
+      this.works.push(this.works[0]);
+      this.works.shift();
+      this.currentIndex++;
+    },
+    prevSlide() {
+      const lastItem = this.works[this.works.length - 1]; // последний элемент в слайдере
+      this.works.unshift(lastItem);
+      this.works.pop();
+      this.currentIndex--;
     }
   },
   async created() { // запросить данные, не обращаясь к реальным дом-узлам

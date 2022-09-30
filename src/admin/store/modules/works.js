@@ -35,7 +35,7 @@ export default {
       // }
 
       try {
-        const { data } = await this.$axios.post('/works', formData);
+        const { data } = await this.$axios.post('/works', formData); // изображение должно быть формата png
         commit("ADD_WORK", data);
       } catch (error) {
         throw new Error("Произошла ошибка")

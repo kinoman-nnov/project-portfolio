@@ -5,10 +5,11 @@
       thumbs-comp(
         :works="reversedWorks"
         :currentWork="currentWork"
-        @handleClick="$emit('handleClick', $event)" 
+        :slideDirection="slideDirection"
+        @handleClick="handleClick" 
       )
       btns-comp(
-        @slide="$emit('slide', $event)" 
+        @slide="slide" 
       )
 </template>
 
@@ -22,10 +23,25 @@ export default {
     btnsComp: btns,
   },
   props: ["currentWork", "works", "currentIndex"],
+  data() {
+    return {
+      slideDirection: ''
+    }
+  },
   computed: {
     reversedWorks() {
       const works = [...this.works];
       return works.slice(0, 3).reverse();
+    }
+  },
+  methods: {
+    slide(event) {
+      this.slideDirection = event;
+      this.$emit('slide', event)
+    },
+    handleClick(event) {
+      this.slideDirection = "handleClick";
+      this.$emit('handleClick', event)
     }
   }
 }

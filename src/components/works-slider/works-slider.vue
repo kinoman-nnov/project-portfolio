@@ -1,11 +1,12 @@
 <template lang="pug">
   .works-slider
+    pre {{works}}
     slider-display(
       v-if="works.length"
       :currentWork="currentWork",
       :works="works",
       :currentIndex="currentIndex",
-      @slide="slide"
+      @slide="slide",
       @handleClick="handleClick"
     )
     slider-info(
@@ -30,7 +31,8 @@ export default {
   data() {
     return {
       works: [],
-      currentIndex: 0
+      currentIndex: 0,
+      handleClickInd: 0
     };
   },
   computed: {
@@ -74,12 +76,12 @@ export default {
           break;
       }
     },
-    handleClick(slideId) { // клик по slider-thumbs
-      const ind = this.works.map(item => item.id).indexOf(slideId);
+    handleClick() { // клик по slider-thumbs
+      // const ind = this.works.map(item => item.id).indexOf(slideId);
       
-      for (let i = 0; i < ind; i++) { console.log(i);
-        this.nextSlide();
-      }
+      // for (let i = 0; i < ind; i++) { // ind раз выполнить nextSlide()
+      // }
+      this.nextSlide();
 
       // let slice = [];
 

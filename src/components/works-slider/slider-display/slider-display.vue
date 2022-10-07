@@ -39,9 +39,9 @@ export default {
       this.slideDirection = event;
       this.$emit('slide', event)
     },
-    handleClick(event) {
+    handleClick() {
       this.slideDirection = "handleClick";
-      this.$emit('handleClick', event)
+      this.$emit('handleClick');
     }
   }
 }

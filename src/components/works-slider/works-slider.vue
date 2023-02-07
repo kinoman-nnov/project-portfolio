@@ -1,13 +1,11 @@
 <template lang="pug">
   .works-slider
-    pre {{works}}
     slider-display(
       v-if="works.length"
       :currentWork="currentWork",
       :works="works",
       :currentIndex="currentIndex",
-      @slide="slide",
-      @handleClick="handleClick"
+      @slide="slide"
     )
     slider-info(
       v-if="works.length"
@@ -66,7 +64,7 @@ export default {
         return item;
       });
     },
-    slide(direction) {
+    slide(direction) { // сюда также приходит handleClick из thumbs
       switch (direction) {
         case "next":
           this.nextSlide();
@@ -75,25 +73,6 @@ export default {
           this.prevSlide();
           break;
       }
-    },
-    handleClick() { // клик по slider-thumbs
-      // const ind = this.works.map(item => item.id).indexOf(slideId);
-      
-      // for (let i = 0; i < ind; i++) { // ind раз выполнить nextSlide()
-      // }
-      this.nextSlide();
-
-      // let slice = [];
-
-      // for (let i = 0; i < this.works.length; i++) {
-      //   if (this.works[i].id === slideId) {
-      //     slice = this.works.splice(0,i); // вырезать часть массива
-          
-      //     this.currentIndex += i;
-      //     break;
-      //   }
-      // }
-      // this.works.push(...slice); // вставить в конец массива
     },
     nextSlide() {
       this.works.push(this.works[0]);

@@ -1,12 +1,12 @@
 <template lang="pug">
-  .works-slider__pics(:data-slide="currentIndex + 1")
-    .works-slider__pics-content
-      img(:src="currentWork.photo" :key="currentWork.id").works-slider__fullpic
-      thumbs-comp(
-        :works="reversedWorks"
-        :currentWork="currentWork"
-        @slide="$emit('slide', $event)" 
-      )
+.works-slider__pics(:data-slide="currentIndex + 1")
+  .works-slider__pics-content
+    img(:src="currentWork.photo" :key="currentWork.id").works-slider__fullpic
+    thumbs-comp(
+      :works="reversedWorks"
+      :currentWork="currentWork"
+      @slide="$emit('slide', $event)" 
+    )
 </template>
 
 <script>

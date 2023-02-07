@@ -4,7 +4,7 @@
     transition-group(
       tag="ul"
       :css="false"
-      v-if="showMobileThumbs"
+      v-if="showThumbs"
       
       @before-enter="beforeEnterCb"
       @enter="enterCb"
@@ -40,7 +40,7 @@ export default {
       slideDirection: "",
       animationsCount: 0,
       disabled: false,
-      showMobileThumbs: false
+      showThumbs: false
     }
   },
   methods: {
@@ -110,12 +110,14 @@ export default {
     }
   },
   created() {
-    // const mediaQuery = window.matchMedia("(min-width:480px)", );
+    const mediaQuery = window.matchMedia("(min-width:480px)");
+    if (mediaQuery.matches) this.showThumbs = true;
+
     window.addEventListener("resize", () => {
       if (window.innerWidth > 480) {
-        this.showMobileThumbs = true;
+        this.showThumbs = true;
       } else {
-        this.showMobileThumbs = false;
+        this.showThumbs = false;
       }
     }); // скрыть слайдер в мобильной версии
   }

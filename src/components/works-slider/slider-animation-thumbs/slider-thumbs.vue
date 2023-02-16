@@ -95,12 +95,19 @@ export default {
           el.classList.remove('outsided-bottom');
           break;
       }
-      list.addEventListener("transitionend", e => {
+
+      const handler = (e) => {
+        console.log(e);
+        list.removeEventListener('transitionend', handler);
+
         if (this.animationsCount > 1) {
-          // this.$emit('slide', "next");
+          this.$emit('slide', "next");
           this.animationsCount -= 1;
         }
-      });
+      }
+
+      list.addEventListener("transitionend", handler);
+
       this.disabled = false;
     },
     leaveCb(el, done) {
